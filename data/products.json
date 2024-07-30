@@ -1,0 +1,14 @@
+[
+  {
+    "id": "EG001",
+    "name": "Classic Earl Grey",
+    "description": "A timeless black tea infused with oil of bergamot for a citrusy twist.",
+    "price": 7.99,
+    "category": "Black Tea",
+    "origin": "India",
+    "caffeine": "Medium",
+    "brewingTime": "3-5 minutes",
+    "temperature": "95°C",
+    "imageUrl": "/images/earl-grey.jpg"
+  }
+]
