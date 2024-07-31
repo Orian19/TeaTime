@@ -26,6 +26,11 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 30 * 60 * 1000 } // 30 minutes
 }));
+// middleware to set user variable
+app.use((req, res, next) => {
+    res.locals.user = req.session.username || null;
+    next();
+});
 
 // set view engine
 app.set('view engine', 'ejs');
