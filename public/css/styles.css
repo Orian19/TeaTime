@@ -2,62 +2,15 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
-}
-
-h1 {
+    background-color: #e0f7fa; /* light blue background */
     color: #333;
 }
 
-nav {
-    margin-bottom: 20px;
-}
-
-nav a {
-    color: #333;
-    text-decoration: none;
-    padding: 5px 10px;
-}
-
-nav a:hover {
-    background-color: #ddd;
-}
-
-.product, .cart-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-}
-
-.search {
-    margin-bottom: 20px;
-}
-
-.search input {
-    padding: 5px;
-    width: 200px;
-}
-
-.search button, .product button {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.search button:hover, .product button:hover {
-    background-color: #45a049;
-}
-
-/* Add to your existing CSS */
 header {
-    background-color: #333;
+    background-color: #4CAF50; /* green header */
     color: white;
     padding: 1rem;
+    text-align: center;
 }
 
 header h1 {
@@ -65,25 +18,35 @@ header h1 {
 }
 
 nav {
-    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    background-color: #4CAF50; /* green for nav items */
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 nav a:hover {
-    background-color: #555;
+    background-color: #357a38; /* darker green for hover effect */
 }
 
 main {
     padding: 2rem;
+    background-color: #ffffff;
+    margin: 0 10%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-    background-color: #333;
+    background-color: #4CAF50;
     color: white;
     text-align: center;
     padding: 1rem;
@@ -92,15 +55,102 @@ footer {
     width: 100%;
 }
 
-.btn {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
+.product, .cart-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product img, .cart-item img {
+    max-width: 100%;
     border-radius: 5px;
 }
 
-.btn:hover {
-    background-color: #45a049;
+.search {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search input {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.search button, .product button {
+    padding: 10px 20px;
+    background-color: #FFEB3B; /* yellow buttons */
+    color: #333;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.search button:hover, .product button:hover {
+    background-color: #FBC02D; /* darker yellow for hover */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+form input[type="text"], form input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form label {
+    align-self: flex-start;
+    margin-bottom: 5px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #FFEB3B; /* yellow button */
+    color: #333;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #FBC02D; /* darker yellow for hover */
+}
+
+form a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    main {
+        margin: 0 5%;
+    }
+
+    .search input {
+        width: 100%;
+        margin: 0 0 10px 0;
+    }
 }
