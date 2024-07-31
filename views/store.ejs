@@ -1,0 +1,106 @@
+<!--&lt;!&ndash; This is the main page of the store. It displays all the products available for purchase. &ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>TeaTime Store</title>-->
+<!--    <style>-->
+<!--        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }-->
+<!--        .product { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }-->
+<!--        .search { margin-bottom: 20px; }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Welcome to TeaTime, <%= user %>!</h1>-->
+
+<!--<nav>-->
+<!--    <a href="/store">Store</a> |-->
+<!--    <a href="/store/cart">Cart</a> |-->
+<!--    <a href="/auth/logout">Logout</a>-->
+<!--</nav>-->
+
+<!--<div class="search">-->
+<!--    <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Search teas...">-->
+<!--    <button onclick="searchProducts()">Search</button>-->
+<!--</div>-->
+
+<!--<div id="products">-->
+<!--    <% products.forEach(function(product) { %>-->
+<!--        <div class="product">-->
+<!--            <h2><%= product.name %></h2>-->
+<!--            <p><%= product.description %></p>-->
+<!--            <p>Price: $<%= product.price.toFixed(2) %></p>-->
+<!--            <p>Category: <%= product.category %></p>-->
+<!--            <button onclick="addToCart('<%= product.id %>')">Add to Cart</button>-->
+<!--        </div>-->
+<!--    <% }); %>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function searchProducts() {-->
+<!--        const searchTerm = document.getElementById('searchInput').value.toLowerCase();-->
+<!--        const products = document.getElementsByClassName('product');-->
+<!--        for (let product of products) {-->
+<!--            const name = product.getElementsByTagName('h2')[0].innerText.toLowerCase();-->
+<!--            const description = product.getElementsByTagName('p')[0].innerText.toLowerCase();-->
+<!--            if (name.includes(searchTerm) || description.includes(searchTerm)) {-->
+<!--                product.style.display = '';-->
+<!--            } else {-->
+<!--                product.style.display = 'none';-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+
+<!--    function addToCart(productId) {-->
+<!--        fetch('/store/add-to-cart', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json',-->
+<!--            },-->
+<!--            body: JSON.stringify({ productId }),-->
+<!--        })-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                alert(data.message);-->
+<!--            })-->
+<!--            .catch((error) => {-->
+<!--                console.error('Error:', error);-->
+<!--            });-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - TeaTime</title>
+</head>
+<body>
+<h1>Welcome to the TeaTime Store, <%= user %></h1>
+<ul>
+    <% products.forEach(product => { %>
+        <li>
+            <h2><%= product.name %></h2>
+            <p><%= product.description %></p>
+            <% if (typeof product.price === 'number') { %>
+                <p>Price: $<%= product.price.toFixed(2) %></p>
+            <% } else { %>
+                <p>Price: $<%= product.price %></p>
+            <% } %>
+            <p>Category: <%= product.category %></p>
+            <img src="<%= product.image %>" alt="<%= product.name %>" width="100">
+            <form action="/store/add-to-cart" method="POST">
+                <input type="hidden" name="productId" value="<%= product.id %>">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </li>
+    <% }) %>
+</ul>
+</body>
+</html>
+
+
