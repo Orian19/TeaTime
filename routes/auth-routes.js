@@ -1,0 +1,53 @@
+const express = require('express');
+const router = express.Router();
+const { registerUser, authenticateUser } = require('../modules/user');
+
+router.get('/register', (req, res) => {
+    res.render('register');
+});
+
+router.post('/register', async (req, res) => {
+    try {
+        await registerUser(req.body.username, req.body.password);
+        res.redirect('/auth/login');
+    } catch(error) {
+        res.status(400).send(error.message);
+    }
+});
+
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.post('/login', async (req, res) => {
+    const { username, password, rememberMe } = req.body;
+    console.log(`Attempting login with username: ${username}`);
+    try {
+        const authenticated = await authenticateUser(username, password);
+        if(authenticated) {
+            req.session.username = username;
+            if (rememberMe) {
+                req.session.cookie.maxAge = 10 * 24 * 60 * 60 * 1000; // 10 days
+            }
+            console.log(`Login successful for username: ${username}`);
+            res.redirect('/store');
+        } else {
+            console.log(`Login failed for username: ${username}`);
+            res.status(401).send('Invalid username or password');
+        }
+    } catch(error) {
+        console.error(`Error during login for username: ${username}: ${error.message}`);
+        res.status(500).render('login', { error: error.message });
+    }
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if(err) {
+            console.error(err);
+        }
+        res.redirect('/auth/login');
+    })
+});
+
+module.exports = router;
