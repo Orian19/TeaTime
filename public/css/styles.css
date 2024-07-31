@@ -1,9 +1,14 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+html, body {
+    height: 100%;
     margin: 0;
+    font-family: Arial, sans-serif;
     background-color: #e0f7fa;
     color: #333;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -67,6 +72,7 @@ nav a:hover {
 }
 
 main {
+    flex: 1;
     padding: 2rem;
     background-color: white;
     margin: 0 10%;
