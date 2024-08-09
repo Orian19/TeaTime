@@ -8,6 +8,9 @@
     "start": "node express_server.js",
     "dev": "nodemon express_server.js"
   },
+  "nodemonConfig": {
+    "ignore": ["data/*", "*.log"]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

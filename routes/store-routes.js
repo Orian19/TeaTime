@@ -34,17 +34,28 @@ router.get('/search', async (req, res) => {
 });
 
 router.post('/add-to-cart', async (req, res) => {
+    console.log('Before adding to cart:', req.session);
+
     if (!req.session.username) {
         return res.redirect('/auth/login');
     }
 
     try {
         await addToCart(req.session.username, req.body.productId, parseInt(req.body.quantity, 10));
-        res.redirect('/store');
+
+        req.session.save(err => {
+            if (err) {
+                console.error('Session save error:', err);
+                return res.status(500).json({ error: 'Session save failed' });
+            }
+            console.log('After adding to cart:', req.session);
+            res.redirect('/store');
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 router.get('/cart', (req, res) => {
     if (!req.session.username) {
