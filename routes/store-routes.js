@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { addToCart, getCart } = require('../modules/cart');
-const { getProducts } = require('../modules/products');
+const { getProducts, getProduct } = require('../modules/products');
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -56,14 +56,24 @@ router.post('/add-to-cart', async (req, res) => {
     }
 });
 
-
-router.get('/cart', (req, res) => {
+// GET cart page
+router.get('/cart', async (req, res) => {
     if (!req.session.username) {
         return res.redirect('/auth/login');
     }
 
     const userCart = getCart(req.session.username);
-    res.render('cart', { cart: userCart, user: req.session.username });
+
+    // Fetch full product details for each item in the cart
+    const detailedCart = await Promise.all(userCart.map(async (item) => {
+        const product = await getProduct(item.productId);
+        return {
+            ...product,
+            quantity: item.quantity,
+        };
+    }));
+
+    res.render('cart', { cart: detailedCart, user: req.session.username });
 });
 
 module.exports = router;
