@@ -1,40 +1,74 @@
-// complete cart code
-
 const { getProduct } = require('./products');
-const { readCart, writeCart } = require('../persist');
+const fs = require('fs');
+const path = require('path');
+
+const cartsFilePath = path.join(__dirname, '../data/carts.json');
 
 /**
- * Get all products in the cart
- * @returns {Promise<*|*[]>}
+ * Read carts from the josn file
+ * @returns {any}
  */
-async function getCart() {
-    return await readCart();
+function readCarts() {
+    const data = fs.readFileSync(cartsFilePath);
+    return JSON.parse(data);
 }
 
 /**
- * Add a product to the cart
- * @param productId
- * @returns {Promise<void>}
+ * Write carts to the json file
+ * @param carts
+ * @returns {void}
  */
-async function addToCart(productId) {
+function writeCarts(carts) {
+    fs.writeFileSync(cartsFilePath, JSON.stringify(carts, null, 2));
+}
+
+/**
+ * Get all products in the user's cart
+ * @param username
+ * @returns {Array}
+ */
+function getCart(username) {
+    const carts = readCarts();
+    return carts[username] || [];
+}
+
+/**
+ * Add a product to the user's cart
+ * @param username
+ * @param productId
+ */
+async function addToCart(username, productId) {
     const product = await getProduct(productId);
-    if(!product) {
+    if (!product) {
         throw new Error('Product not found');
     }
-    const cart = await readCart();
-    cart.push(product);
-    await writeCart(cart);
+
+    const carts = readCarts();
+    const userCart = carts[username] || [];
+
+    const existingProductIndex = userCart.findIndex(item => item.productId === productId);
+    if (existingProductIndex !== -1) {
+        userCart[existingProductIndex].quantity += 1;
+    } else {
+        userCart.push({ productId: productId, quantity: 1 });
+    }
+
+    carts[username] = userCart;
+    writeCarts(carts);
 }
 
 /**
- * Remove a product from the cart
+ * Remove a product from the user's cart
+ * @param username
  * @param productId
- * @returns {Promise<void>}
  */
-async function removeFromCart(productId) {
-    const cart = await readCart();
-    const updatedCart = cart.filter(p => p.id !== productId);
-    await writeCart(updatedCart);
+function removeFromCart(username, productId) {
+    const carts = readCarts();
+    const userCart = carts[username] || [];
+    const updatedCart = userCart.filter(p => p.productId !== productId);
+
+    carts[username] = updatedCart;
+    writeCarts(carts);
 }
 
 module.exports = {
