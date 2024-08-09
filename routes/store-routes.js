@@ -11,9 +11,6 @@ const { getProducts, getProduct } = require('../modules/products');
 //     res.render('store', { products, user: req.session.username });
 // });
 router.get('/', async (req, res) => {
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
     const products = await getProducts();
     res.render('store', {
         title: 'Our Tea Selection',
@@ -23,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/add-to-cart', async (req, res) => {
-    if(!req.session.user) {
+    if(!req.session.username) {
         // return res.status(401).json({ error: 'Unauthorized' });
         return res.redirect('/auth/login'); // redirect to login screen if not logged in
     }
@@ -40,7 +37,7 @@ router.post('/add-to-cart', async (req, res) => {
 });
 
 router.get('/cart', (req, res) => {
-    if(!req.session.user) {
+    if(!req.session.username) {
         return res.redirect('/auth/login');
     }
     res.render('cart', { cart: req.session.cart || [], user: req.session.user});
