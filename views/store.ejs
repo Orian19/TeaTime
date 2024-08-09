@@ -1,41 +1,24 @@
-<!--&lt;!&ndash; This is the main page of the store. It displays all the products available for purchase. &ndash;&gt;-->
-<!--<script>-->
-<!--    function addToCart(productId) {-->
-<!--        fetch('/store/add-to-cart', {-->
-<!--            method: 'POST',-->
-<!--            headers: {-->
-<!--                'Content-Type': 'application/json',-->
-<!--            },-->
-<!--            body: JSON.stringify({ productId }),-->
-<!--        })-->
-<!--            .then(response => response.json())-->
-<!--            .then(data => {-->
-<!--                alert(data.message);-->
-<!--            })-->
-<!--            .catch((error) => {-->
-<!--                console.error('Error:', error);-->
-<!--            });-->
-<!--    }-->
-<!--</script>-->
-
-<!-- This is the main page of the store. It displays all the products available for purchase. -->
+<!-- Search form -->
 <div class="search">
     <form action="/store/search" method="GET">
-        <label for="searchInput"></label>
-        <input type="text" id="searchInput" name="search" placeholder="Search tea products..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+        <input type="text" id="searchInput" name="search" placeholder="Search teas..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
         <button type="submit">Search</button>
     </form>
 </div>
 
+<!-- Display products -->
 <div id="products">
     <% products.forEach(function(product) { %>
         <div class="product">
+            <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
             <h2><%= product.name %></h2>
             <p><%= product.description %></p>
             <p>Price: $<%= product.price.toFixed(2) %></p>
             <p>Category: <%= product.category %></p>
             <form action="/store/add-to-cart" method="POST">
                 <input type="hidden" name="productId" value="<%= product.id %>">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1">
                 <button type="submit">Add to Cart</button>
             </form>
         </div>

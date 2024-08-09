@@ -36,8 +36,10 @@ function getCart(username) {
  * Add a product to the user's cart
  * @param username
  * @param productId
+ * @param quantity
+ * @returns {Promise<void>}
  */
-async function addToCart(username, productId) {
+async function addToCart(username, productId, quantity = 1) {
     const product = await getProduct(productId);
     if (!product) {
         throw new Error('Product not found');
@@ -48,14 +50,15 @@ async function addToCart(username, productId) {
 
     const existingProductIndex = userCart.findIndex(item => item.productId === productId);
     if (existingProductIndex !== -1) {
-        userCart[existingProductIndex].quantity += 1;
+        userCart[existingProductIndex].quantity += quantity;
     } else {
-        userCart.push({ productId: productId, quantity: 1 });
+        userCart.push({ productId: productId, quantity: quantity });
     }
 
     carts[username] = userCart;
     writeCarts(carts);
 }
+
 
 /**
  * Remove a product from the user's cart

@@ -39,7 +39,7 @@ router.post('/add-to-cart', async (req, res) => {
     }
 
     try {
-        await addToCart(req.session.username, req.body.productId);
+        await addToCart(req.session.username, req.body.productId, parseInt(req.body.quantity, 10));
         res.redirect('/store');
     } catch (error) {
         res.status(500).json({ error: error.message });
