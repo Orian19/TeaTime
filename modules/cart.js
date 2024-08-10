@@ -75,6 +75,29 @@ function removeFromCart(username, productId) {
 }
 
 /**
+ * Update the quantity of a product in the user's cart
+ * @param username
+ * @param productId
+ * @param newQuantity
+ */
+function updateCartQuantity(username, productId, newQuantity) {
+    const carts = readCarts();
+    const userCart = carts[username] || [];
+
+    const productIndex = userCart.findIndex(item => item.productId === productId);
+    if (productIndex !== -1) {
+        if (newQuantity <= 0) {
+            userCart.splice(productIndex, 1); // Remove item if quantity is 0 or less
+        } else {
+            userCart[productIndex].quantity = newQuantity; // Update quantity
+        }
+    }
+
+    carts[username] = userCart;
+    writeCarts(carts);
+}
+
+/**
  * Clear the user's cart
  * @param username
  */
@@ -87,6 +110,7 @@ function clearCart(username) {
 module.exports = {
     getCart,
     addToCart,
+    updateCartQuantity,
     removeFromCart,
     clearCart
 };

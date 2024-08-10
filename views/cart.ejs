@@ -10,6 +10,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -20,16 +21,26 @@
                         <div class="product-name"><%= item.name %></div>
                     </td>
                     <td>$<%= item.price.toFixed(2) %></td>
-                    <td><%= item.quantity %></td>
+                    <td>
+                        <form action="/store/update-quantity" method="POST">
+                            <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
+                            <input type="hidden" name="productId" value="<%= item.productId %>">
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
                     <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
+                    <td>
+                        <form action="/store/remove-item" method="POST">
+                            <input type="hidden" name="productId" value="<%= item.productId %>">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             <% }); %>
             </tbody>
         </table>
         <div class="cart-actions">
-            <form action="/store/checkout" method="GET">
-                <button type="submit">Proceed to Checkout</button>
-            </form>
+            <a href="/store/checkout"><button type="button">Proceed to Checkout</button></a>
         </div>
     <% } %>
 </main>

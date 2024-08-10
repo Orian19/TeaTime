@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { addToCart, getCart } = require('../modules/cart');
+const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 
@@ -88,13 +88,46 @@ router.get('/checkout', async (req, res) => {
         const product = await getProduct(item.productId);
         return {
             name: product.name,
-            price: product.price,
+            price: parseFloat(product.price),
             quantity: item.quantity,
             imageUrl: product.imageUrl,
             total: (product.price * item.quantity).toFixed(2)
         };
     }));
+
     res.render('checkout', { cartDetails });
+});
+
+router.post('/remove-item', async (req, res) => {
+    console.log('Remove item route hit');
+    if (!req.session.username) {
+        return res.redirect('/auth/login');
+    }
+
+    const { productId } = req.body;
+    try {
+        removeFromCart(req.session.username, productId);
+        res.redirect('/store/cart');
+    } catch (error) {
+        console.error('Error removing item from cart:', error);
+        res.status(500).send('Failed to remove item from cart.');
+    }
+});
+
+router.post('/update-quantity', async (req, res) => {
+    console.log('Update quantity route hit');
+    if (!req.session.username) {
+        return res.redirect('/auth/login');
+    }
+
+    const { productId, quantity } = req.body;
+    try {
+        updateCartQuantity(req.session.username, productId, parseInt(quantity, 10));
+        res.redirect('/store/cart');
+    } catch (error) {
+        console.error('Error updating cart quantity:', error);
+        res.status(500).send('Failed to update cart quantity.');
+    }
 });
 
 router.post('/checkout/process', async (req, res) => {
