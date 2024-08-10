@@ -82,17 +82,19 @@ router.get('/checkout', async (req, res) => {
         return res.redirect('/auth/login');
     }
 
-    try {
-        const { cartDetails, total } = await getCheckoutDetails(req.session.username);
-        res.render('checkout', {
-            cart: cartDetails,
-            total: total,
-            user: req.session.username
-        });
-    } catch (error) {
-        console.error('Error during checkout rendering:', error);
-        res.status(500).send('An error occurred during the checkout process.');
-    }
+    const userCart = getCart(req.session.username);
+
+    const cartDetails = await Promise.all(userCart.map(async item => {
+        const product = await getProduct(item.productId);
+        return {
+            name: product.name,
+            price: product.price,
+            quantity: item.quantity,
+            imageUrl: product.imageUrl,
+            total: (product.price * item.quantity).toFixed(2)
+        };
+    }));
+    res.render('checkout', { cartDetails });
 });
 
 router.post('/checkout/process', async (req, res) => {
