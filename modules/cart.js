@@ -74,8 +74,19 @@ function removeFromCart(username, productId) {
     writeCarts(carts);
 }
 
+/**
+ * Clear the user's cart
+ * @param username
+ */
+function clearCart(username) {
+    const carts = readCarts();
+    carts[username] = [];
+    writeCarts(carts);
+}
+
 module.exports = {
     getCart,
     addToCart,
-    removeFromCart
+    removeFromCart,
+    clearCart
 };

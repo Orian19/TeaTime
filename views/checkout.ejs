@@ -1,1 +1,37 @@
 <!-- This is the checkout page (choose from the cart and “pay”) -->
+<main>
+    <h1>Checkout</h1>
+    <% if (cartDetails.length === 0) { %>
+        <p>Your cart is empty.</p>
+    <% } else { %>
+        <table class="checkout-table">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% cartDetails.forEach(function(item) { %>
+                <tr>
+                    <td><%= item.name %></td>
+                    <td><%= item.quantity %></td>
+                    <td>$<%= item.price.toFixed(2) %></td>
+                    <td>$<%= item.itemTotal %></td>
+                </tr>
+            <% }); %>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">Total:</td>
+                <td>$<%= total %></td>
+            </tr>
+            </tfoot>
+        </table>
+        <form action="/checkout/process" method="POST">
+            <button type="submit">Confirm and Pay</button>
+        </form>
+    <% } %>
+</main>

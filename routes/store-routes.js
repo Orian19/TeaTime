@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { addToCart, getCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
+const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -74,6 +75,38 @@ router.get('/cart', async (req, res) => {
     }));
 
     res.render('cart', { cart: detailedCart, user: req.session.username });
+});
+
+router.get('/checkout', async (req, res) => {
+    if (!req.session.username) {
+        return res.redirect('/auth/login');
+    }
+
+    try {
+        const { cartDetails, total } = await getCheckoutDetails(req.session.username);
+        res.render('checkout', {
+            cart: cartDetails,
+            total: total,
+            user: req.session.username
+        });
+    } catch (error) {
+        console.error('Error during checkout rendering:', error);
+        res.status(500).send('An error occurred during the checkout process.');
+    }
+});
+
+router.post('/checkout/process', async (req, res) => {
+    if (!req.session.username) {
+        return res.redirect('/auth/login');
+    }
+
+    try {
+        await processCheckout(req.session.username);
+        res.redirect('/store');
+    } catch (error) {
+        console.error('Error during checkout processing:', error);
+        res.status(500).send('An error occurred during the checkout process.');
+    }
 });
 
 module.exports = router;
