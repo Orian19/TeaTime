@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/reviews">Customer Reviews</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Customer Reviews</h1>
+        <div id="reviews-list">
+            <% if (reviews.length > 0) { %>
+                <% reviews.forEach((review, index) => { %>
+                    <div class="review">
+                        <h3><%= review.name %></h3>
+                        <p><%= review.comment %></p>
+                        <p><strong>Rating:</strong> <%= review.rating %>/5</p>
+                        <form class="remove-review-form" method="POST" action="/store/remove-review">
+                            <input type="hidden" name="reviewIndex" value="<%= index %>">
+                            <input type="submit" value="Remove Review">
+                        </form>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No reviews yet. Be the first to leave a review!</p>
+            <% } %>
+        </div>
+
+        <h2>Submit a Review</h2>
+        <form id="review-form" method="POST" action="/store/submit-review">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="rating">Rating (1-5):</label><br>
+            <input type="number" id="rating" name="rating" min="1" max="5" required><br>
+            <label for="comment">Comment:</label><br>
+            <textarea id="comment" name="comment" required></textarea><br>
+            <input type="submit" value="Submit Review">
+        </form>
+    </main>
+</body>
+</html>
