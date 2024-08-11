@@ -24,14 +24,14 @@
                     <td>
                         <form action="/store/update-quantity" method="POST">
                             <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
-                            <input type="hidden" name="productId" value="<%= item.productId %>">
+                            <input type="hidden" name="productId" value="<%= item.id %>">
                             <button type="submit">Update</button>
                         </form>
                     </td>
                     <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
                     <td>
                         <form action="/store/remove-item" method="POST">
-                            <input type="hidden" name="productId" value="<%= item.productId %>">
+                            <input type="hidden" name="productId" value="<%= item.id %>">
                             <button type="submit">Remove</button>
                         </form>
                     </td>
