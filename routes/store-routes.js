@@ -3,6 +3,7 @@ const router = express.Router();
 const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
+const { addOrder } = require('../modules/orders');
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -136,7 +137,34 @@ router.post('/checkout/process', async (req, res) => {
     }
 
     try {
+        // Get detailed checkout information, including the total
+        const { cartDetails, total } = await getCheckoutDetails(req.session.username);
+
+        if (cartDetails.length === 0) {
+            return res.redirect('/store/cart'); // Redirect back to cart if it's empty
+        }
+
+        // Map cartDetails to only include productId and quantity for the order items
+        const orderItems = cartDetails.map(item => ({
+            productId: item.id,  // Assuming `id` corresponds to `productId`
+            quantity: item.quantity
+        }));
+
+        // Create an order object using the checkout details
+        const order = {
+            id: Date.now(), // Simple unique ID
+            user: req.session.username,
+            items: orderItems,  // Use stripped down orderItems
+            total, // Use the total from getCheckoutDetails
+            date: new Date().toISOString(),
+        };
+
+        await addOrder(order);
+
+        // Process the checkout (clear the cart, etc.)
         await processCheckout(req.session.username);
+
+        // Redirect to the thank you page
         res.redirect('/store/thank-you');
     } catch (error) {
         console.error('Error during checkout processing:', error);

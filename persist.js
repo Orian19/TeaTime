@@ -1,14 +1,11 @@
-const fs= require('fs').promises;
+const fs = require('fs').promises;
 const path = require('path');
 const Tea = require('./modules/tea');
 
 const DATA_DIR = path.join(__dirname, 'data');
 const PRODUCTS_FILE = 'products.json';
-// const USERS_FILE = 'users.json';
-// const CART_FILE = 'cart.json';
-// const ORDERS_FILE = 'orders.json';
 
-// create a directory if it doesn't exist
+// Create a directory if it doesn't exist
 fs.mkdir(DATA_DIR, { recursive: true }).catch(console.error);
 
 /**
@@ -95,6 +92,31 @@ async function deleteProduct(id) {
     await writeProducts(updatedProducts);
 }
 
+/**
+ * Read data from database file - orders.json
+ * @returns {Promise<any|[]>}
+ */
+async function readOrders(file) {
+    const filePath = path.join(DATA_DIR, file);
+    try {
+        const data = await fs.readFile(filePath, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        return []; // return an empty array if the file doesn't exist
+    }
+}
+
+/**
+ * Write data to database file - orders.json
+ * @param file
+ * @param orders
+ * @returns {Promise<void>}
+ */
+async function writeOrders(file, orders) {
+    const filePath = path.join(DATA_DIR, file);
+    await fs.writeFile(filePath, JSON.stringify(orders, null, 2));
+}
+
 module.exports = {
     readUsers,
     writeUsers,
@@ -102,5 +124,7 @@ module.exports = {
     writeProducts,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    readOrders,
+    writeOrders,
 };
