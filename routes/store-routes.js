@@ -3,6 +3,8 @@ const router = express.Router();
 const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
+const { getReviews, addReview, removeReview, updateReview } = require('../modules/reviews');
+
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -34,6 +36,7 @@ router.get('/search', async (req, res) => {
     });
 });
 
+// POST cart
 router.post('/add-to-cart', async (req, res) => {
     console.log('Before adding to cart:', req.session);
 
@@ -77,6 +80,7 @@ router.get('/cart', async (req, res) => {
     res.render('cart', { cart: detailedCart, user: req.session.username });
 });
 
+// GET checkout
 router.get('/checkout', async (req, res) => {
     if (!req.session.username) {
         return res.redirect('/auth/login');
@@ -98,19 +102,25 @@ router.get('/checkout', async (req, res) => {
     res.render('checkout', { cartDetails });
 });
 
-router.post('/remove-item', async (req, res) => {
-    console.log('Remove item route hit');
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
+// GET reviews
+router.get('/reviews', (req, res) => {
+    const reviews = getReviews();
+    res.render('reviews', { reviews });
+});
+
+// POST add review
+router.post('/submit-review', (req, res) => {
+    const { name, rating, comment } = req.body;
+    if (!name || !rating || !comment) {
+        return res.status(400).json({ success: false, message: 'All fields are required' });
     }
 
-    const { productId } = req.body;
     try {
-        removeFromCart(req.session.username, productId);
-        res.redirect('/store/cart');
+        addReview({ name, rating: parseInt(rating, 10), comment });
+        res.redirect('/store/reviews'); // Redirect to the reviews page to see the updated list
     } catch (error) {
-        console.error('Error removing item from cart:', error);
-        res.status(500).send('Failed to remove item from cart.');
+        console.error('Error adding review:', error);
+        res.status(500).json({ success: false, message: 'Failed to add review' });
     }
 });
 
