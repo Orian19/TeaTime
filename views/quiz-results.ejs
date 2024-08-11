@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Teas</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/store">Back to Store</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Recommended Teas</h1>
+        <div id="teas-list">
+            <% if (teas.length > 0) { %>
+                <ul>
+                    <% teas.forEach(tea => { %>
+                        <li>
+                            <h3><%= tea.name %></h3>
+                            <p><%= tea.description %></p>
+                            <p><strong>Price:</strong> $<%= tea.price %></p>
+                            <a href="<%= tea.url %>" target="_blank">View Product</a>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No matching teas found. Please try different preferences.</p>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

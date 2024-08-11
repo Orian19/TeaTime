@@ -37,6 +37,7 @@ function getReviews() {
  */
 function addReview(review) {
     const reviews = readReviews();
+    review.date = new Date().toISOString();
     reviews.push(review);
     writeReviews(reviews);
 }
