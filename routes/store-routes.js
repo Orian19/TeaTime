@@ -137,11 +137,15 @@ router.post('/checkout/process', async (req, res) => {
 
     try {
         await processCheckout(req.session.username);
-        res.redirect('/store');
+        res.redirect('/store/thank-you');
     } catch (error) {
         console.error('Error during checkout processing:', error);
         res.status(500).send('An error occurred during the checkout process.');
     }
+});
+
+router.get('/thank-you', (req, res) => {
+    res.render('thank-you-payment', { user: req.session.username });
 });
 
 module.exports = router;
