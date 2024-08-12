@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa;
+    background-color: #d5f6c7;
     color: #333;
 }
 
@@ -12,22 +12,11 @@ body {
     flex-direction: column;
 }
 
-/* Layout */
-header, footer {
-    background-color: #4CAF50;
-    color: white;
-    padding: 0.5rem;
-    text-align: center;
-    width: 100%;
-}
-
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: #d5f6c7;
+    color: rgb(17, 46, 16);
+    text-align: center;
+    padding: 1rem;
 }
 
 footer {
@@ -47,8 +36,7 @@ main {
 
 /* Header */
 .header-content {
-    display: flex;
-    align-items: center;
+    text-align: center;
 }
 
 .logo {
@@ -58,12 +46,14 @@ main {
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 0;
 }
 
 /* Navigation */
 nav {
+    background-color: rgb(48, 69, 47);
+    padding: 0.5rem;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -82,11 +72,11 @@ nav {
 }
 
 nav a {
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
-    background-color: #4CAF50;
+    background-color: rgb(48, 69, 47);
     border-radius: 5px;
     transition: background-color 0.3s;
 }
@@ -95,7 +85,26 @@ nav a:hover {
     background-color: #357a38;
 }
 
-/* Product and Cart Items */
+main {
+    flex: 1;
+    padding: 2rem;
+    background-color: white;
+    margin: 0 10%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 0.25rem;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    font-size: 0.75rem;
+}
+
 .product, .cart-item {
     display: flex;
     justify-content: space-between;
