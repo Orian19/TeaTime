@@ -1,14 +1,98 @@
 [
   {
-    "id": "EG001",
-    "name": "Classic Earl Grey",
-    "description": "A timeless black tea infused with oil of bergamot for a citrusy twist.",
-    "price": 7.99,
-    "category": "Black Tea",
-    "origin": "India",
-    "caffeine": "Medium",
-    "brewingTime": "3-5 minutes",
-    "temperature": "95°C",
-    "imageUrl": "/images/earl-grey.jpg"
+      "id": "EG001",
+      "name": "Classic Earl Grey",
+      "description": "A timeless black tea infused with oil of bergamot for a citrusy twist.",
+      "price": 7.99,
+      "category": "Black Tea",
+      "origin": "India",
+      "caffeine": "Medium",
+      "brewingTime": "3-5 minutes",
+      "temperature": "95°C",
+      "imageUrl": "/images/earl-grey.jpg"
+  },
+  {
+      "id": "GT002",
+      "name": "Jasmine Green Tea",
+      "description": "Delicate green tea scented with jasmine blossoms for a fragrant experience.",
+      "price": 8.49,
+      "category": "Green Tea",
+      "origin": "China",
+      "caffeine": "Low",
+      "brewingTime": "2-3 minutes",
+      "temperature": "80°C",
+      "imageUrl": "/images/jasmine-green.jpg"
+  },
+  {
+      "id": "BT003",
+      "name": "Masala Chai",
+      "description": "A robust black tea blended with traditional Indian spices for a warming cup.",
+      "price": 9.99,
+      "category": "Black Tea",
+      "origin": "India",
+      "caffeine": "High",
+      "brewingTime": "5-7 minutes",
+      "temperature": "90°C",
+      "imageUrl": "/images/masala-chai.jpg"
+  },
+  {
+      "id": "HT004",
+      "name": "Chamomile Herbal Tea",
+      "description": "Soothing herbal tea made from chamomile flowers, ideal for relaxation.",
+      "price": 6.99,
+      "category": "Herbal Tea",
+      "origin": "Egypt",
+      "caffeine": "None",
+      "brewingTime": "5-7 minutes",
+      "temperature": "100°C",
+      "imageUrl": "/images/chamomile.jpg"
+  },
+  {
+      "id": "GT005",
+      "name": "Sencha Green Tea",
+      "description": "High-quality Japanese green tea with a fresh and slightly grassy flavor.",
+      "price": 8.99,
+      "category": "Green Tea",
+      "origin": "Japan",
+      "caffeine": "Medium",
+      "brewingTime": "2-3 minutes",
+      "temperature": "75°C",
+      "imageUrl": "/images/sencha.jpg"
+  },
+  {
+      "id": "BT006",
+      "name": "English Breakfast",
+      "description": "A strong black tea blend perfect for a hearty start to your day.",
+      "price": 7.49,
+      "category": "Black Tea",
+      "origin": "Sri Lanka",
+      "caffeine": "High",
+      "brewingTime": "3-5 minutes",
+      "temperature": "95°C",
+      "imageUrl": "/images/english-breakfast.jpg"
+  },
+  {
+      "id": "HT007",
+      "name": "Peppermint Herbal Tea",
+      "description": "Refreshing herbal tea made from peppermint leaves, great for digestion.",
+      "price": 6.49,
+      "category": "Herbal Tea",
+      "origin": "USA",
+      "caffeine": "None",
+      "brewingTime": "5-7 minutes",
+      "temperature": "100°C",
+      "imageUrl": "/images/peppermint.jpg"
+  },
+  {
+      "id": "BT008",
+      "name": "Darjeeling First Flush",
+      "description": "A premium black tea with a light, floral aroma and delicate flavor.",
+      "price": 12.99,
+      "category": "Black Tea",
+      "origin": "India",
+      "caffeine": "Medium",
+      "brewingTime": "3-5 minutes",
+      "temperature": "90°C",
+      "imageUrl": "/images/darjeeling.jpg"
   }
 ]

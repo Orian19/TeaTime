@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Tal",
+    "rating": 5,
+    "comment": "amazing!!"
+  },
+  {
+    "name": "Tal",
+    "rating": 3,
+    "comment": "great!\r\n"
+  },
+  {
+    "name": "Brian",
+    "rating": 4,
+    "comment": "Great tea!!"
+  },
+  {
+    "name": "Tal",
+    "rating": 3,
+    "comment": "good",
+    "date": "2024-08-11T12:49:17.132Z"
+  }
+]

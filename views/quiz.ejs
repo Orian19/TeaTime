@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea Recommendation Quiz</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Find Your Perfect Tea</h1>
+        <form id="quiz-form">
+            <label for="flavor">Favorite Flavor:</label>
+            <select id="flavor" name="flavor" required>
+                <option value="fruity">Fruity</option>
+                <option value="spicy">Spicy</option>
+                <option value="floral">Floral</option>
+                <option value="herbal">Herbal</option>
+            </select><br>
+            
+            <label for="caffeine">Caffeine Preference:</label>
+            <select id="caffeine" name="caffeine" required>
+                <option value="none">None</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select><br>
+
+            <label for="brewing-time">Preferred Brewing Time:</label>
+            <select id="brewing-time" name="brewing-time" required>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="evening">Evening</option>
+                <option value="anytime">Anytime</option>
+            </select><br>
+            
+            <label for="temperature">Preferred Temperature:</label>
+            <select id="temperature" name="temperature" required>
+                <option value="cold">Cold</option>
+                <option value="warm">Warm</option>
+                <option value="hot">Hot</option>
+                <option value="any">Any</option>
+            </select><br>
+
+            <input type="submit" value="Find My Tea">
+        </form>
+
+        <!-- Modal -->
+        <div id="result-popup" class="modal">
+            <div class="modal-content">
+                <span class="close" id="close-popup">&times;</span>
+                <div id="result-content">
+                    <!-- Result will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/quiz.js"></script>
+</body>
+</html>

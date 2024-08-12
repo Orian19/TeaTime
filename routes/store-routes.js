@@ -3,7 +3,10 @@ const router = express.Router();
 const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
-const { addOrder } = require('../modules/orders');
+const { getReviews, addReview } = require('../modules/reviews');
+const { findMatchingTeas } = require('../modules/quiz');
+
+
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -97,6 +100,47 @@ router.get('/checkout', async (req, res) => {
     }));
 
     res.render('checkout', { cartDetails });
+});
+
+// GET reviews
+router.get('/reviews', (req, res) => {
+    const reviews = getReviews();
+    res.render('reviews', { reviews });
+});
+
+// GET quiz
+router.get('/quiz', (req, res) => {
+    res.render('quiz');
+});
+
+router.get('/recommendations', (req, res) => {
+    const { flavor, caffeine, brewingTime, temperature } = req.query;
+    const preferences = {
+        flavor,
+        caffeine,
+        brewingTime,
+        temperature
+    };
+    
+    const matchingTeas = findMatchingTeas(preferences);
+
+    res.render('recommendations', { teas: matchingTeas });
+});
+
+// POST review
+router.post('/submit-review', (req, res) => {
+    const { name, rating, comment } = req.body;
+    if (!name || !rating || !comment) {
+        return res.status(400).json({ success: false, message: 'All fields are required' });
+    }
+
+    try {
+        addReview({ name, rating: parseInt(rating, 10), comment });
+        res.redirect('/store/reviews'); // Redirect to the reviews page to see the updated list
+    } catch (error) {
+        console.error('Error adding review:', error);
+        res.status(500).json({ success: false, message: 'Failed to add review' });
+    }
 });
 
 router.post('/remove-item', async (req, res) => {
