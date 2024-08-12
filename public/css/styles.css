@@ -16,7 +16,6 @@ header {
     background-color: #d5f6c7;
     color: rgb(17, 46, 16);
     text-align: center;
-    padding: 1rem;
 }
 
 footer {
@@ -95,7 +94,7 @@ main {
 }
 
 footer {
-    background-color: #4CAF50;
+    background-color: rgb(17, 46, 16);
     color: white;
     text-align: center;
     padding: 0.25rem;
