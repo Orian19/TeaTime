@@ -9,7 +9,7 @@
       "caffeine": "Medium",
       "brewingTime": "3-5 minutes",
       "temperature": "95°C",
-      "imageUrl": "/images/earl-grey.jpg"
+      "imageUrl": "/images/earl-grey.jpeg"
   },
   {
       "id": "GT002",
@@ -21,11 +21,11 @@
       "caffeine": "Low",
       "brewingTime": "2-3 minutes",
       "temperature": "80°C",
-      "imageUrl": "/images/jasmine-green.jpg"
+      "imageUrl": "/images/jasmine.jpeg"
   },
   {
       "id": "BT003",
-      "name": "Masala Chai",
+      "name": "Chai Masala",
       "description": "A robust black tea blended with traditional Indian spices for a warming cup.",
       "price": 9.99,
       "category": "Black Tea",
@@ -33,7 +33,7 @@
       "caffeine": "High",
       "brewingTime": "5-7 minutes",
       "temperature": "90°C",
-      "imageUrl": "/images/masala-chai.jpg"
+      "imageUrl": "/images/chai-masala.jpeg"
   },
   {
       "id": "HT004",
@@ -45,11 +45,11 @@
       "caffeine": "None",
       "brewingTime": "5-7 minutes",
       "temperature": "100°C",
-      "imageUrl": "/images/chamomile.jpg"
+      "imageUrl": "/images/camomille.jpeg"
   },
   {
       "id": "GT005",
-      "name": "Sencha Green Tea",
+      "name": "Green Tea With Mint",
       "description": "High-quality Japanese green tea with a fresh and slightly grassy flavor.",
       "price": 8.99,
       "category": "Green Tea",
@@ -57,7 +57,9 @@
       "caffeine": "Medium",
       "brewingTime": "2-3 minutes",
       "temperature": "75°C",
-      "imageUrl": "/images/sencha.jpg"
+      "imageUrl": "/images/green-mint.jpeg",
+      "lat": 34.8845,
+      "lng": 135.7984
   },
   {
       "id": "BT006",
@@ -69,7 +71,7 @@
       "caffeine": "High",
       "brewingTime": "3-5 minutes",
       "temperature": "95°C",
-      "imageUrl": "/images/english-breakfast.jpg"
+      "imageUrl": "/images/english-breakfast.jpeg"
   },
   {
       "id": "HT007",
@@ -81,18 +83,6 @@
       "caffeine": "None",
       "brewingTime": "5-7 minutes",
       "temperature": "100°C",
-      "imageUrl": "/images/peppermint.jpg"
-  },
-  {
-      "id": "BT008",
-      "name": "Darjeeling First Flush",
-      "description": "A premium black tea with a light, floral aroma and delicate flavor.",
-      "price": 12.99,
-      "category": "Black Tea",
-      "origin": "India",
-      "caffeine": "Medium",
-      "brewingTime": "3-5 minutes",
-      "temperature": "90°C",
-      "imageUrl": "/images/darjeeling.jpg"
+      "imageUrl": "/images/peppermint.jpeg"
   }
 ]

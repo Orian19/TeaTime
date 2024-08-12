@@ -4,5 +4,15 @@
       "productId": "EG001",
       "quantity": 31
     }
+  ],
+  "talsolovey": [
+    {
+      "productId": "EG001",
+      "quantity": 7
+    },
+    {
+      "productId": "GT002",
+      "quantity": 2
+    }
   ]
 }

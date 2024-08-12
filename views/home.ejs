@@ -1,3 +1,65 @@
-<h2>Welcome to TeaTime</h2>
-<p>Discover our exquisite selection of teas from around the world.</p>
-<a href="/store" class="btn">Shop Now</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeaTime - Home</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Discover the Finest Teas from Around the World</h1>
+                <p>Explore our exquisite selection of teas that cater to every taste and preference.</p>
+                <a href="/store" class="btn">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="introduction">
+            <div class="container">
+                <h2>Welcome to TeaTime</h2>
+                <p>At TeaTime, we pride ourselves on offering a diverse range of high-quality teas sourced from the best regions around the world. Whether you're a tea enthusiast or a casual drinker, our selection has something for everyone.</p>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="featured-products">
+            <h2>Featured Teas</h2>
+            <div class="products-container">
+                <div class="product-card">
+                    <img src="/images/earl-grey.jpeg" alt="Classic Earl Grey" class="product-image">
+                    <h3>Classic Earl Grey</h3>
+                    <p>$7.99</p>
+                    <a href="/store/earl-grey" class="btn">View Details</a>
+                </div>
+                <div class="product-card">
+                    <img src="/images/jasmine.jpeg" alt="Jasmine Green Tea" class="product-image">
+                    <h3>Jasmine Green Tea</h3>
+                    <p>$8.49</p>
+                    <a href="/store/jasmine-green" class="btn">View Details</a>
+                </div>
+                <div class="product-card">
+                    <img src="/images/chai-masala.jpeg" alt="Masala Chai" class="product-image">
+                    <h3>Chai Masala</h3>
+                    <p>$9.99</p>
+                    <a href="/store/masala-chai" class="btn">View Details</a>
+                </div>
+                <!-- Add more product cards here -->
+            </div>
+        </section>
+
+        <!-- Newsletter Signup Section -->
+        <section class="newsletter">
+            <h2>Stay Updated</h2>
+            <p>Sign up for our newsletter to receive the latest news and special offers from Tea Haven.</p>
+            <form action="/subscribe" method="post">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

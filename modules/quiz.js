@@ -19,10 +19,6 @@ function readProducts() {
 /**
  * Find tea products that match the quiz preferences
  * @param {Object} preferences - User's tea preferences
- * @param {string} preferences.flavor - Preferred flavor
- * @param {string} preferences.caffeine - Caffeine preference
- * @param {string} preferences.brewingTime - Preferred brewing time
- * @param {string} preferences.temperature - Preferred temperature
  * @returns {Array} Array of matching tea products
  */
 function findMatchingTeas(preferences) {
@@ -37,15 +33,6 @@ function findMatchingTeas(preferences) {
     });
 }
 
-/**
- * Handle the quiz form submission and redirect to recommendations
- * @param {Object} preferences - User's tea preferences
- * @returns {Promise<Array>} A promise that resolves to an array of matching tea products
- */
-async function handleQuizSubmission(preferences) {
-    return findMatchingTeas(preferences);
-}
-
 module.exports = {
-    handleQuizSubmission
+    findMatchingTeas
 };

@@ -5,6 +5,8 @@ const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
 const { findMatchingTeas } = require('../modules/quiz');
+const { getTeasWithLocations } = require('../modules/map');
+
 
 
 
@@ -102,29 +104,25 @@ router.get('/checkout', async (req, res) => {
     res.render('checkout', { cartDetails });
 });
 
-// GET reviews
+// GET reviews page
 router.get('/reviews', (req, res) => {
     const reviews = getReviews();
     res.render('reviews', { reviews });
 });
 
-// GET quiz
+// GET quiz page
 router.get('/quiz', (req, res) => {
     res.render('quiz');
 });
 
-router.get('/recommendations', (req, res) => {
-    const { flavor, caffeine, brewingTime, temperature } = req.query;
-    const preferences = {
-        flavor,
-        caffeine,
-        brewingTime,
-        temperature
-    };
-    
+// Handle quiz submission and return results as JSON
+router.post('/submit-quiz', (req, res) => {
+    const { flavor, caffeine, brewingTime, temperature } = req.body;
+    const preferences = { flavor, caffeine, brewingTime, temperature };
+
     const matchingTeas = findMatchingTeas(preferences);
 
-    res.render('recommendations', { teas: matchingTeas });
+    res.json(matchingTeas); // Return the matching teas as JSON
 });
 
 // POST review
