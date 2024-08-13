@@ -21,6 +21,11 @@
             <a href="/store/quiz">Quiz</a>
             <a href="/store/recipes">Recipes</a>
         </div>
+        <div class="nav-admin">
+            <% if (user && user.isAdmin) { %>
+                <a href="/admin">Admin</a>
+            <% } %>
+        </div>
         <div class="nav-login">
             <% if (user) { %>
                 <a href="/auth/logout">Logout</a>

@@ -1,0 +1,13 @@
+<form id="addProductForm">
+    <!-- Add fields for title, description, and picture here -->
+    <button type="submit">Add Product</button>
+</form>
+<ul id="productList">
+    <% products.forEach(product => { %>
+        <li>
+            <%= product.title %>
+            <button class="deleteProductButton" data-product-id="<%= product.id %>">Delete</button>
+        </li>
+    <% }); %>
+</ul>
+<script src="/modules/admin-products.js"></script>

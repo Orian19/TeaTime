@@ -9,14 +9,16 @@ const { getTeasWithLocations } = require('../modules/map');
 
 
 
-
 // GET store page
 router.get('/', async (req, res) => {
     const products = await getProducts();
     res.render('store', {
         title: 'Our Tea Selection',
         products,
-        user: req.session.username
+        user: {
+            username: req.session.username,
+            isAdmin: req.session.isAdmin
+        }
     });
 });
 
@@ -36,6 +38,7 @@ router.get('/search', async (req, res) => {
         title: 'Our Tea Selection',
         products,
         user: req.session.username,
+        isAdmin: req.session.isAdmin,
         searchTerm
     });
 });
