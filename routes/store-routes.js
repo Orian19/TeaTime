@@ -6,6 +6,7 @@ const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
 const { findMatchingTeas } = require('../modules/quiz');
 const { getTeasWithLocations } = require('../modules/map');
+const {addOrder} = require("../modules/orders");
 
 
 
