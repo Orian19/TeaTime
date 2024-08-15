@@ -9,7 +9,6 @@ const { getTeasWithLocations } = require('../modules/map');
 const {addOrder} = require("../modules/orders");
 
 
-
 // GET store page
 router.get('/', async (req, res) => {
     const products = await getProducts();
@@ -53,6 +52,10 @@ router.post('/add-to-cart', async (req, res) => {
 
     try {
         await addToCart(req.session.username, req.body.productId, parseInt(req.body.quantity, 10));
+        await addUserActivity({
+            username: req.body.username,
+            type: 'add-to-cart'
+        });
 
         req.session.save(err => {
             if (err) {
