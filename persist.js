@@ -40,7 +40,19 @@ async function readProducts() {
     try {
         const data = await fs.readFile(filePath, 'utf-8');
         const products = JSON.parse(data);
-        return products.map(p => new Tea(p.id, p.name, p.description, parseFloat(p.price), p.category, p.origin, p.caffeine, p.brewingTime, p.temperature, p.imageUrl));
+        return products.map(p => new Tea(
+            p.id,
+            p.name,
+            p.description,
+            parseFloat(p.price),
+            p.category,
+            p.origin,
+            parseFloat(p.lat),
+            parseFloat(p.lng),
+            p.caffeine,
+            p.brewingTime,
+            p.temperature,
+            p.imageUrl));
     } catch (error) {
         return []; // return an empty array if the file doesn't exist
     }

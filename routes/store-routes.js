@@ -5,7 +5,6 @@ const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
 const { findMatchingTeas } = require('../modules/quiz');
-const { getTeasWithLocations } = require('../modules/map');
 const {addOrder} = require("../modules/orders");
 
 
@@ -221,5 +220,30 @@ router.post('/checkout/process', async (req, res) => {
 router.get('/thank-you', (req, res) => {
     res.render('thank-you-payment', { user: req.session.username });
 });
+
+router.get('/map', (req, res) => {
+    res.render('map', { user: req.session.username });
+});
+
+router.get('/api/tea-regions', async (req, res) => {
+    const products = await getProducts();
+    const regions = {};
+
+    products.forEach(product => {
+        if (!regions[product.origin]) {
+            regions[product.origin] = {
+                name: product.origin,
+                products: [],
+                lat: product.lat,
+                lng: product.lng,
+            };
+        }
+        regions[product.origin].products.push(product.name);
+    });
+
+    res.json(Object.values(regions));
+});
+
+
 
 module.exports = router;
