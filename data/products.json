@@ -96,5 +96,19 @@
         "brewingTime": "5-7 minutes",
         "temperature": "100°C",
         "imageUrl": "/images/peppermint.jpeg"
+    },
+    {
+        "id": "HT007",
+        "name": "Hibiscus Herbal Tea",
+        "description": "Tangy herbal tea made from hibiscus flowers, rich in vitamin C.",
+        "price": 6.49,
+        "category": "Herbal Tea",
+        "origin": "USA",
+        "lat": 38.7749,
+        "lng": -110.4194,
+        "caffeine": "None",
+        "brewingTime": "5-7 minutes",
+        "temperature": "100°C",
+        "imageUrl": "/images/peppermint.jpeg"
     }
 ]

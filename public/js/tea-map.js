@@ -12,19 +12,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // const markers = L.markerClusterGroup();
 
     fetch('/store/api/tea-regions')
-        .then(response => response.text())  // Convert to text first
-        .then(text => {
-            return JSON.parse(text);  // Then parse it as JSON
-        })
-        .then(products => {
-            products.forEach(product => {
-                if (product.lat && product.lng) {
-                    L.marker([product.lat, product.lng]).addTo(map);
-                } else {
-                    console.warn(`Product ${product.name} does not have valid coordinates.`);
+        .then(response => response.json())
+        .then(regions => {
+            regions.forEach(region => {
+                if (region.lat && region.lng) {
+                    const marker = L.marker([region.lat, region.lng]).addTo(map);
+
+                    // Add a link in the popup that redirects to the store page with a query parameter for filtering by origin
+                    marker.bindPopup(`
+                    <b>${region.name}</b><br>
+                    <a href="/store?origin=${encodeURIComponent(region.name)}">
+                        View products from ${region.name}
+                    </a>
+                `);
                 }
             });
         })
         .catch(error => console.error('Error fetching products:', error));
+
 
 });

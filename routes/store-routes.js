@@ -11,15 +11,25 @@ const {addOrder} = require("../modules/orders");
 // GET store page
 router.get('/', async (req, res) => {
     const products = await getProducts();
+    const originFilter = req.query.origin;
+
+    let filteredProducts = products;
+
+    if (originFilter) {
+        // Filter products by origin if the origin parameter is given
+        filteredProducts = products.filter(product => product.origin === originFilter);
+    }
+
     res.render('store', {
-        title: 'Our Tea Selection',
-        products,
+        title: originFilter ? `Products from ${originFilter}` : 'Our Tea Selection',
+        products: filteredProducts,
         user: {
             username: req.session.username,
             isAdmin: req.session.isAdmin
         }
     });
 });
+
 
 // Search functionality
 router.get('/search', async (req, res) => {
