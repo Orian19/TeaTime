@@ -1,4 +1,8 @@
 {
+  "123": {
+    "password": "$2b$10$EgGZg8Ug6jB47bqZGI8.DufIfPZ1MuUJgK8fJaKvZMI5ZakIYUupG",
+    "isAdmin": false
+  },
   "Orian19": {
     "password": "$2b$10$QrtugOEcrsHhSeYl4Z4UTejsorIe3deQOiiun4EPdKAwmx863F0Pq",
     "isAdmin": false

@@ -1,0 +1,103 @@
+[
+  {
+    "username": "talsolovey",
+    "activity": "Logged in"
+  },
+  {
+    "username": "talsolovey",
+    "activity": "Logged out"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "activity": "Logged out"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged out"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged out"
+  },
+  {
+    "username": "admin",
+    "activity": "Logged in"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-14T13:12:48.537Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-14T13:12:50.673Z"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-14T13:58:47.830Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-14T13:58:50.068Z"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-14T14:08:32.255Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-14T14:08:34.701Z"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-14T14:52:17.053Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-14T14:52:19.817Z"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-14T14:56:17.590Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-14T14:56:20.065Z"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-14T14:56:43.842Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-14T14:56:45.947Z"
+  }
+]

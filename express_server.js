@@ -40,9 +40,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
+const adminRoutes = require('./routes/admin-routes');
 const authRoutes = require('./routes/auth-routes');
 const storeRoutes = require('./routes/store-routes');
-const adminRoutes = require('./routes/admin-routes');
 
 // root route
 // app.get('/', (req, res) => {
@@ -55,9 +55,9 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/store', storeRoutes);
-app.use('/admin', adminRoutes);
 
 // start server
 app.listen(port, () => {
