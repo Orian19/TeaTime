@@ -4,8 +4,8 @@ const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = re
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
-const { findMatchingTeas } = require('../modules/quiz');
 const {addOrder} = require("../modules/orders");
+const {addUserActivity} = require("../modules/admin");
 
 
 // GET store page
@@ -125,14 +125,14 @@ router.get('/quiz', (req, res) => {
     res.render('quiz');
 });
 
-// Handle quiz submission and return results as JSON
-router.post('/submit-quiz', (req, res) => {
-    const { flavor, caffeine, brewingTime, temperature } = req.body;
-    const preferences = { flavor, caffeine, brewingTime, temperature };
-
-    const matchingTeas = findMatchingTeas(preferences);
-
-    res.json(matchingTeas); // Return the matching teas as JSON
+router.get('/api/products', async (req, res) => {
+    try {
+        const products = await getProducts();
+        res.json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 // GET reviews page
@@ -255,7 +255,5 @@ router.get('/api/tea-regions', async (req, res) => {
 
     res.json(Object.values(regions));
 });
-
-
 
 module.exports = router;

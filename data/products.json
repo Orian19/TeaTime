@@ -9,8 +9,7 @@
     "lat": 28.6139,
     "lng": 77.209,
     "caffeine": "Medium",
-    "brewingTime": "3-5 minutes",
-    "temperature": "95°C",
+    "temperature": "Hot",
     "imageUrl": "/images/earl-grey.jpeg"
   },
   {
@@ -23,8 +22,7 @@
     "lat": 39.9042,
     "lng": 116.4074,
     "caffeine": "Low",
-    "brewingTime": "2-3 minutes",
-    "temperature": "80°C",
+    "temperature": "Hot",
     "imageUrl": "/images/jasmine.jpeg"
   },
   {
@@ -37,8 +35,7 @@
     "lat": 28.6139,
     "lng": 77.209,
     "caffeine": "High",
-    "brewingTime": "5-7 minutes",
-    "temperature": "90°C",
+    "temperature": "Hot",
     "imageUrl": "/images/chai-masala.jpeg"
   },
   {
@@ -51,8 +48,7 @@
     "lat": 30.0444,
     "lng": 31.2357,
     "caffeine": "None",
-    "brewingTime": "5-7 minutes",
-    "temperature": "100°C",
+    "temperature": "Hot",
     "imageUrl": "/images/camomille.jpeg"
   },
   {
@@ -65,8 +61,7 @@
     "lat": 35.6895,
     "lng": 139.6917,
     "caffeine": "Medium",
-    "brewingTime": "2-3 minutes",
-    "temperature": "75°C",
+    "temperature": "Hot",
     "imageUrl": "/images/green-mint.jpeg"
   },
   {
@@ -79,8 +74,7 @@
     "lat": 7.8731,
     "lng": 80.7718,
     "caffeine": "High",
-    "brewingTime": "3-5 minutes",
-    "temperature": "95°C",
+    "temperature": "Hot",
     "imageUrl": "/images/english-breakfast.jpeg"
   },
   {
@@ -93,36 +87,20 @@
     "lat": 37.7749,
     "lng": -122.4194,
     "caffeine": "None",
-    "brewingTime": "5-7 minutes",
-    "temperature": "100°C",
+    "temperature": "Hot",
     "imageUrl": "/images/peppermint.jpeg"
   },
   {
-    "id": "HT007",
-    "name": "Hibiscus Herbal Tea",
-    "description": "Tangy herbal tea made from hibiscus flowers, rich in vitamin C.",
+    "id": "HT008",
+    "name": "Hibiscus Iced Tea",
+    "description": "Tangy herbal tea made from hibiscus flowers, rich in vitamin C. Perfect for a refreshing cold drink.",
     "price": 6.49,
     "category": "Herbal Tea",
     "origin": "USA",
     "lat": 38.7749,
     "lng": -110.4194,
     "caffeine": "None",
-    "brewingTime": "5-7 minutes",
-    "temperature": "100°C",
-    "imageUrl": "/images/peppermint.jpeg"
-  },
-  {
-    "name": "green tea",
-    "description": "kdj",
-    "price": 0.02,
-    "lat": null,
-    "lng": null,
-    "imageUrl": "caked"
-  },
-  {
-    "name": "mnnom",
-    "description": "kjkj",
-    "imageUrl": "jaj",
-    "price": 0.04
+    "temperature": "Cold",
+    "imageUrl": "/images/hibiscus.jpeg"
   }
 ]

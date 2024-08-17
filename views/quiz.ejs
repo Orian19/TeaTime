@@ -1,147 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tea Recommendation Quiz</title>
-</head>
-<body>
-    <h1>Find Your Perfect Tea</h1>
-    <form id="quiz-form">
-        <label for="category">Tea Category:</label>
-        <select id="category" name="category" required>
-            <option value="any">Any</option>
-            <option value="Black Tea">Black Tea</option>
-            <option value="Green Tea">Green Tea</option>
-            <option value="Herbal Tea">Herbal Tea</option>
-        </select>
+<main>
+    <div class="add-padding">
+        <h1>Find Your Perfect Tea</h1>
+        <form id="quiz-form">
+            <label for="type">Type of Tea:</label>
+            <select id="type" name="type" required>
+                <option value="any">Any</option>
+                <option value="Black Tea">Black Tea</option>
+                <option value="Green Tea">Green Tea</option>
+                <option value="Herbal Tea">Herbal Tea</option>
+            </select>
 
-        <label for="caffeine">Caffeine Preference:</label>
-        <select id="caffeine" name="caffeine" required>
-            <option value="any">Any</option>
-            <option value="None">None</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-        </select>
+            <label for="caffeine">Caffeine Preference:</label>
+            <select id="caffeine" name="caffeine" required>
+                <option value="any">Any</option>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
 
-        <label for="brewing-time">Preferred Brewing Time:</label>
-        <select id="brewing-time" name="brewing-time" required>
-            <option value="any">Any</option>
-            <option value="2-3 minutes">2-3 minutes</option>
-            <option value="3-5 minutes">3-5 minutes</option>
-            <option value="5-7 minutes">5-7 minutes</option>
-        </select>
+            <label for="temperature">Preferred Temperature:</label>
+            <select id="temperature" name="temperature" required>
+                <option value="any">Any</option>
+                <option value="Hot">Hot</option>
+                <option value="Warm">Warm</option>
+                <option value="Cold">Cold</option>
+            </select>
 
-        <label for="temperature">Preferred Temperature:</label>
-        <select id="temperature" name="temperature" required>
-            <option value="any">Any</option>
-            <option value="75°C">75°C</option>
-            <option value="80°C">80°C</option>
-            <option value="90°C">90°C</option>
-            <option value="95°C">95°C</option>
-            <option value="100°C">100°C</option>
-        </select>
+            <input type="submit" value="Find My Tea">
+        </form>
 
-        <input type="submit" value="Find My Tea">
-    </form>
-
-    <div id="modal">
-        <div id="modal-content">
-            <span class="close">&times;</span>
-            <h2>Your Perfect Tea Match</h2>
-            <img id="tea-image" src="" alt="Recommended Tea">
-            <h3 id="tea-name"></h3>
-            <p id="tea-description"></p>
-            <p id="tea-price"></p>
-            <p id="tea-origin"></p>
-            <button id="add-to-cart">Add to Cart</button>
+        <div id="modal" class="modal">
+            <div id="modal-content" class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Your Perfect Tea Match</h2>
+                <img id="tea-image" src="" alt="Recommended Tea">
+                <h3 id="tea-name"></h3>
+                <p id="tea-description"></p>
+                <p id="tea-price"></p>
+                <p id="tea-origin"></p>
+                <p id="tea-type"></p>
+                <p id="tea-caffeine"></p>
+                <p id="tea-temperature"></p>
+                <div class="product-quantity">
+                    <form action="/store/add-to-cart" method="POST">
+                      <input type="hidden" id="product-id" name="productId" value="">
+                      <label for="quantity">Quantity:</label>
+                      <input type="number" id="quantity" name="quantity" value="1" min="1">
+                      <button type="submit">Add to Cart</button>
+                    </form>
+                  </div>
+            </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var quizForm = document.getElementById('quiz-form');
-            var modal = document.getElementById('modal');
-            var closeBtn = document.getElementsByClassName('close')[0];
-            var addToCartBtn = document.getElementById('add-to-cart');
-
-            var teas = [
-                {
-                    "id": "EG001",
-                    "name": "Classic Earl Grey",
-                    "description": "A timeless black tea infused with oil of bergamot for a citrusy twist.",
-                    "price": 7.99,
-                    "category": "Black Tea",
-                    "origin": "India",
-                    "lat": 28.6139,
-                    "lng": 77.2090,
-                    "caffeine": "Medium",
-                    "brewingTime": "3-5 minutes",
-                    "temperature": "95°C",
-                    "imageUrl": "/images/earl-grey.jpeg"
-                },
-                {
-                    "id": "GT002",
-                    "name": "Jasmine Green Tea",
-                    "description": "Delicate green tea scented with jasmine blossoms for a fragrant experience.",
-                    "price": 8.49,
-                    "category": "Green Tea",
-                    "origin": "China",
-                    "lat": 39.9042,
-                    "lng": 116.4074,
-                    "caffeine": "Low",
-                    "brewingTime": "2-3 minutes",
-                    "temperature": "80°C",
-                    "imageUrl": "/images/jasmine.jpeg"
-                },
-                // ... (include all other teas from your data file)
-            ];
-
-            function findMatchingTea(preferences) {
-                return teas.find(tea => 
-                    (preferences.category === 'any' || tea.category === preferences.category) &&
-                    (preferences.caffeine === 'any' || tea.caffeine === preferences.caffeine) &&
-                    (preferences.brewingTime === 'any' || tea.brewingTime === preferences.brewingTime) &&
-                    (preferences.temperature === 'any' || tea.temperature === preferences.temperature)
-                ) || teas[0]; // Default to first tea if no match found
-            }
-
-            quizForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                var preferences = {
-                    category: document.getElementById('category').value,
-                    caffeine: document.getElementById('caffeine').value,
-                    brewingTime: document.getElementById('brewing-time').value,
-                    temperature: document.getElementById('temperature').value
-                };
-                
-                var recommendedTea = findMatchingTea(preferences);
-
-                document.getElementById('tea-image').src = recommendedTea.imageUrl;
-                document.getElementById('tea-name').textContent = recommendedTea.name;
-                document.getElementById('tea-description').textContent = recommendedTea.description;
-                document.getElementById('tea-price').textContent = `Price: $${recommendedTea.price}`;
-                document.getElementById('tea-origin').textContent = `Origin: ${recommendedTea.origin}`;
-
-                modal.style.display = 'block';
-            });
-
-            closeBtn.onclick = function() {
-                modal.style.display = 'none';
-            };
-
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            };
-
-            addToCartBtn.onclick = function() {
-                alert('Tea added to cart!');
-                // Here you would typically update the cart in your e-commerce system
-            };
-        });
-    </script>
-</body>
-</html>
+</main>
+<script src="/js/quiz.js"></script>

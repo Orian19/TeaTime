@@ -1,4 +1,5 @@
 <main>
+    <div class="add-padding">
     <div class="search">
         <form action="/store/search" method="GET">
             <input type="text" id="searchInput" name="search" placeholder="Search teas..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
@@ -29,4 +30,5 @@
             </div>
         <% }); %>
     </div>
+</div>
 </main>
