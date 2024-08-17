@@ -1,76 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Reviews</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-    <main>
+<main>
+    <div class="add-padding">
         <h1>Customer Reviews</h1>
         <div id="reviews-list">
-            <% if (reviews.length > 0) { %>
-                <% reviews.forEach((review, index) => { %>
+            <% if (reviews && reviews.length > 0) { %>
+                <% reviews.forEach(function(review) { %>
                     <div class="review">
                         <h3><%= review.name %></h3>
+                        <p>Rating: <%= review.rating %>/5</p>
                         <p><%= review.comment %></p>
-                        <p><strong>Rating:</strong> <%= review.rating %>/5</p>
-                        <p><strong>Date:</strong> <%= new Date(review.date).toLocaleString() %></p>
+                        <p>Date: <%= new Date(review.date).toLocaleDateString() %></p>
                     </div>
-                <% }) %>
-            <% } else { %>
-                <p>No reviews yet. Be the first to leave a review!</p>
+                <% }); %>
             <% } %>
         </div>
-
-        <!-- Button to open the modal -->
-        <button id="openModalBtn" class="btn">Add a Review</button>
-
-        <!-- The Modal -->
-        <div id="reviewModal" class="modal">
-            <div class="modal-content">
+        <button id="add-review-btn">Add a Review</button>
+        <div id="modal">
+            <div id="modal-content">
                 <span class="close">&times;</span>
                 <h2>Submit a Review</h2>
-                <form id="review-form" method="POST" action="/store/submit-review">
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name" required><br>
-                    <label for="rating">Rating (1-5):</label><br>
-                    <input type="number" id="rating" name="rating" min="1" max="5" required><br>
-                    <label for="comment">Comment:</label><br>
-                    <textarea id="comment" name="comment" required></textarea><br>
+                <form id="review-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="rating">Rating (1-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    <label for="comment">Comment:</label>
+                    <textarea id="comment" name="comment" required></textarea>
                     <input type="submit" value="Submit Review">
                 </form>
             </div>
         </div>
-    </main>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById("reviewModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("openModalBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-</body>
-</html>
+    </div>
+</main>
+<script src="/js/reviews.js"></script>

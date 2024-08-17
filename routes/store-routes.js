@@ -120,12 +120,6 @@ router.get('/checkout', async (req, res) => {
     res.render('checkout', { cartDetails });
 });
 
-// GET reviews page
-router.get('/reviews', (req, res) => {
-    const reviews = getReviews();
-    res.render('reviews', { reviews });
-});
-
 // GET quiz page
 router.get('/quiz', (req, res) => {
     res.render('quiz');
@@ -141,16 +135,21 @@ router.post('/submit-quiz', (req, res) => {
     res.json(matchingTeas); // Return the matching teas as JSON
 });
 
+// GET reviews page
+router.get('/reviews', async(req, res) => {
+    const reviews = await getReviews();
+    res.render('reviews', { reviews });
+});
+
 // POST review
-router.post('/submit-review', (req, res) => {
+router.post('/reviews', async (req, res) => {
     const { name, rating, comment } = req.body;
     if (!name || !rating || !comment) {
         return res.status(400).json({ success: false, message: 'All fields are required' });
     }
-
     try {
-        addReview({ name, rating: parseInt(rating, 10), comment });
-        res.redirect('/store/reviews'); // Redirect to the reviews page to see the updated list
+        await addReview({ name, rating: parseInt(rating, 10), comment });
+        res.json({ success: true, message: 'Review added successfully' });
     } catch (error) {
         console.error('Error adding review:', error);
         res.status(500).json({ success: false, message: 'Failed to add review' });

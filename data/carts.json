@@ -14,5 +14,11 @@
       "productId": "GT002",
       "quantity": 2
     }
+  ],
+  "admin": [
+    {
+      "productId": "EG001",
+      "quantity": 2
+    }
   ]
 }

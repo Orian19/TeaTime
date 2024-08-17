@@ -1,23 +1,8 @@
 [
   {
-    "name": "Tal",
+    "name": "Tal Solovey",
     "rating": 5,
-    "comment": "amazing!!"
-  },
-  {
-    "name": "Tal",
-    "rating": 3,
-    "comment": "great!\r\n"
-  },
-  {
-    "name": "Brian",
-    "rating": 4,
-    "comment": "Great tea!!"
-  },
-  {
-    "name": "Tal",
-    "rating": 3,
-    "comment": "good",
-    "date": "2024-08-11T12:49:17.132Z"
+    "comment": "Amazing tea selection!!",
+    "date": "2024-08-17T14:36:15.915Z"
   }
 ]
