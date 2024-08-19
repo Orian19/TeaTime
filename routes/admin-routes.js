@@ -54,9 +54,23 @@ router.get('/products', isAdmin, async (req, res) => {
 // Add a new product
 router.post('/products', isAdmin, async (req, res) => {
     try {
-        const { name, description, imageUrl, price } = req.body;
-        const newProduct = await createProduct({ name, description, imageUrl, price: parseFloat(price) });
+        const { id, name, description, price, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
+        const newProduct = await createProduct({
+            id,
+            name,
+            description,
+            price: parseFloat(price),
+            category,
+            origin,
+            lat: parseFloat(lat),
+            lng: parseFloat(lng),
+            caffeine,
+            temperature,
+            imageUrl
+        });
+
         res.status(201).json(newProduct);
+
     } catch (error) {
         console.error(`Error adding product: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
@@ -64,7 +78,7 @@ router.post('/products', isAdmin, async (req, res) => {
 });
 
 // Remove a product
-router.delete('/products/:id', isAdmin, async (req, res) => {
+router.post('/products/:id', isAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         await removeProduct(id);

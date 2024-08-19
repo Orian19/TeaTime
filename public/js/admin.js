@@ -47,11 +47,17 @@ function populateProductList(products) {
     productList.innerHTML = '';
     products.forEach(product => {
         const div = document.createElement('div');
+        div.className = 'product-item';
         div.innerHTML = `
-            <h3>${product.name}</h3>
+            <h3>${product.name} (${product.id})</h3>
+            <img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100px;">
             <p>${product.description}</p>
-            <img src="${product.imageUrl}" alt="${product.name}" style="max-width: 200px;">
-            <p>Price: $${product.price}</p>
+            <p>Price: $${product.price.toFixed(2)}</p>
+            <p>Category: ${product.category}</p>
+            <p>Origin: ${product.origin}</p>
+            <p>Location: ${product.lat}, ${product.lng}</p>
+            <p>Caffeine: ${product.caffeine}</p>
+            <p>Temperature: ${product.temperature}</p>
             <button onclick="removeProduct('${product.id}')">Remove</button>
         `;
         productList.appendChild(div);
@@ -60,12 +66,22 @@ function populateProductList(products) {
 
 function addProduct(event) {
     event.preventDefault();
-    const name = document.getElementById('productTitle').value;
-    const description = document.getElementById('productDescription').value;
-    const imageUrl = document.getElementById('productPicture').value;
-    const price = document.getElementById('productPrice').value;
+    const product = {
+        id: document.getElementById('productId').value,
+        name: document.getElementById('productName').value,
+        description: document.getElementById('productDescription').value,
+        price: parseFloat(document.getElementById('productPrice').value),
+        category: document.getElementById('productCategory').value,
+        origin: document.getElementById('productOrigin').value,
+        lat: parseFloat(document.getElementById('productLat').value),
+        lng: parseFloat(document.getElementById('productLng').value),
+        caffeine: document.getElementById('productCaffeine').value,
+        temperature: document.getElementById('productTemperature').value,
+        imageUrl: document.getElementById('productImageUrl').value
+    };
 
-    axios.post('/admin/products', { name, description, imageUrl, price })
+    console.log('Sending product:', product);
+    axios.post('/admin/products', product)
         .then(() => {
             getProducts();
             document.getElementById('addProductForm').reset();
@@ -74,7 +90,7 @@ function addProduct(event) {
 }
 
 function removeProduct(productId) {
-    axios.delete(`/admin/products/${productId}`)
+    axios.post(`/admin/products/${productId}`)
         .then(() => getProducts())
         .catch(error => console.error('Error removing product:', error));
 }

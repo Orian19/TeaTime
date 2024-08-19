@@ -50,7 +50,6 @@ async function readProducts() {
             parseFloat(p.lat),
             parseFloat(p.lng),
             p.caffeine,
-            p.brewingTime,
             p.temperature,
             p.imageUrl));
     } catch (error) {
@@ -94,7 +93,7 @@ async function updateProduct(product) {
 }
 
 /**
- * Delete a product from the database - products.json
+ * Delete a product from the database file - products.json
  * @param id
  * @returns {Promise<void>}
  */
