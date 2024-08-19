@@ -89,18 +89,5 @@
     "caffeine": "None",
     "temperature": "Hot",
     "imageUrl": "/images/peppermint.jpeg"
-  },
-  {
-    "id": "HT008",
-    "name": "Hibiscus Iced Tea",
-    "description": "Tangy herbal tea made from hibiscus flowers, rich in vitamin C. Perfect for a refreshing cold drink.",
-    "price": 6.49,
-    "category": "Herbal Tea",
-    "origin": "USA",
-    "lat": 38.7749,
-    "lng": -110.4194,
-    "caffeine": "None",
-    "temperature": "Cold",
-    "imageUrl": "/images/hibiscus.jpeg"
   }
 ]

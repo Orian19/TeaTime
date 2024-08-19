@@ -15,10 +15,5 @@
       "quantity": 2
     }
   ],
-  "admin": [
-    {
-      "productId": "EG001",
-      "quantity": 3
-    }
-  ]
+  "admin": []
 }

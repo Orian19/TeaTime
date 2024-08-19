@@ -54,6 +54,10 @@ header h1 {
     margin: 0;
 }
 
+.page-heading{
+    text-align: center;
+}
+
 /* Navigation */
 nav {
     background-color: rgb(48, 69, 47);
@@ -278,6 +282,7 @@ form a:hover {
 
     .product img, .cart-item img {
         margin-bottom: 10px;
+        object-fit: scale-down;
     }
 
     .cart-actions {
@@ -299,17 +304,17 @@ form a:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
 }
 
 #modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%; 
 }
 .close {
     color: #aaa;
@@ -333,17 +338,6 @@ input, textarea {
     width: 100%; 
     padding: 5px; 
     margin-top: 5px; 
-}
-
-/*center content*/
-.center-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    padding-top: 1100px;
 }
 
 /* User Activities Section */
@@ -557,10 +551,12 @@ input, textarea {
     padding: 2rem;
     border-radius: 10px;
 }
+
 .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
+
 .btn {
     display: inline-block;
     background-color: #2e7d32; /* Darker matcha green */
@@ -570,22 +566,27 @@ input, textarea {
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
+
 .btn:hover {
     background-color: #1b5e20; /* Even darker matcha green on hover */
 }
+
 .container {
     width: 80%;
     margin: auto;
     overflow: hidden;
     padding: 2rem 0;
 }
+
 .introduction, .featured-products, .newsletter {
     padding: 3rem 0;
     text-align: center;
 }
+
 .introduction {
     background-color: #c8e6c9; /* Light matcha green background */
 }
+
 .products-container {
     display: flex;
     justify-content: space-around;
@@ -600,35 +601,42 @@ input, textarea {
     width: 250px;
     transition: transform 0.3s ease;
 }
+
 .product-card:hover {
     transform: translateY(-5px);
 }
+
 .product-image {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: scale-down;
     border-radius: 5px;
 }
+
 .newsletter {
     background-color: #81c784; /* Medium matcha green */
     color: white;
 }
+
 .newsletter form {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
 }
+
 .newsletter input[type="email"] {
     padding: 10px;
     width: 300px;
     border: 1px solid #4caf50;
     border-radius: 5px 0 0 5px;
 }
+
 .newsletter button {
     border: none;
     border-radius: 0 5px 5px 0;
     background-color: #2e7d32; /* Darker matcha green */
 }
+
 .newsletter button:hover {
     background-color: #1b5e20; /* Even darker matcha green on hover */
 }

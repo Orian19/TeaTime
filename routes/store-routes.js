@@ -7,11 +7,11 @@ const { getReviews, addReview } = require('../modules/reviews');
 const {addOrder} = require("../modules/orders");
 const {addUserActivity} = require("../modules/admin");
 
-
 // GET store page
 router.get('/', async (req, res) => {
     const products = await getProducts();
     const originFilter = req.query.origin;
+    console.log('User:', req.session.user);
 
     let filteredProducts = products;
 
@@ -22,14 +22,9 @@ router.get('/', async (req, res) => {
 
     res.render('store', {
         title: originFilter ? `Products from ${originFilter}` : 'Our Tea Selection',
-        products: filteredProducts,
-        user: {
-            username: req.session.username,
-            isAdmin: req.session.isAdmin
-        }
+        products: filteredProducts
     });
 });
-
 
 // Search functionality
 router.get('/search', async (req, res) => {
@@ -46,11 +41,10 @@ router.get('/search', async (req, res) => {
     res.render('store', {
         title: 'Our Tea Selection',
         products,
-        user: req.session.username,
-        isAdmin: req.session.isAdmin,
         searchTerm
     });
 });
+
 
 router.post('/add-to-cart', async (req, res) => {
     console.log('Before adding to cart:', req.session);
@@ -96,8 +90,11 @@ router.get('/cart', async (req, res) => {
         };
     }));
 
-    res.render('cart', { cart: detailedCart, user: req.session.username });
+    res.render('cart', { 
+        cart: detailedCart
+     });
 });
+
 
 router.get('/checkout', async (req, res) => {
     if (!req.session.username) {
@@ -117,7 +114,9 @@ router.get('/checkout', async (req, res) => {
         };
     }));
 
-    res.render('checkout', { cartDetails });
+    res.render('checkout', { 
+        cartDetails,
+     });
 });
 
 // GET quiz page
@@ -156,6 +155,7 @@ router.post('/reviews', async (req, res) => {
     }
 });
 
+
 router.post('/remove-item', async (req, res) => {
     console.log('Remove item route hit');
     if (!req.session.username) {
@@ -172,6 +172,7 @@ router.post('/remove-item', async (req, res) => {
     }
 });
 
+
 router.post('/update-quantity', async (req, res) => {
     console.log('Update quantity route hit');
     if (!req.session.username) {
@@ -187,6 +188,7 @@ router.post('/update-quantity', async (req, res) => {
         res.status(500).send('Failed to update cart quantity.');
     }
 });
+
 
 router.post('/checkout/process', async (req, res) => {
     if (!req.session.username) {
@@ -229,13 +231,16 @@ router.post('/checkout/process', async (req, res) => {
     }
 });
 
+
 router.get('/thank-you', (req, res) => {
     res.render('thank-you-payment', { user: req.session.username });
 });
 
+
 router.get('/map', (req, res) => {
-    res.render('map', { user: req.session.username });
+    res.render('map');
 });
+
 
 router.get('/api/tea-regions', async (req, res) => {
     const products = await getProducts();

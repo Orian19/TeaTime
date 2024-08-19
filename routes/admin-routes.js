@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUserActivities, filterUserActivities, addUserActivity } = require('../modules/admin');
+const { getUserActivities, filterUserActivities } = require('../modules/admin');
 const { getProducts, createProduct, removeProduct } = require('../modules/products');
 
 // Middleware to check if user is admin
@@ -8,7 +8,7 @@ function isAdmin(req, res, next) {
     if (req.session && req.session.isAdmin) {
         next();
     } else {
-        res.status(403).json({ error: 'Unauthorized' });
+        return res.redirect('/auth/login');
     }
 }
 

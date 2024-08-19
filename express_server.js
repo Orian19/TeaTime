@@ -26,9 +26,13 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 30 * 60 * 1000 } // 30 minutes
 }));
+
 // middleware to set user variable
 app.use((req, res, next) => {
-    res.locals.user = req.session.username || null;
+    res.locals.user = {
+        username: req.session.username || false,
+        isAdmin: req.session.isAdmin || false
+    };
     next();
 });
 
@@ -45,13 +49,9 @@ const authRoutes = require('./routes/auth-routes');
 const storeRoutes = require('./routes/store-routes');
 
 // root route
-// app.get('/', (req, res) => {
-//     res.redirect('/store');
-// });
 app.get('/', (req, res) => {
     res.render('home', {
-        title: 'Welcome',
-        user: req.session.username
+        title: 'Welcome'
     });
 });
 
