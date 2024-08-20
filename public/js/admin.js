@@ -1,5 +1,3 @@
-// public/js/admin.js
-
 function getUserActivities() {
     axios.get('/admin/activities')
         .then(response => {
@@ -10,13 +8,16 @@ function getUserActivities() {
 }
 
 function filterUserActivities() {
-    const filter = document.getElementById('userFilter').value;
-    axios.post('/admin/filter', { prefix: filter })
+    const filter = document.getElementById('userFilter').value.toLowerCase();
+    axios.get('/admin/activities')
         .then(response => {
             const activities = response.data;
-            populateActivityTable(activities);
+            const filteredActivities = activities.filter(activity => 
+                activity.username.toLowerCase().startsWith(filter)
+            );
+            populateActivityTable(filteredActivities);
         })
-        .catch(error => console.error('Error filtering activities:', error));
+        .catch(error => console.error('Error fetching activities:', error));
 }
 
 function populateActivityTable(activities) {
@@ -79,7 +80,6 @@ function addProduct(event) {
         temperature: document.getElementById('productTemperature').value,
         imageUrl: document.getElementById('productImageUrl').value
     };
-
     console.log('Sending product:', product);
     axios.post('/admin/products', product)
         .then(() => {
@@ -90,7 +90,7 @@ function addProduct(event) {
 }
 
 function removeProduct(productId) {
-    axios.post(`/admin/products/${productId}`)
+    axios.delete(`/admin/products/${productId}`)
         .then(() => getProducts())
         .catch(error => console.error('Error removing product:', error));
 }
@@ -98,7 +98,6 @@ function removeProduct(productId) {
 document.addEventListener('DOMContentLoaded', () => {
     getUserActivities();
     getProducts();
-
     document.getElementById('userFilter').addEventListener('input', filterUserActivities);
     document.getElementById('addProductForm').addEventListener('submit', addProduct);
 });

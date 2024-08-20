@@ -6,6 +6,105 @@ const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
 const {addOrder} = require("../modules/orders");
 const {addUserActivity} = require("../modules/admin");
+const { getBlendableTeas, createBlend, getUserBlends, getBlendById, removeBlend } = require('../modules/tea-blender');
+
+
+router.get('/tea-blender', async (req, res) => {
+    try {
+        const blendableTeas = await getBlendableTeas();
+        res.render('tea-blender', { 
+            title: 'Tea Blending Workshop', 
+            blendableTeas,
+        });
+    } catch (error) {
+        console.error('Error loading tea blender:', error);
+        res.status(500).send('An error occurred while loading the tea blender');
+    }
+});
+
+router.get('/blendable-teas', async (req, res) => {
+    try {
+        const blendableTeas = await getBlendableTeas();
+        res.json(blendableTeas);
+    } catch (error) {
+        console.error('Error fetching blendable teas:', error);
+        res.status(500).json({ error: 'Failed to fetch blendable teas' });
+    }
+});
+
+// POST create new blend
+router.post('/tea-blender', async (req, res) => {
+    if (!req.session.username) {
+        return res.status(401).json({ error: 'User not logged in' });
+    }
+    try {
+        const { blendName, baseTea, flavors } = req.body;
+        console.log('Received blend data:', req.body);
+
+        if (!blendName || !baseTea || !flavors || Object.keys(flavors).length === 0) {
+            return res.status(400).json({ error: 'Invalid blend data' });
+        }
+
+        const newBlend = await createBlend(req.session.username, blendName, baseTea, flavors);
+        res.status(201).json(newBlend);
+    } catch (error) {
+        console.error('Error creating blend:', error);
+        res.status(500).json({ error: 'Failed to create blend' });
+    }
+});
+
+// GET user blends
+router.get('/user-blends', async (req, res) => {
+    if (!req.session.username) {
+        return res.status(401).json({ error: 'User not logged in' });
+    }
+    try {
+        const userBlends = await getUserBlends(req.session.username);
+        res.json(userBlends);
+    } catch (error) {
+        console.error('Error fetching user blends:', error);
+        res.status(500).json({ error: 'Failed to fetch user blends' });
+    }
+});
+
+router.delete('/remove-blend/:blendId', async (req, res) => {
+    if (!req.session.username) {
+        return res.status(401).json({ error: 'User not logged in' });
+    }
+    try {
+        const { blendId } = req.params;
+        await removeBlend(req.session.username, blendId);
+        res.json({ success: true, message: 'Blend removed successfully' });
+    } catch (error) {
+        console.error('Error removing blend:', error);
+        res.status(500).json({ error: 'Failed to remove blend' });
+    }
+});
+
+router.post('/add-blend-to-cart', async (req, res) => {
+    if (!req.session.username) {
+        return res.status(401).json({ success: false, error: 'User not logged in' });
+    }
+    try {
+        const { blendId } = req.body;
+        const blend = await getBlendById(req.session.username, blendId);
+        if (!blend) {
+            return res.status(404).json({ success: false, error: 'Blend not found' });
+        }
+        await addToCart(req.session.username, blendId, 1, 'custom_blend');
+        await addUserActivity({
+            username: req.session.username,
+            type: 'add-to-cart',
+            details: 'Custom Blend'
+        });
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error adding blend to cart:', error);
+        res.status(500).json({ success: false, error: 'Failed to add blend to cart' });
+    }
+});
+
+
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -56,7 +155,7 @@ router.post('/add-to-cart', async (req, res) => {
     try {
         await addToCart(req.session.username, req.body.productId, parseInt(req.body.quantity, 10));
         await addUserActivity({
-            username: req.body.username,
+            username: req.session.username,
             type: 'add-to-cart'
         });
 
@@ -260,5 +359,8 @@ router.get('/api/tea-regions', async (req, res) => {
 
     res.json(Object.values(regions));
 });
+
+
+
 
 module.exports = router;

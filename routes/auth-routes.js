@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
             }
             console.log(`Login successful for username: ${username}`);
             await addUserActivity({
-                username: req.body.username,
+                username: req.session.username,
                 type: 'login'
             });
             res.redirect('/store');
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     await addUserActivity({
-        username: req.body.username,
+        username: req.session.username,
         type: 'logout'
     });
     req.session.destroy(err => {

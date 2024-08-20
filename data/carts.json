@@ -8,12 +8,46 @@
   "talsolovey": [
     {
       "productId": "EG001",
-      "quantity": 7
+      "quantity": 1
+    },
+    {
+      "itemId": "1724153594509",
+      "quantity": 1,
+      "itemType": "custom_blend"
+    },
+    {
+      "itemId": "1724152994235",
+      "quantity": 1,
+      "itemType": "custom_blend"
+    },
+    {
+      "itemId": "1724154215348",
+      "quantity": 1,
+      "itemType": "custom_blend"
+    },
+    {
+      "quantity": null,
+      "itemType": "product"
+    },
+    {
+      "itemId": "1724154920840",
+      "quantity": 2,
+      "itemType": "custom_blend"
+    },
+    {
+      "itemId": "1724153371832",
+      "quantity": 1,
+      "itemType": "custom_blend"
+    }
+  ],
+  "admin": [
+    {
+      "productId": "EG001",
+      "quantity": 3
     },
     {
       "productId": "GT002",
-      "quantity": 2
+      "quantity": 1
     }
-  ],
-  "admin": []
+  ]
 }

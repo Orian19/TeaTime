@@ -1,0 +1,17 @@
+[
+    {
+    "id": "F001",
+    "name": "Vanilla",
+    "category": "Flavor"
+  },
+  {
+    "id": "F002",
+    "name": "Cinnamon",
+    "category": "Flavor"
+  },
+  {
+    "id": "F003",
+    "name": "Lemon",
+    "category": "Flavor"
+  }
+]
