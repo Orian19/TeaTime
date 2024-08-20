@@ -198,7 +198,7 @@ function displayUserBlends(blends) {
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove Blend';
         removeButton.onclick = () => removeBlend(blend.id);
-        removeButton.className = 'remove-blend-btn';
+        removeButton.className = 'remove-btn';
         blendItem.appendChild(removeButton);
 
         blendsList.appendChild(blendItem);

@@ -6,9 +6,9 @@
                 <% reviews.forEach(function(review) { %>
                     <div class="review">
                         <h3><%= review.name %></h3>
-                        <p>Rating: <%= review.rating %>/5</p>
+                        <p class="review-rating">Rating: <%= review.rating %>/5</p>
                         <p><%= review.comment %></p>
-                        <p>Date: <%= new Date(review.date).toLocaleDateString() %></p>
+                        <p class="review-date">Date: <%= new Date(review.date).toLocaleDateString() %></p>
                     </div>
                 <% }); %>
             <% } %>

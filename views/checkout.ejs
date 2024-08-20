@@ -1,6 +1,5 @@
-<!-- This is the checkout page (choose from the cart and “pay”) -->
 <main>
-    <div class="add-padding">
+<div class="add-padding">
     <h1 class="page-heading">Checkout</h1>
     <% if (cartDetails.length === 0) { %>
         <p>Your cart is empty.</p>
@@ -17,9 +16,9 @@
             <tbody>
             <% cartDetails.forEach(function(item) { %>
                 <tr>
-                    <td class="product-info">
-                        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="product-image">
-                        <div class="product-name"><%= item.name %></div>
+                    <td class="cart-product-info">
+                        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
+                        <div class="cart-product-name"><%= item.name %></div>
                     </td>
                     <td>$<%= item.price.toFixed(2) %></td>
                     <td><%= item.quantity %></td>

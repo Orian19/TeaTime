@@ -34,5 +34,21 @@
     ],
     "total": "23.97",
     "date": "2024-08-19T11:07:24.746Z"
+  },
+  {
+    "id": 1724169898639,
+    "user": "admin",
+    "items": [
+      {
+        "productId": "GT002",
+        "quantity": 1
+      },
+      {
+        "productId": "BT003",
+        "quantity": 1
+      }
+    ],
+    "total": "18.48",
+    "date": "2024-08-20T16:04:58.639Z"
   }
 ]

@@ -38,15 +38,27 @@
       "itemId": "1724153371832",
       "quantity": 1,
       "itemType": "custom_blend"
+    },
+    {
+      "productId": "GT002",
+      "quantity": 1
     }
   ],
   "admin": [
     {
-      "productId": "EG001",
-      "quantity": 3
+      "productId": "GT002",
+      "quantity": 2
     },
     {
-      "productId": "GT002",
+      "productId": "BT003",
+      "quantity": 1
+    },
+    {
+      "productId": "EG001",
+      "quantity": 6
+    },
+    {
+      "productId": "GT005",
       "quantity": 1
     }
   ]

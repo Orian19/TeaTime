@@ -1,6 +1,6 @@
 <main>
     <div class="add-padding">
-    <h1>Your Cart</h1>
+    <h1 class="page-heading">Your Cart</h1>
     <% if (cart.length === 0) { %>
         <p>Your cart is empty.</p>
     <% } else { %>
@@ -17,23 +17,23 @@
             <tbody>
             <% cart.forEach(function(item) { %>
                 <tr>
-                    <td class="product-info">
-                        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="product-image">
-                        <div class="product-name"><%= item.name %></div>
+                    <td class="cart-product-info">
+                        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
+                        <div class="cart-product-name"><%= item.name %></div>
                     </td>
                     <td>$<%= item.price.toFixed(2) %></td>
                     <td>
                         <form action="/store/update-quantity" method="POST">
                             <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
                             <input type="hidden" name="productId" value="<%= item.id %>">
-                            <button type="submit">Update</button>
+                            <button id="update-btn" type="submit">Update</button>
                         </form>
                     </td>
                     <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
                     <td>
                         <form action="/store/remove-item" method="POST">
                             <input type="hidden" name="productId" value="<%= item.id %>">
-                            <button type="submit">Remove</button>
+                            <button id="remove-btn" type="submit">Remove</button>
                         </form>
                     </td>
                 </tr>
