@@ -44,22 +44,5 @@
       "quantity": 1
     }
   ],
-  "admin": [
-    {
-      "productId": "GT002",
-      "quantity": 2
-    },
-    {
-      "productId": "BT003",
-      "quantity": 1
-    },
-    {
-      "productId": "EG001",
-      "quantity": 6
-    },
-    {
-      "productId": "GT005",
-      "quantity": 1
-    }
-  ]
+  "admin": []
 }

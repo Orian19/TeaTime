@@ -868,5 +868,15 @@
     "username": "admin",
     "type": "login",
     "datetime": "2024-08-22T09:51:49.272Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T10:38:57.809Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T10:40:39.656Z"
   }
 ]

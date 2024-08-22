@@ -46,7 +46,7 @@
 .newsletter {
     background-color: rgba(48, 69, 47, 0.906);
     color: whitesmoke;
-    padding: 0.2rem 0;
+    padding: 2rem 0;
 }
 
 .newsletter form {
@@ -58,10 +58,18 @@
 .newsletter input[type="email"] {
     padding: 10px;
     width: 300px;
-    border-radius: 5px 0 0 5px;
+    border: 1px solid #4caf50;
+    border-radius: 4px 0 0 4px;
 }
 
-.newsletter button {
-    padding: 0.75rem 1.5rem;
+.newsletter .button {
     border-radius: 0 4px 4px 0;
+}
+
+#subscriptionMessage {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+    color: white;
 }
