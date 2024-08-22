@@ -823,5 +823,50 @@
     "username": "admin",
     "type": "add-to-cart",
     "datetime": "2024-08-20T16:51:18.888Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T09:02:02.034Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T09:02:06.142Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T09:11:01.195Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T09:11:02.283Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T09:12:35.128Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T09:12:36.365Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-22T09:51:40.503Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "logout",
+    "datetime": "2024-08-22T09:51:45.247Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T09:51:49.272Z"
   }
 ]

@@ -1,0 +1,67 @@
+/* Home page */
+.hero {
+    background-image: url('/images/tea-background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    background-color: rgba(252, 253, 238, 0.5); 
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.intro-container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+.introduction, .featured-products, .newsletter {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.introduction {
+    background-color: rgba(48, 69, 47, 0.906); 
+    color: whitesmoke;
+}
+
+.featured-products{
+    background-color: rgba(248, 251, 241, 0.902);
+}
+
+
+.newsletter {
+    background-color: rgba(48, 69, 47, 0.906);
+    color: whitesmoke;
+    padding: 0.2rem 0;
+}
+
+.newsletter form {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.newsletter input[type="email"] {
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px 0 0 5px;
+}
+
+.newsletter button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0 4px 4px 0;
+}

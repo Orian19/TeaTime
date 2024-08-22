@@ -1,0 +1,178 @@
+/* Tea-Blender page*/
+.blender-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.saved-chart-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 150px;
+}
+
+.chart-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#blendForm {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#flavorComponents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.flavor-item {
+    display: flex;
+    align-items: center;
+}
+
+.flavor-item label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.flavor-item input[type="range"] {
+    flex: 2;
+}
+
+.flavor-value {
+    flex: 0 0 40px;
+    text-align: right;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#blendChart {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+#userBlends {
+    margin-top: 40px;
+}
+
+.blend-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+#userBlends {
+    margin-top: 40px;
+}
+
+#blendsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.blend-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.blend-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.blend-item p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.blend-item canvas {
+    margin: 10px 0;
+}
+
+.blend-item button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.blend-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.flavors-container {
+    width: 45%;
+    text-align: left;
+}
+
+.flavors-container h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.flavors-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.flavors-list li {
+    margin-bottom: 3px;
+}

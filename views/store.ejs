@@ -1,9 +1,10 @@
+<link rel="stylesheet" href="/css/store.css">
 <main>
     <div class="add-padding-2">
     <div class="search">
         <form action="/store/search" method="GET">
             <input type="text" id="searchInput" name="search" placeholder="Search teas..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
-            <button type="submit">Search</button>
+            <button class="button" type="submit">Search</button>
         </form>
     </div>
 
@@ -26,7 +27,7 @@
                             <label for="quantity-<%= product.id %>">Quantity:</label>
                             <input type="number" id="quantity-<%= product.id %>" name="quantity" value="1" min="1">
                         </div>
-                        <button type="submit">Add to Cart</button>
+                        <button class="button add-btn" type="submit">Add to Cart</button>
                     </form>
                 </div>
             </div>
