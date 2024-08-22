@@ -89,4 +89,20 @@ router.post('/products/:id', isAdmin, async (req, res) => {
     }
 });
 
+// Search functionality
+router.get('/search', isAdmin, async (req, res) => {
+    const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
+    let activities = await getUserActivities();
+        
+    if (searchTerm) {
+        activities = await activities.filterUserActivities(searchTerm);
+    } 
+
+    res.render('admin', {
+        activities,
+        searchTerm
+    });
+});
+
+
 module.exports = router;

@@ -48,48 +48,6 @@
 }
 
 /* Popup Page */
-#modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto;
-}
-
-#modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 500px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close:hover {
-    color: #333;
-}
-
-#modal h2 {
-    color: #19431bd8;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
 #review-form label {
     display: block;
     margin-top: 1rem;

@@ -24,13 +24,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 5000);
         }, 1000); // Simulate a delay for the subscription process
     });
-
-    // Add to cart functionality for featured products
-    const addToCartButtons = document.querySelectorAll('.add-btn');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const product = this.getAttribute('data-product');
-            alert(`Added ${product} to your cart!`);
-        });
-    });
 });

@@ -10,6 +10,9 @@ const { getBlendableTeas, createBlend, getUserBlends, getBlendById, removeBlend 
 
 
 router.get('/tea-blender', async (req, res) => {
+    if (!req.session.username) {
+        return res.redirect('/auth/login');
+    }
     try {
         const blendableTeas = await getBlendableTeas();
         res.render('tea-blender', { 
@@ -35,7 +38,7 @@ router.get('/blendable-teas', async (req, res) => {
 // POST create new blend
 router.post('/tea-blender', async (req, res) => {
     if (!req.session.username) {
-        return res.status(401).json({ error: 'User not logged in' });
+        return res.redirect('/auth/login');
     }
     try {
         const { blendName, baseTea, flavors } = req.body;

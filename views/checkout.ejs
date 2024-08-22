@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/cart-checkout.css">
 <main>
-<div class="add-padding">
+<div class="add-padding-2">
     <h1 class="page-heading">Checkout</h1>
     <% if (cartDetails.length === 0) { %>
         <p>Your cart is empty.</p>
@@ -27,13 +27,20 @@
                 </tr>
             <% }); %>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td>$<%= cartDetails.reduce((sum, item) => sum + parseFloat(item.total), 0).toFixed(2) %></td>
+                </tr>
+            </tfoot>
         </table>
         <div class="checkout-actions">
             <form action="/store/checkout/process" method="POST">
-                <button type="submit" class="btn btn-primary">Confirm Payment</button>
+                <button type="submit" class="button">Confirm Payment</button>
             </form>
 
         </div>
     <% } %>
 </div>
 </main>
+

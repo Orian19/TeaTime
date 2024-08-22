@@ -878,5 +878,380 @@
     "username": "admin",
     "type": "add-to-cart",
     "datetime": "2024-08-22T10:40:39.656Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T10:54:36.722Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T11:30:23.138Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:30:30.464Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:30:41.070Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:30:48.451Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:30:55.678Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:30:57.680Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T11:40:17.490Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:40:20.042Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T11:41:02.341Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T11:59:10.754Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T11:59:16.739Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:15:03.110Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T12:29:47.044Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T12:31:38.590Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T12:31:41.936Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:32:30.235Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:32:32.748Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:42:32.013Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:42:38.614Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:42:40.023Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T12:52:00.006Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T13:07:46.846Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T13:13:00.558Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T13:31:35.199Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T13:54:39.715Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T13:55:25.470Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T13:56:10.054Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:02:26.436Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:03:55.924Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:05:13.764Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:08:47.052Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:11:04.933Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:12:24.943Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:12:57.441Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:13:16.086Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:16:59.853Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:19:22.530Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:25:02.686Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:27:45.542Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:32:25.901Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:33:28.936Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:34:11.056Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:35:23.631Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:35:34.820Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:38:04.077Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:47:02.774Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:49:14.791Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:51:08.217Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:51:47.272Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:52:00.217Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:52:40.844Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:53:25.868Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:53:43.337Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:55:00.121Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T14:57:23.698Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:02:16.411Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-08-22T15:02:20.713Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T15:03:50.874Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:03:53.294Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:05:44.487Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T15:05:47.984Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:05:56.052Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:12:18.861Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:12:47.491Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:12:55.880Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T15:13:05.474Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:13:09.742Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T15:17:17.094Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:17:23.837Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:19:29.826Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:21:06.271Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T15:21:13.741Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-22T15:21:20.112Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-22T15:23:42.995Z"
   }
 ]

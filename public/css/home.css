@@ -39,9 +39,14 @@
 }
 
 .featured-products{
+    align-items: center;
     background-color: rgba(248, 251, 241, 0.902);
 }
 
+.products-container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
 
 .newsletter {
     background-color: rgba(48, 69, 47, 0.906);

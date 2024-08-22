@@ -8,6 +8,11 @@ async function getProducts() {
     return await readProducts();
 }
 
+async function getFeaturedProducts() {
+    const allProducts = await readProducts();
+    return allProducts.slice(0, 3); // Return the first 3 products
+}
+
 /**
  * Get a product by ID
  * @param id
@@ -50,5 +55,6 @@ module.exports = {
     getProduct,
     createProduct,
     modifyProduct,
-    removeProduct
+    removeProduct,
+    getFeaturedProducts
 };

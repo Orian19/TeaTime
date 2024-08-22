@@ -1,23 +1,39 @@
+let allActivities = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.querySelector('.search form');
+    const searchInput = document.getElementById('searchInput');
+
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const searchTerm = searchInput.value.trim();
+        filterActivities(searchTerm);
+    });
+
+    // Add event listener for real-time filtering
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.trim();
+        filterActivities(searchTerm);
+    });
+
+    // Initial load of activities and products
+    getUserActivities();
+    getProducts();
+    document.getElementById('addProductForm').addEventListener('submit', addProduct);
+});
+
 function getUserActivities() {
     axios.get('/admin/activities')
         .then(response => {
-            const activities = response.data;
-            populateActivityTable(activities);
+            allActivities = response.data;
+            populateActivityTable(allActivities);
         })
         .catch(error => console.error('Error fetching activities:', error));
 }
 
-function filterUserActivities() {
-    const filter = document.getElementById('userFilter').value.toLowerCase();
-    axios.get('/admin/activities')
-        .then(response => {
-            const activities = response.data;
-            const filteredActivities = activities.filter(activity => 
-                activity.username.toLowerCase().startsWith(filter)
-            );
-            populateActivityTable(filteredActivities);
-        })
-        .catch(error => console.error('Error fetching activities:', error));
+function filterActivities(searchTerm) {
+    // Use GET request as originally intended
+    window.location.href = `/admin?search=${encodeURIComponent(searchTerm)}`;
 }
 
 function populateActivityTable(activities) {
@@ -59,7 +75,7 @@ function populateProductList(products) {
             <p>Location: ${product.lat}, ${product.lng}</p>
             <p>Caffeine: ${product.caffeine}</p>
             <p>Temperature: ${product.temperature}</p>
-            <button onclick="removeProduct('${product.id}')">Remove</button>
+            <button class="button remove-btn" onclick="removeProduct('${product.id}')">Remove</button>
         `;
         productList.appendChild(div);
     });
@@ -90,7 +106,7 @@ function addProduct(event) {
 }
 
 function removeProduct(productId) {
-    axios.delete(`/admin/products/${productId}`)
+    axios.post(`/admin/products/${productId}`)
         .then(() => getProducts())
         .catch(error => console.error('Error removing product:', error));
 }

@@ -1,49 +1,57 @@
 <link rel="stylesheet" href="/css/cart-checkout.css">
 <main>
-    <div class="add-padding">
-    <h1 class="page-heading">Your Cart</h1>
-    <% if (cart.length === 0) { %>
-        <p>Your cart is empty.</p>
-    <% } else { %>
-        <table class="cart-table">
-            <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% cart.forEach(function(item) { %>
-                <tr>
-                    <td class="cart-product-info">
-                        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
-                        <div class="cart-product-name"><%= item.name %></div>
-                    </td>
-                    <td>$<%= item.price.toFixed(2) %></td>
-                    <td>
-                        <form action="/store/update-quantity" method="POST">
-                            <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
-                            <input type="hidden" name="productId" value="<%= item.id %>">
-                            <button id="update-btn" type="submit">Update</button>
-                        </form>
-                    </td>
-                    <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
-                    <td>
-                        <form action="/store/remove-item" method="POST">
-                            <input type="hidden" name="productId" value="<%= item.id %>">
-                            <button id="remove-btn" type="submit">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-            <% }); %>
-            </tbody>
-        </table>
-        <div class="cart-actions">
-            <a href="/store/checkout"><button type="button">Proceed to Checkout</button></a>
-        </div>
-    <% } %>
-</div>
+    <div class="add-padding-2">
+        <h1 class="page-heading">Your Cart</h1>
+        
+        <% if (cart.length === 0) { %>
+            <p>Your cart is empty.</p>
+        <% } else { %>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% cart.forEach(function(item) { %>
+                        <tr>
+                            <td class="cart-product-info">
+                                <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
+                                <span class="cart-product-name"><%= item.name %></span>
+                            </td>
+                            <td data-label="Price">$<%= item.price.toFixed(2) %></td>
+                            <td data-label="Quantity">
+                                <form action="/store/update-quantity" method="POST" class="cart-quantity-form">
+                                    <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="cart-quantity-input">
+                                    <input type="hidden" name="productId" value="<%= item.id %>">
+                                    <button type="submit" class="update-btn">Update</button>
+                                </form>
+                            </td>
+                            <td data-label="Total">$<%= (item.price * item.quantity).toFixed(2) %></td>
+                            <td data-label="Actions">
+                                <form action="/store/remove-item" method="POST">
+                                    <input type="hidden" name="productId" value="<%= item.id %>">
+                                    <button type="submit" class="remove-btn">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>$<%= cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2) %></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="cart-actions">
+                <a href="/store/checkout" class="button">Proceed to Checkout</a>
+            </div>
+        <% } %>
+    </div>
 </main>

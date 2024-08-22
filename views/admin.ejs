@@ -1,54 +1,65 @@
 <link rel="stylesheet" href="/css/admin.css">
-<main>
-    <div class="add-padding">
+<main class="add-padding-2">
+    <section class="admin-section">
         <h1 class="page-heading">Admin Panel</h1>
         <h2>User Activities</h2>
-        <input type="text" id="userFilter" placeholder="Filter by username prefix">
+        <div class="search">
+            <form action="/admin/search" method="GET">
+                <input type="text" id="searchInput" name="search" placeholder="Search teas..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+                <button class="button" type="submit">Search</button>
+            </form>
+        </div>
         <div class="table-container">
-        <table id="activityTable">
-            <thead>
-                <tr>
-                    <th>Date/Time</th>
-                    <th>Username</th>
-                    <th>Activity Type</th>
-                </tr>
-            </thead>
-            <tbody id="activityTableBody">
+            <table id="activityTable">
+                <thead>
+                    <tr>
+                        <th>Date/Time</th>
+                        <th>Username</th>
+                        <th>Activity Type</th>
+                    </tr>
+                </thead>
+                <tbody id="activityTableBody">
                 <!-- Activities will be populated here by JavaScript -->
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+    </section>
+
+    <section class="admin-section manage-products">
+        <div class="add-product">
+            <h2>Add a New Product</h2>
+            <form id="addProductForm">
+                <input type="text" id="productId" placeholder="Product ID (e.g., HT007)" required>
+                <input type="text" id="productName" placeholder="Product Name" required>
+                <textarea id="productDescription" placeholder="Product Description" required></textarea>
+                <input type="number" id="productPrice" placeholder="Price" step="0.01" required>
+                <input type="text" id="productCategory" placeholder="Category (e.g., Herbal Tea)" required>
+                <input type="text" id="productOrigin" placeholder="Origin" required>
+                <input type="number" id="productLat" placeholder="Latitude" step="0.0001" required>
+                <input type="number" id="productLng" placeholder="Longitude" step="0.0001" required>
+                <select id="productCaffeine" required>
+                    <option value="">Select Caffeine Level</option>
+                    <option value="None">None</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <select id="productTemperature" required>
+                    <option value="">Select Temperature</option>
+                    <option value="Hot">Hot</option>
+                    <option value="Cold">Cold</option>
+                    <option value="Both">Both</option>
+                </select>
+                <input type="text" id="productImageUrl" placeholder="Image URL" required>
+                <button class="button" type="submit">Add Product</button>
+            </form>
         </div>
-        <h2>Manage Products</h2>
-        <h3 style="text-align: center;">Add Product</h3>
-        <form id="addProductForm">
-            <input type="text" id="productId" placeholder="Product ID (e.g., HT007)" required>
-            <input type="text" id="productName" placeholder="Product Name" required>
-            <textarea id="productDescription" placeholder="Product Description" required></textarea>
-            <input type="number" id="productPrice" placeholder="Price" step="0.01" required>
-            <input type="text" id="productCategory" placeholder="Category (e.g., Herbal Tea)" required>
-            <input type="text" id="productOrigin" placeholder="Origin" required>
-            <input type="number" id="productLat" placeholder="Latitude" step="0.0001" required>
-            <input type="number" id="productLng" placeholder="Longitude" step="0.0001" required>
-            <select id="productCaffeine" required>
-                <option value="">Select Caffeine Level</option>
-                <option value="None">None</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-            </select>
-            <select id="productTemperature" required>
-                <option value="">Select Temperature</option>
-                <option value="Hot">Hot</option>
-                <option value="Cold">Cold</option>
-                <option value="Both">Both</option>
-            </select>
-            <input type="text" id="productImageUrl" placeholder="Image URL" required>
-            <button type="submit">Add Product</button>
-        </form>
-        <div id="productList">
+        <div class="product-list">
+            <h2>Manage Products</h2>
+            <div id="productList">
             <!-- Products will be populated here by JavaScript -->
+            </div>
         </div>
-    </div>
+    </section>
 </main>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

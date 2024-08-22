@@ -18,24 +18,27 @@
         <div class="container">
             <h2>Featured Teas</h2>
             <div class="products-container">
-                <div class="product-card">
-                    <img src="/images/earl-grey.jpeg" alt="Classic Earl Grey" class="product-image">
-                    <h3>Classic Earl Grey</h3>
-                    <p>$7.99</p>
-                    <button class="button add-btn" data-product="earl-grey">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="/images/jasmine.jpeg" alt="Jasmine Green Tea" class="product-image">
-                    <h3>Jasmine Green Tea</h3>
-                    <p>$8.49</p>
-                    <button class="button add-btn" data-product="jasmine-green">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="/images/chai-masala.jpeg" alt="Masala Chai" class="product-image">
-                    <h3>Chai Masala</h3>
-                    <p>$9.99</p>
-                    <button class="button add-btn" data-product="masala-chai">Add to Cart</button>
-                </div>
+                <% featuredProducts.forEach(function(product) { %>
+                    <div class="product-card">
+                        <div class="product-details">
+                            <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="product-image">
+                            <h2><%= product.name %></h2>
+                            <p><%= product.description %></p>
+                            <p>Price: $<%= product.price.toFixed(2) %></p>
+                            <p>Category: <%= product.category %></p>
+                        </div>
+                        <div class="product-quantity">
+                            <form action="/store/add-to-cart" method="POST">
+                                <input type="hidden" name="productId" value="<%= product.id %>">
+                                <div class="quantity-input">
+                                    <label for="quantity-<%= product.id %>">Quantity:</label>
+                                    <input type="number" id="quantity-<%= product.id %>" name="quantity" value="1" min="1">
+                                </div>
+                                <button class="button add-btn" type="submit">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
         </div>
     </section>
