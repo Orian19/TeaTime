@@ -48,11 +48,17 @@ const adminRoutes = require('./routes/admin-routes');
 const authRoutes = require('./routes/auth-routes');
 const storeRoutes = require('./routes/store-routes');
 
+const { getFeaturedProducts } = require('./modules/products');
+
 // root route
-app.get('/', (req, res) => {
-    res.render('home', {
-        title: 'Welcome'
-    });
+app.get('/', async (req, res) => {
+    try {
+        const featuredProducts = await getFeaturedProducts();
+        res.render('home', { featuredProducts });
+    } catch (error) {
+        console.error('Error fetching featured products:', error);
+        res.status(500).send('An error occurred while loading the home page');
+    }
 });
 
 app.use('/admin', adminRoutes);
