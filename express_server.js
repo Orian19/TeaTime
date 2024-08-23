@@ -12,8 +12,6 @@ const limiter = rateLimit({
     max: 100 // limit each IP to 100 requests per windowMs
 });
 
-app.use(limiter); // apply to all requests
-
 // layout
 const expressLayouts = require('express-ejs-layouts');
 
@@ -28,17 +26,12 @@ app.set('layout', 'layout');
 // middleware - body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser()); // todo: makes sure cookies work!!! (cause i dont think they do)
 app.use(session({
     secret: secret,
     resave: false,
     saveUninitialized: false,
-    cookie: { 
-        maxAge: 30 * 60 * 1000, // 30 minutes
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict'
-    }
+    cookie: { maxAge: 30 * 60 * 1000 } // 30 minutes
 }));
 
 // middleware to set user variable
@@ -47,7 +40,7 @@ app.use((req, res, next) => {
         username: req.session.username || false,
         isAdmin: req.session.isAdmin || false
     };
-
+    
     next();
 });
 
@@ -62,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const adminRoutes = require('./routes/admin-routes');
 const authRoutes = require('./routes/auth-routes');
 const storeRoutes = require('./routes/store-routes');
+
 const { getFeaturedProducts } = require('./modules/products');
 
 // root route

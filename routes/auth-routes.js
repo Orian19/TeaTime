@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
             });
 
             res.redirect('/store');
-            
+
         } else {
             console.log(`Login failed for username: ${username}`);
             res.render('login', { error: 'Invalid username or password' });

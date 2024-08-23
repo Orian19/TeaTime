@@ -43,6 +43,7 @@ function isAuthenticated(req, res, next) {
     if (req.session.username) {
         return next();
     }
+
     res.redirect('/auth/login');
 }
 
@@ -64,6 +65,7 @@ async function initAdmin() {
         } else {
             console.log('Admin user already exists');
         }
+        
     } catch (error) {
         console.error('Error initializing admin user:', error);
         throw error;

@@ -89,18 +89,5 @@
     "caffeine": "None",
     "temperature": "Hot",
     "imageUrl": "/images/peppermint.jpeg"
-  },
-  {
-    "id": "gfds",
-    "name": "fds",
-    "description": "fds",
-    "price": 0.01,
-    "category": "fees",
-    "origin": "rew",
-    "lat": 0.0001,
-    "lng": 0.0001,
-    "caffeine": "None",
-    "temperature": "Hot",
-    "imageUrl": "frdpw"
   }
 ]
