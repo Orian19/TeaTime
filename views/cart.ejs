@@ -21,9 +21,9 @@
                         <tr>
                             <td class="cart-product-info">
                                 <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
-                                <span class="cart-product-name"><%= item.name %></span>
+                                <span class="cart-product-name"><%= item.name ? item.name : 'Personalized Blend' %></span>
                             </td>
-                            <td data-label="Price">$<%= item.price.toFixed(2) %></td>
+                            <td data-label="Price">$<%= item.price ? item.price.toFixed(2) : '9.99' %></td>
                             <td data-label="Quantity">
                                 <form action="/store/update-quantity" method="POST" class="cart-quantity-form">
                                     <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="cart-quantity-input">
@@ -31,7 +31,9 @@
                                     <button type="submit" class="update-btn">Update</button>
                                 </form>
                             </td>
-                            <td data-label="Total">$<%= (item.price * item.quantity).toFixed(2) %></td>
+                            <td data-label="Total">
+                                $<%= (item.price ? (item.price * item.quantity).toFixed(2) : (9.99 * item.quantity).toFixed(2)) %>
+                            </td>
                             <td data-label="Actions">
                                 <form action="/store/remove-item" method="POST">
                                     <input type="hidden" name="productId" value="<%= item.id %>">
@@ -44,7 +46,9 @@
                 <tfoot>
                     <tr>
                         <td colspan="3">Total</td>
-                        <td>$<%= cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2) %></td>
+                        <td>
+                            $<%= cart.reduce((total, item) => total + ((item.price || 9.99) * item.quantity), 0).toFixed(2) %>
+                        </td>
                         <td></td>
                     </tr>
                 </tfoot>

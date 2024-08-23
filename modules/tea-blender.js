@@ -67,6 +67,7 @@ async function createBlend(username, blendName, baseTea, flavors) {
         name: blendName,
         baseTea,
         flavors,
+        price: 10.99,
         createdAt: new Date().toISOString()
     };
 

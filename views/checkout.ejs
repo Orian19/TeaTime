@@ -19,9 +19,9 @@
                 <tr>
                     <td class="cart-product-info">
                         <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
-                        <div class="cart-product-name"><%= item.name %></div>
+                        <div class="cart-product-name"><%= item.name ? item.name : 'Personal Blend' %></div>
                     </td>
-                    <td>$<%= item.price.toFixed(2) %></td>
+                    <td>$<%= item.price ? item.price.toFixed(2) : '9.99' %></td>
                     <td><%= item.quantity %></td>
                     <td>$<%= item.total %></td>
                 </tr>

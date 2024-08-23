@@ -23,14 +23,21 @@ router.get('/activities', async (req, res) => {
     }
 });
 
-// Filter user activities
-router.post('/filter', async (req, res) => {
+// Search user activities
+router.get('/search', async (req, res) => {
     try {
-        const { prefix } = req.body;
-        const filteredActivities = await filterUserActivities(prefix);
-        res.json(filteredActivities);
+        const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
+        let activities = await getUserActivities();
+
+        if (searchTerm) {
+            activities = activities.filter(activity => 
+                activity.username.toLowerCase().startsWith(searchTerm)
+            );
+        }
+
+        res.json(activities);
     } catch (error) {
-        console.error(`Error filtering user activities: ${error.message}`);
+        console.error(`Error searching activities: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
     }
 });
@@ -82,21 +89,6 @@ router.post('/products/:id', async (req, res) => {
         console.error(`Error removing product: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
     }
-});
-
-// Search functionality
-router.get('/search', async (req, res) => {
-    const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
-    let activities = await getUserActivities();
-        
-    if (searchTerm) {
-        activities = await activities.filterUserActivities(searchTerm);
-    } 
-
-    res.render('admin', {
-        activities,
-        searchTerm
-    });
 });
 
 

@@ -20,13 +20,9 @@ async function getUserActivities() {
             // If the file doesn't exist, return an empty array
             return [];
         }
+        
         throw error;
     }
-}
-
-async function filterUserActivities(prefix) {
-    const activities = await getUserActivities();
-    return activities.filter(activity => activity.username.toLowerCase().startsWith(prefix.toLowerCase()));
 }
 
 async function addUserActivity(activity) {
@@ -41,6 +37,5 @@ async function addUserActivity(activity) {
 module.exports = { 
     isAdmin,
     getUserActivities, 
-    filterUserActivities, 
     addUserActivity
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { isAuthenticated } = require('../modules/user');
-const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = require('../modules/cart');
+const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart, addBlendToCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
@@ -122,7 +122,7 @@ router.post('/add-blend-to-cart', async (req, res) => {
             return res.status(404).json({ success: false, error: 'Blend not found' });
         }
 
-        await addToCart(req.session.username, blendId, 1, 'custom_blend');
+        await addBlendToCart(req.session.username, blendId, 1);
         await addUserActivity({
             username: req.session.username,
             type: 'add-to-cart',
@@ -182,22 +182,42 @@ router.get('/cart', async (req, res) => {
 
 // GET checkout page
 router.get('/checkout', async (req, res) => {
-    const userCart = getCart(req.session.username);
-    const cartDetails = await Promise.all(userCart.map(async item => {
-        const product = await getProduct(item.productId);
-        return {
-            name: product.name,
-            price: parseFloat(product.price),
-            quantity: item.quantity,
-            imageUrl: product.imageUrl,
-            total: (product.price * item.quantity).toFixed(2)
-        };
-    }));
+    try {
+        const userCart = getCart(req.session.username);
+        const cartDetails = await Promise.all(userCart.map(async item => {
+            const product = await getProduct(item.productId);
 
-    res.render('checkout', { 
-        cartDetails,
-     });
+            if (!product) {
+                return {
+                    name: 'Personalized Blend',
+                    price: 9.99,
+                    quantity: item.quantity,
+                    imageUrl: '',  // Default or placeholder image URL
+                    total: (9.99 * item.quantity).toFixed(2)
+                };
+            }
+
+            const price = parseFloat(product.price) 
+            const total = (price * item.quantity).toFixed(2);  
+
+            return {
+                name: product.name,
+                price: price,
+                quantity: item.quantity,
+                imageUrl: product.imageUrl,  // Default or placeholder image URL
+                total: total
+            };
+        }));
+
+        res.render('checkout', { 
+            cartDetails,
+        });
+    } catch (error) {
+        console.error(`Error loading checkout page: ${error.message}`);
+        res.status(500).send('Server Error');
+    }
 });
+
 
 // GET quiz page
 router.get('/quiz', (req, res) => {

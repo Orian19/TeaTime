@@ -1,44 +1,39 @@
-let allActivities = [];
-
 document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.querySelector('.search form');
-    const searchInput = document.getElementById('searchInput');
+    const userSearchInput = document.getElementById('userSearchInput');
 
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const searchTerm = searchInput.value.trim();
-        filterActivities(searchTerm);
-    });
-
-    // Add event listener for real-time filtering
-    searchInput.addEventListener('input', (e) => {
+    userSearchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.trim();
-        filterActivities(searchTerm);
+        filterUserActivities(searchTerm);
     });
 
-    // Initial load of activities and products
+    productSearchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.trim();
+        filterProducts(searchTerm);
+    });
+
+    // Initial load of activities
     getUserActivities();
-    getProducts();
-    document.getElementById('addProductForm').addEventListener('submit', addProduct);
 });
 
-function getUserActivities() {
-    axios.get('/admin/activities')
+function filterUserActivities(searchTerm) {
+    axios.get(`/admin/search/users?search=${encodeURIComponent(searchTerm)}`)
         .then(response => {
-            allActivities = response.data;
-            populateActivityTable(allActivities);
+            populateUserActivityTable(response.data);
+        })
+        .catch(error => console.error('Error filtering user activities:', error));
+}
+
+function getUserActivities() {
+    axios.get('/admin/search')
+        .then(response => {
+            populateActivityTable(response.data);
         })
         .catch(error => console.error('Error fetching activities:', error));
 }
 
-function filterActivities(searchTerm) {
-    // Use GET request as originally intended
-    window.location.href = `/admin?search=${encodeURIComponent(searchTerm)}`;
-}
-
 function populateActivityTable(activities) {
     const tbody = document.getElementById('activityTableBody');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Clear existing table data
     activities.forEach(activity => {
         const tr = document.createElement('tr');
         tr.innerHTML = `

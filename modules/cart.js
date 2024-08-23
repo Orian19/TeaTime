@@ -1,4 +1,5 @@
 const { getProduct } = require('./products');
+const { getBlendById } = require('./tea-blender');
 const fs = require('fs');
 const path = require('path');
 
@@ -41,6 +42,26 @@ function getCart(username) {
  */
 async function addToCart(username, productId, quantity = 1) {
     const product = await getProduct(productId);
+    if (!product) {
+        throw new Error('Product not found');
+    }
+
+    const carts = readCarts();
+    const userCart = carts[username] || [];
+
+    const existingProductIndex = userCart.findIndex(item => item.productId === productId);
+    if (existingProductIndex !== -1) {
+        userCart[existingProductIndex].quantity += quantity;
+    } else {
+        userCart.push({ productId: productId, quantity: quantity });
+    }
+
+    carts[username] = userCart;
+    writeCarts(carts);
+}
+
+async function addBlendToCart(username, productId, quantity = 1) {
+    const product = await getBlendById(username, productId);
     if (!product) {
         throw new Error('Product not found');
     }
@@ -110,6 +131,7 @@ function clearCart(username) {
 module.exports = {
     getCart,
     addToCart,
+    addBlendToCart,
     updateCartQuantity,
     removeFromCart,
     clearCart

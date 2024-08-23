@@ -4,10 +4,7 @@
         <h1 class="page-heading">Admin Panel</h1>
         <h2>User Activities</h2>
         <div class="search">
-            <form action="/admin/search" method="GET">
-                <input type="text" id="searchInput" name="search" placeholder="Search teas..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
-                <button class="button" type="submit">Search</button>
-            </form>
+            <input type="text" id="userSearchInput" name="search" placeholder="Search by username...">
         </div>
         <div class="table-container">
             <table id="activityTable">
