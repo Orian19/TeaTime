@@ -1288,5 +1288,25 @@
     "username": "talsolovey",
     "type": "login",
     "datetime": "2024-08-23T11:00:50.704Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-23T12:14:49.520Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "logout",
+    "datetime": "2024-08-23T12:15:10.432Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-23T12:15:13.427Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-23T12:16:18.777Z"
   }
 ]

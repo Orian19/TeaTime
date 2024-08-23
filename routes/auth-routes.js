@@ -35,16 +35,20 @@ router.post('/login', async (req, res) => {
             if (rememberMe) {
                 req.session.cookie.maxAge = 10 * 24 * 60 * 60 * 1000; // 10 days
             }
+
             console.log(`Login successful for username: ${username}`);
             await addUserActivity({
                 username: req.session.username,
                 type: 'login'
             });
+
             res.redirect('/store');
+            
         } else {
             console.log(`Login failed for username: ${username}`);
-            res.status(401).send('Invalid username or password');
+            res.render('login', { error: 'Invalid username or password' });
         }
+
     } catch(error) {
         console.error(`Error during login for username: ${username}: ${error.message}`);
         res.status(500).send('An error occurred during login');
