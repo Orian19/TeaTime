@@ -54,8 +54,8 @@ function isAuthenticated(req, res, next) {
 async function initAdmin() {
     try {
         const users = await readUsers(USERS_FILE) || {};
-
-        // Check if any user is an admin
+        
+        // Check if any user has admin privileges
         const adminExists = Object.values(users).some(user => user.isAdmin);
 
         if (!adminExists) {
@@ -66,7 +66,7 @@ async function initAdmin() {
         }
     } catch (error) {
         console.error('Error initializing admin user:', error);
-        throw error; 
+        throw error;
     }
 }
 

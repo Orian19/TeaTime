@@ -1,9 +1,18 @@
 const express = require('express');
 const session = require('express-session');
+const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
 const port = 3000;
+
+// rate limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter); // apply to all requests
 
 // layout
 const expressLayouts = require('express-ejs-layouts');
@@ -27,7 +36,7 @@ app.use(session({
     cookie: { 
         maxAge: 30 * 60 * 1000, // 30 minutes
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
         sameSite: 'strict'
     }
 }));
@@ -38,6 +47,7 @@ app.use((req, res, next) => {
         username: req.session.username || false,
         isAdmin: req.session.isAdmin || false
     };
+
     next();
 });
 

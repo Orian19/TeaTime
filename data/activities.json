@@ -1308,5 +1308,10 @@
     "username": "admin",
     "type": "logout",
     "datetime": "2024-08-23T12:16:18.777Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-23T12:30:18.315Z"
   }
 ]
