@@ -1,24 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { getUserActivities, filterUserActivities } = require('../modules/admin');
+const { getUserActivities, filterUserActivities, isAdmin } = require('../modules/admin');
 const { getProducts, createProduct, removeProduct } = require('../modules/products');
+const { isAuthenticated } = require('../modules/user');
 
-// Middleware to check if user is admin
-function isAdmin(req, res, next) {
-    if (req.session && req.session.isAdmin) {
-        next();
-    } else {
-        return res.redirect('/auth/login');
-    }
-}
+router.use(isAuthenticated);
+router.use(isAdmin);
 
-// Admin route
-router.get('/', isAdmin, (req, res) => {
+// Get admin page
+router.get('/', (req, res) => {
     res.render('admin');
 });
 
-// Get all activities
-router.get('/activities', isAdmin, async (req, res) => {
+// Get user activities
+router.get('/activities', async (req, res) => {
     try {
         const activities = await getUserActivities();
         res.json(activities);
@@ -29,7 +24,7 @@ router.get('/activities', isAdmin, async (req, res) => {
 });
 
 // Filter user activities
-router.post('/filter', isAdmin, async (req, res) => {
+router.post('/filter', async (req, res) => {
     try {
         const { prefix } = req.body;
         const filteredActivities = await filterUserActivities(prefix);
@@ -41,7 +36,7 @@ router.post('/filter', isAdmin, async (req, res) => {
 });
 
 // Get all products
-router.get('/products', isAdmin, async (req, res) => {
+router.get('/products', async (req, res) => {
     try {
         const products = await getProducts();
         res.json(products);
@@ -52,7 +47,7 @@ router.get('/products', isAdmin, async (req, res) => {
 });
 
 // Add a new product
-router.post('/products', isAdmin, async (req, res) => {
+router.post('/products', async (req, res) => {
     try {
         const { id, name, description, price, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
         const newProduct = await createProduct({
@@ -78,7 +73,7 @@ router.post('/products', isAdmin, async (req, res) => {
 });
 
 // Remove a product
-router.post('/products/:id', isAdmin, async (req, res) => {
+router.post('/products/:id', async (req, res) => {
     try {
         const { id } = req.params;
         await removeProduct(id);
@@ -90,7 +85,7 @@ router.post('/products/:id', isAdmin, async (req, res) => {
 });
 
 // Search functionality
-router.get('/search', isAdmin, async (req, res) => {
+router.get('/search', async (req, res) => {
     const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
     let activities = await getUserActivities();
         

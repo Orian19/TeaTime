@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { readUsers, writeUsers } = require('../persist');
+const { isAdmin } = require('../modules/admin');
 
 const USERS_FILE = 'users.json';
 
@@ -30,25 +31,48 @@ async function registerUser(username, password, isAdmin = false) {
 async function authenticateUser(username, password) {
     const users = await readUsers(USERS_FILE) || {};
     const user = users[username];
+    
     if (user && await bcrypt.compare(password, user.password)) {
-        return user;
+        return { username, isAdmin: user.isAdmin };
     }
+
     return false;
 }
+
+function isAuthenticated(req, res, next) {
+    if (req.session.username) {
+        return next();
+    }
+    res.redirect('/auth/login');
+}
+
 
 /**
  * Initialize the admin user
  * @returns {Promise<void>}
  */
 async function initAdmin() {
-    const users = await readUsers(USERS_FILE) || {};
-    if (!users.admin) {
-        await registerUser('admin', 'admin', true);
+    try {
+        const users = await readUsers(USERS_FILE) || {};
+
+        // Check if any user is an admin
+        const adminExists = Object.values(users).some(user => user.isAdmin);
+
+        if (!adminExists) {
+            await registerUser('admin', 'admin', true);
+            console.log('Admin user initialized successfully');
+        } else {
+            console.log('Admin user already exists');
+        }
+    } catch (error) {
+        console.error('Error initializing admin user:', error);
+        throw error; 
     }
 }
 
 module.exports = {
     registerUser,
     authenticateUser,
+    isAuthenticated,
     initAdmin
 };

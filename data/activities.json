@@ -1253,5 +1253,40 @@
     "username": "talsolovey",
     "type": "login",
     "datetime": "2024-08-22T15:23:42.995Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-22T15:36:17.856Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-22T15:47:28.700Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-23T09:41:08.786Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-23T10:57:23.051Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-23T11:00:34.639Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-23T11:00:43.014Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-23T11:00:50.704Z"
   }
 ]

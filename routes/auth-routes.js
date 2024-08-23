@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
         const user = await authenticateUser(username, password);
         if(user) {
             req.session.username = username;
-            req.session.isAdmin = user.isAdmin; // Set isAdmin in the session if the user is an admin
+            req.session.isAdmin = user.isAdmin;
             if (rememberMe) {
                 req.session.cookie.maxAge = 10 * 24 * 60 * 60 * 1000; // 10 days
             }
@@ -56,12 +56,14 @@ router.get('/logout', async (req, res) => {
         username: req.session.username,
         type: 'logout'
     });
+
     req.session.destroy(err => {
         if(err) {
-            console.error(err);
+            return console.error(err);
         }
+
         res.redirect('/auth/login');
-    })
+    });
 });
 
 

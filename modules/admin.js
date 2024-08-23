@@ -4,6 +4,13 @@ const path = require('path');
 
 const ACTIVITIES_FILE = path.join(__dirname, '..', 'data', 'activities.json');
 
+function isAdmin(req, res, next) {
+    if (req.session.isAdmin) {
+      return next();
+    }
+    res.status(403).send('Access denied');
+  }
+
 async function getUserActivities() {
     try {
         const data = await fs.readFile(ACTIVITIES_FILE, 'utf8');
@@ -32,6 +39,7 @@ async function addUserActivity(activity) {
 }
 
 module.exports = { 
+    isAdmin,
     getUserActivities, 
     filterUserActivities, 
     addUserActivity

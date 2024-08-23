@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { isAuthenticated } = require('../modules/user');
 const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
@@ -7,107 +8,6 @@ const { getReviews, addReview } = require('../modules/reviews');
 const {addOrder} = require("../modules/orders");
 const {addUserActivity} = require("../modules/admin");
 const { getBlendableTeas, createBlend, getUserBlends, getBlendById, removeBlend } = require('../modules/tea-blender');
-
-
-router.get('/tea-blender', async (req, res) => {
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-    try {
-        const blendableTeas = await getBlendableTeas();
-        res.render('tea-blender', { 
-            title: 'Tea Blending Workshop', 
-            blendableTeas,
-        });
-    } catch (error) {
-        console.error('Error loading tea blender:', error);
-        res.status(500).send('An error occurred while loading the tea blender');
-    }
-});
-
-router.get('/blendable-teas', async (req, res) => {
-    try {
-        const blendableTeas = await getBlendableTeas();
-        res.json(blendableTeas);
-    } catch (error) {
-        console.error('Error fetching blendable teas:', error);
-        res.status(500).json({ error: 'Failed to fetch blendable teas' });
-    }
-});
-
-// POST create new blend
-router.post('/tea-blender', async (req, res) => {
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-    try {
-        const { blendName, baseTea, flavors } = req.body;
-        console.log('Received blend data:', req.body);
-
-        if (!blendName || !baseTea || !flavors || Object.keys(flavors).length === 0) {
-            return res.status(400).json({ error: 'Invalid blend data' });
-        }
-
-        const newBlend = await createBlend(req.session.username, blendName, baseTea, flavors);
-        res.status(201).json(newBlend);
-    } catch (error) {
-        console.error('Error creating blend:', error);
-        res.status(500).json({ error: 'Failed to create blend' });
-    }
-});
-
-// GET user blends
-router.get('/user-blends', async (req, res) => {
-    if (!req.session.username) {
-        return res.status(401).json({ error: 'User not logged in' });
-    }
-    try {
-        const userBlends = await getUserBlends(req.session.username);
-        res.json(userBlends);
-    } catch (error) {
-        console.error('Error fetching user blends:', error);
-        res.status(500).json({ error: 'Failed to fetch user blends' });
-    }
-});
-
-router.delete('/remove-blend/:blendId', async (req, res) => {
-    if (!req.session.username) {
-        return res.status(401).json({ error: 'User not logged in' });
-    }
-    try {
-        const { blendId } = req.params;
-        await removeBlend(req.session.username, blendId);
-        res.json({ success: true, message: 'Blend removed successfully' });
-    } catch (error) {
-        console.error('Error removing blend:', error);
-        res.status(500).json({ error: 'Failed to remove blend' });
-    }
-});
-
-router.post('/add-blend-to-cart', async (req, res) => {
-    if (!req.session.username) {
-        return res.status(401).json({ success: false, error: 'User not logged in' });
-    }
-    try {
-        const { blendId } = req.body;
-        const blend = await getBlendById(req.session.username, blendId);
-        if (!blend) {
-            return res.status(404).json({ success: false, error: 'Blend not found' });
-        }
-        await addToCart(req.session.username, blendId, 1, 'custom_blend');
-        await addUserActivity({
-            username: req.session.username,
-            type: 'add-to-cart',
-            details: 'Custom Blend'
-        });
-        res.json({ success: true });
-    } catch (error) {
-        console.error('Error adding blend to cart:', error);
-        res.status(500).json({ success: false, error: 'Failed to add blend to cart' });
-    }
-});
-
-
 
 // GET store page
 router.get('/', async (req, res) => {
@@ -147,14 +47,99 @@ router.get('/search', async (req, res) => {
     });
 });
 
+router.use(isAuthenticated); // Protect all routes below this line
 
-router.post('/add-to-cart', async (req, res) => {
-    console.log('Before adding to cart:', req.session);
-
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
+router.get('/tea-blender', async (req, res) => {
+    try {
+        const blendableTeas = await getBlendableTeas();
+        res.render('tea-blender', { 
+            title: 'Tea Blending Workshop', 
+            blendableTeas,
+        });
+    } catch (error) {
+        console.error('Error loading tea blender:', error);
+        res.status(500).send('An error occurred while loading the tea blender');
     }
+});
 
+router.get('/blendable-teas', async (req, res) => {
+    try {
+        const blendableTeas = await getBlendableTeas();
+        res.json(blendableTeas);
+    } catch (error) {
+        console.error('Error fetching blendable teas:', error);
+        res.status(500).json({ error: 'Failed to fetch blendable teas' });
+    }
+});
+
+// POST create new blend
+router.post('/tea-blender', async (req, res) => {
+    try {
+        const { blendName, baseTea, flavors } = req.body;
+
+        if (!blendName || !baseTea || !flavors || Object.keys(flavors).length === 0) {
+            return res.status(400).json({ error: 'Invalid blend data' });
+        }
+
+        const newBlend = await createBlend(req.session.username, blendName, baseTea, flavors);
+        res.status(201).json(newBlend);
+    } catch (error) {
+        console.error('Error creating blend:', error);
+        res.status(500).json({ error: 'Failed to create blend' });
+    }
+});
+
+// GET user blends
+router.get('/user-blends', async (req, res) => {
+    try {
+        const userBlends = await getUserBlends(req.session.username);
+        res.json(userBlends);
+    } catch (error) {
+        console.error('Error fetching user blends:', error);
+        res.status(500).json({ error: 'Failed to fetch user blends' });
+    }
+});
+
+// DELETE remove blend
+router.delete('/remove-blend/:blendId', async (req, res) => {
+    try {
+        const { blendId } = req.params;
+        await removeBlend(req.session.username, blendId);
+        res.json({ success: true, message: 'Blend removed successfully' });
+    } catch (error) {
+        console.error('Error removing blend:', error);
+        res.status(500).json({ error: 'Failed to remove blend' });
+    }
+});
+
+// POST add blend to cart
+router.post('/add-blend-to-cart', async (req, res) => {
+    try {
+        const { blendId } = req.body;
+        const blend = await getBlendById(req.session.username, blendId);
+        
+        if (!blend) {
+            return res.status(404).json({ success: false, error: 'Blend not found' });
+        }
+
+        await addToCart(req.session.username, blendId, 1, 'custom_blend');
+        await addUserActivity({
+            username: req.session.username,
+            type: 'add-to-cart',
+            details: 'Custom Blend'
+        });
+
+        res.json({ success: true });
+
+    } catch (error) {
+        console.error('Error adding blend to cart:', error);
+        res.status(500).json({ success: false, error: 'Failed to add blend to cart' });
+    }
+});
+
+
+// POST add to cart
+router.post('/add-to-cart', async (req, res) => {
     try {
         await addToCart(req.session.username, req.body.productId, parseInt(req.body.quantity, 10));
         await addUserActivity({
@@ -167,9 +152,11 @@ router.post('/add-to-cart', async (req, res) => {
                 console.error('Session save error:', err);
                 return res.status(500).json({ error: 'Session save failed' });
             }
+
             console.log('After adding to cart:', req.session);
             res.redirect('/store');
         });
+
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -177,10 +164,6 @@ router.post('/add-to-cart', async (req, res) => {
 
 // GET cart page
 router.get('/cart', async (req, res) => {
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-
     const userCart = getCart(req.session.username);
 
     // Fetch full product details for each item in the cart
@@ -197,14 +180,9 @@ router.get('/cart', async (req, res) => {
      });
 });
 
-
+// GET checkout page
 router.get('/checkout', async (req, res) => {
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-
     const userCart = getCart(req.session.username);
-
     const cartDetails = await Promise.all(userCart.map(async item => {
         const product = await getProduct(item.productId);
         return {
@@ -226,6 +204,7 @@ router.get('/quiz', (req, res) => {
     res.render('quiz');
 });
 
+// GET products API
 router.get('/api/products', async (req, res) => {
     try {
         const products = await getProducts();
@@ -257,13 +236,8 @@ router.post('/reviews', async (req, res) => {
     }
 });
 
-
-router.post('/remove-item', async (req, res) => {
-    console.log('Remove item route hit');
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-
+// POST remove item from cart
+router.delete('/remove-item', async (req, res) => {
     const { productId } = req.body;
     try {
         removeFromCart(req.session.username, productId);
@@ -276,11 +250,6 @@ router.post('/remove-item', async (req, res) => {
 
 
 router.post('/update-quantity', async (req, res) => {
-    console.log('Update quantity route hit');
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-
     const { productId, quantity } = req.body;
     try {
         updateCartQuantity(req.session.username, productId, parseInt(quantity, 10));
@@ -293,10 +262,6 @@ router.post('/update-quantity', async (req, res) => {
 
 
 router.post('/checkout/process', async (req, res) => {
-    if (!req.session.username) {
-        return res.redirect('/auth/login');
-    }
-
     try {
         // Get detailed checkout information, including the total
         const { cartDetails, total } = await getCheckoutDetails(req.session.username);
@@ -333,17 +298,17 @@ router.post('/checkout/process', async (req, res) => {
     }
 });
 
-
+// GET thank you page
 router.get('/thank-you', (req, res) => {
     res.render('thank-you-payment', { user: req.session.username });
 });
 
-
+// GET map page
 router.get('/map', (req, res) => {
     res.render('map');
 });
 
-
+// GET tea regions API
 router.get('/api/tea-regions', async (req, res) => {
     const products = await getProducts();
     const regions = {};
@@ -362,8 +327,6 @@ router.get('/api/tea-regions', async (req, res) => {
 
     res.json(Object.values(regions));
 });
-
-
 
 
 module.exports = router;
