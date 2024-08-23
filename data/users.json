@@ -1,8 +1,4 @@
 {
-  "123": {
-    "password": "$2b$10$EgGZg8Ug6jB47bqZGI8.DufIfPZ1MuUJgK8fJaKvZMI5ZakIYUupG",
-    "isAdmin": false
-  },
   "Orian19": {
     "password": "$2b$10$QrtugOEcrsHhSeYl4Z4UTejsorIe3deQOiiun4EPdKAwmx863F0Pq",
     "isAdmin": false
@@ -14,5 +10,9 @@
   "admin": {
     "password": "$2b$10$l58al.1I47AYMDekthRiHeOFrfPc/oftAlHxCyPv9FyiwYIekcli6",
     "isAdmin": true
+  },
+  "newuser": {
+    "password": "$2b$10$lyuvLXXVNG6OI102veSumeVHpvSvGXh3FMFG8k3LTYo/G3DV/GFYS",
+    "isAdmin": false
   }
 }

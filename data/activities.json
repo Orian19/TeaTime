@@ -1378,5 +1378,19 @@
     "username": "admin",
     "type": "login",
     "datetime": "2024-08-23T12:48:10.867Z"
+  },
+  {
+    "username": "newuser",
+    "type": "register",
+    "datetime": "2024-08-23T12:54:17.876Z"
+  },
+  {
+    "type": "logout",
+    "datetime": "2024-08-23T12:54:17.922Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-23T13:02:36.706Z"
   }
 ]
