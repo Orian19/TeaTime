@@ -7,21 +7,26 @@
     <% } else { %>
         <table class="checkout-table">
             <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
             </thead>
             <tbody>
             <% cartDetails.forEach(function(item) { %>
                 <tr>
                     <td class="cart-product-info">
                         <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
-                        <div class="cart-product-name"><%= item.name ? item.name : 'Personal Blend' %></div>
+                        <div class="cart-product-name">
+                            <%= item.name %>
+                            <% if (item.itemType === 'custom_blend') { %>
+                                <span>(Custom Blend)</span>
+                            <% } %>
+                        </div>
                     </td>
-                    <td>$<%= item.price ? item.price.toFixed(2) : '9.99' %></td>
+                    <td>$<%= item.price.toFixed(2) %></td>
                     <td><%= item.quantity %></td>
                     <td>$<%= item.total %></td>
                 </tr>
@@ -38,9 +43,7 @@
             <form action="/store/checkout/process" method="POST">
                 <button type="submit" class="button">Confirm Payment</button>
             </form>
-
         </div>
     <% } %>
 </div>
 </main>
-

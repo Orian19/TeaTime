@@ -1,6 +1,4 @@
-const { getCart } = require('./cart');
-const { getProduct } = require('./products');
-const { clearCart } = require('./cart');
+const { getCartDetails, clearCart } = require('./cart');
 
 /**
  * Get the cart details for checkout
@@ -8,27 +6,24 @@ const { clearCart } = require('./cart');
  * @returns {Promise<object>} - The cart details including products, total price, etc.
  */
 async function getCheckoutDetails(username) {
-    const cart = getCart(username);
+    const cartDetails = await getCartDetails(username);
     let total = 0;
 
-    const cartDetails = await Promise.all(
-        cart.map(async item => {
-            const product = await getProduct(item.productId);
-            const itemTotal = product.price * item.quantity;
-            total += itemTotal;
-            return {
-                ...product,
-                quantity: item.quantity,
-                itemTotal: itemTotal.toFixed(2)
-            };
-        })
-    );
+    const checkoutItems = cartDetails.map(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        return {
+            ...item,
+            total: itemTotal.toFixed(2)
+        };
+    });
 
     return {
-        cartDetails,
+        cartDetails: checkoutItems,
         total: total.toFixed(2)
     };
 }
+
 
 /**
  * Process the checkout and clear the cart
@@ -37,7 +32,7 @@ async function getCheckoutDetails(username) {
  */
 async function processCheckout(username) {
     // todo: handle payment processing, order creation, etc.
-    clearCart(username);
+    await clearCart(username);
 }
 
 module.exports = {

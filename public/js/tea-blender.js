@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         const blendData = {
-            blendName: blendName,
+            name: blendName,
             baseTea: baseTea,
             flavors: flavors
         };

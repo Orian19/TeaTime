@@ -118,5 +118,76 @@
     ],
     "total": "8.49",
     "date": "2024-08-22T12:54:22.965Z"
+  },
+  {
+    "id": "1724506267679",
+    "user": "talsolovey",
+    "items": [
+      {
+        "itemId": "1724425391410",
+        "itemType": "custom_blend",
+        "price": 9.99,
+        "quantity": 1
+      }
+    ],
+    "total": "9.99",
+    "date": "2024-08-24T13:31:07.679Z"
+  },
+  {
+    "id": "1724506363623",
+    "user": "talsolovey",
+    "items": [
+      {
+        "itemId": "1724425391410",
+        "itemType": "custom_blend",
+        "price": 9.99,
+        "quantity": 1
+      }
+    ],
+    "total": "9.99",
+    "date": "2024-08-24T13:32:43.623Z"
+  },
+  {
+    "id": "1724506376168",
+    "user": "talsolovey",
+    "items": [
+      {
+        "itemId": "EG001",
+        "itemType": "product",
+        "name": "Classic Earl Grey",
+        "price": 7.99,
+        "quantity": 1
+      },
+      {
+        "itemId": "GT002",
+        "itemType": "product",
+        "name": "Jasmine Green Tea",
+        "price": 8.49,
+        "quantity": 1
+      }
+    ],
+    "total": "16.48",
+    "date": "2024-08-24T13:32:56.168Z"
+  },
+  {
+    "id": "1724507663217",
+    "user": "talsolovey",
+    "items": [
+      {
+        "itemId": "GT002",
+        "itemType": "product",
+        "name": "Jasmine Green Tea",
+        "price": 8.49,
+        "quantity": 1
+      },
+      {
+        "itemId": "1724503151416",
+        "itemType": "custom_blend",
+        "price": 9.99,
+        "quantity": 1
+      }
+    ],
+    "total": "18.48",
+    "date": "2024-08-24T13:54:23.217Z"
   }
 ]

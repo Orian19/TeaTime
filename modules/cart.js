@@ -1,138 +1,102 @@
+// In cart.js
+
 const { getProduct } = require('./products');
-const { getBlendById } = require('./tea-blender');
-const fs = require('fs');
+const { getBlend } = require('./tea-blender');
+const fs = require('fs').promises;
 const path = require('path');
 
 const cartsFilePath = path.join(__dirname, '../data/carts.json');
 
-/**
- * Read carts from the josn file
- * @returns {any}
- */
-function readCarts() {
-    const data = fs.readFileSync(cartsFilePath);
-    return JSON.parse(data);
+async function readCarts() {
+    try {
+        const data = await fs.readFile(cartsFilePath, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        return {};
+    }
 }
 
-/**
- * Write carts to the json file
- * @param carts
- * @returns {void}
- */
-function writeCarts(carts) {
-    fs.writeFileSync(cartsFilePath, JSON.stringify(carts, null, 2));
+async function writeCarts(carts) {
+    await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 }
 
-/**
- * Get all products in the user's cart
- * @param username
- * @returns {Array}
- */
-function getCart(username) {
-    const carts = readCarts();
+async function getCart(username) {
+    const carts = await readCarts();
     return carts[username] || [];
 }
 
-/**
- * Add a product to the user's cart
- * @param username
- * @param productId
- * @param quantity
- * @returns {Promise<void>}
- */
-async function addToCart(username, productId, quantity = 1) {
-    const product = await getProduct(productId);
-    if (!product) {
-        throw new Error('Product not found');
-    }
-
-    const carts = readCarts();
+async function addToCart(username, itemId, quantity = 1, itemType = 'product') {
+    const carts = await readCarts();
     const userCart = carts[username] || [];
-
-    const existingProductIndex = userCart.findIndex(item => item.productId === productId);
-    if (existingProductIndex !== -1) {
-        userCart[existingProductIndex].quantity += quantity;
+    const existingItemIndex = userCart.findIndex(item => item.itemId === itemId && item.itemType === itemType);
+    
+    if (existingItemIndex !== -1) {
+        userCart[existingItemIndex].quantity += quantity;
     } else {
-        userCart.push({ productId: productId, quantity: quantity });
+        userCart.push({ itemId, quantity, itemType });
     }
 
     carts[username] = userCart;
-    writeCarts(carts);
+    await writeCarts(carts);
 }
 
-async function addBlendToCart(username, productId, quantity = 1) {
-    const product = await getBlendById(username, productId);
-    if (!product) {
-        throw new Error('Product not found');
-    }
-
-    const carts = readCarts();
+async function removeFromCart(username, itemId, itemType) {
+    const carts = await readCarts();
     const userCart = carts[username] || [];
-
-    const existingProductIndex = userCart.findIndex(item => item.productId === productId);
-    if (existingProductIndex !== -1) {
-        userCart[existingProductIndex].quantity += quantity;
-    } else {
-        userCart.push({ productId: productId, quantity: quantity });
-    }
-
-    carts[username] = userCart;
-    writeCarts(carts);
-}
-
-
-/**
- * Remove a product from the user's cart
- * @param username
- * @param productId
- */
-function removeFromCart(username, productId) {
-    const carts = readCarts();
-    const userCart = carts[username] || [];
-    const updatedCart = userCart.filter(p => p.productId !== productId);
-
+    const updatedCart = userCart.filter(item => !(item.itemId === itemId && item.itemType === itemType));
     carts[username] = updatedCart;
-    writeCarts(carts);
+    await writeCarts(carts);
 }
 
-/**
- * Update the quantity of a product in the user's cart
- * @param username
- * @param productId
- * @param newQuantity
- */
-function updateCartQuantity(username, productId, newQuantity) {
-    const carts = readCarts();
+async function updateCartQuantity(username, itemId, newQuantity, itemType) {
+    const carts = await readCarts();
     const userCart = carts[username] || [];
-
-    const productIndex = userCart.findIndex(item => item.productId === productId);
-    if (productIndex !== -1) {
+    const itemIndex = userCart.findIndex(item => item.itemId === itemId && item.itemType === itemType);
+    
+    if (itemIndex !== -1) {
         if (newQuantity <= 0) {
-            userCart.splice(productIndex, 1); // Remove item if quantity is 0 or less
+            userCart.splice(itemIndex, 1);
         } else {
-            userCart[productIndex].quantity = newQuantity; // Update quantity
+            userCart[itemIndex].quantity = newQuantity;
         }
     }
 
     carts[username] = userCart;
-    writeCarts(carts);
+    await writeCarts(carts);
 }
 
-/**
- * Clear the user's cart
- * @param username
- */
-function clearCart(username) {
-    const carts = readCarts();
-    carts[username] = [];
-    writeCarts(carts);
+async function getCartDetails(username) {
+    const userCart = await getCart(username);
+    const cartDetails = await Promise.all(userCart.map(async (item) => {
+        if (item.itemType === 'product') {
+            const product = await getProduct(item.itemId);
+            return { ...product, quantity: item.quantity, itemType: 'product' };
+        } else if (item.itemType === 'custom_blend') {
+            const blend = await getBlend(username, item.itemId);
+            return { 
+                id: blend.id,
+                blendName: blend.name,
+                price: 9.99, // or calculate based on blend components
+                quantity: item.quantity,
+                itemType: 'custom_blend'
+            };
+        }
+    }));
+
+    return cartDetails;
+}
+
+async function clearCart(username) {
+    const carts = await readCarts();
+    delete carts[username];
+    await writeCarts(carts);
 }
 
 module.exports = {
     getCart,
     addToCart,
-    addBlendToCart,
-    updateCartQuantity,
     removeFromCart,
+    updateCartQuantity,
+    getCartDetails,
     clearCart
 };

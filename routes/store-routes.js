@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { isAuthenticated } = require('../modules/user');
-const { addToCart, getCart, removeFromCart, updateCartQuantity, clearCart, addBlendToCart } = require('../modules/cart');
+const { addToCart, getCart, removeFromCart, updateCartQuantity, getCartDetails, clearCart} = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
 const {addOrder} = require("../modules/orders");
 const {addUserActivity} = require("../modules/admin");
-const { getBlendableTeas, createBlend, getUserBlends, getBlendById, removeBlend } = require('../modules/tea-blender');
-
+const { getBlendableTeas, getUserBlendsList, getBlend, removeBlend, createUserBlend } = require('../modules/tea-blender');
 // GET store page
 router.get('/', async (req, res) => {
     const products = await getProducts();
@@ -52,10 +51,13 @@ router.use(isAuthenticated); // Protect all routes below this line
 router.get('/tea-blender', async (req, res) => {
     try {
         const blendableTeas = await getBlendableTeas();
+        const userBlends = await getUserBlendsList(req.session.username);
         res.render('tea-blender', { 
             title: 'Tea Blending Workshop', 
             blendableTeas,
+            userBlends
         });
+
     } catch (error) {
         console.error('Error loading tea blender:', error);
         res.status(500).send('An error occurred while loading the tea blender');
@@ -74,25 +76,14 @@ router.get('/blendable-teas', async (req, res) => {
 
 // POST create new blend
 router.post('/tea-blender', async (req, res) => {
-    try {
-        const { blendName, baseTea, flavors } = req.body;
-
-        if (!blendName || !baseTea || !flavors || Object.keys(flavors).length === 0) {
-            return res.status(400).json({ error: 'Invalid blend data' });
-        }
-
-        const newBlend = await createBlend(req.session.username, blendName, baseTea, flavors);
-        res.status(201).json(newBlend);
-    } catch (error) {
-        console.error('Error creating blend:', error);
-        res.status(500).json({ error: 'Failed to create blend' });
-    }
+    const blend = await createUserBlend(req.session.username, req.body);
+    res.json(blend);
 });
 
 // GET user blends
 router.get('/user-blends', async (req, res) => {
     try {
-        const userBlends = await getUserBlends(req.session.username);
+        const userBlends = await getUserBlendsList(req.session.username);
         res.json(userBlends);
     } catch (error) {
         console.error('Error fetching user blends:', error);
@@ -114,28 +105,17 @@ router.delete('/remove-blend/:blendId', async (req, res) => {
 
 // POST add blend to cart
 router.post('/add-blend-to-cart', async (req, res) => {
-    try {
-        const { blendId } = req.body;
-        const blend = await getBlendById(req.session.username, blendId);
-        
-        if (!blend) {
-            return res.status(404).json({ success: false, error: 'Blend not found' });
-        }
-
-        await addBlendToCart(req.session.username, blendId, 1);
-        await addUserActivity({
-            username: req.session.username,
-            type: 'add-to-cart',
-            details: 'Custom Blend'
-        });
-
-        res.json({ success: true });
-
-    } catch (error) {
-        console.error('Error adding blend to cart:', error);
-        res.status(500).json({ success: false, error: 'Failed to add blend to cart' });
+    const { blendId, quantity } = req.body;
+    const blend = await getBlend(req.session.username, blendId);
+    
+    if (!blend) {
+        return res.status(404).json({ error: 'Blend not found' });
     }
+
+    await addToCart(req.session.username, blendId, quantity, 'custom_blend');
+    res.json({ success: true });
 });
+
 
 
 // POST add to cart
@@ -164,54 +144,61 @@ router.post('/add-to-cart', async (req, res) => {
 
 // GET cart page
 router.get('/cart', async (req, res) => {
-    const userCart = getCart(req.session.username);
-
-    // Fetch full product details for each item in the cart
-    const detailedCart = await Promise.all(userCart.map(async (item) => {
-        const product = await getProduct(item.productId);
-        return {
-            ...product,
-            quantity: item.quantity,
-        };
-    }));
-
-    res.render('cart', { 
-        cart: detailedCart
-     });
+    try {
+        const cartDetails = await getCartDetails(req.session.username);
+        res.render('cart', { cart: cartDetails });
+    } catch (error) {
+        console.error('Error fetching cart details:', error);
+        res.status(500).send('An error occurred while loading the cart.');
+    }
 });
 
 // GET checkout page
 router.get('/checkout', async (req, res) => {
     try {
-        const userCart = getCart(req.session.username);
+        const userCart = await getCart(req.session.username);
         const cartDetails = await Promise.all(userCart.map(async item => {
-            const product = await getProduct(item.productId);
+            
+            if (item.itemType === 'product') {
+                const product = await getProduct(item.itemId);
+                
+                if (!product) {
+                    throw new Error(`Product not found: ${item.itemId}`);
+                }
 
-            if (!product) {
+                const price = parseFloat(product.price);    
                 return {
-                    name: 'Personalized Blend',
-                    price: 9.99,
+                    name: product.name,
+                    price: price,
                     quantity: item.quantity,
-                    imageUrl: '',  // Default or placeholder image URL
-                    total: (9.99 * item.quantity).toFixed(2)
+                    imageUrl: product.imageUrl,
+                    total: (price * item.quantity).toFixed(2),
+                    itemType: 'product'
+                };
+
+            } else if (item.itemType === 'custom_blend') {
+                const blend = await getBlend(req.session.username, item.itemId);
+                
+                if (!blend) {
+                    throw new Error(`Blend not found: ${item.itemId}`);
+                }
+                
+                const price = 9.99; // Or calculate based on blend components
+                return {
+                    name: blend.name,
+                    price: price,
+                    quantity: item.quantity,
+                    imageUrl: '/images/tea-blend.jpg', // Use a default image for blends
+                    total: (price * item.quantity).toFixed(2),
+                    itemType: 'custom_blend'
                 };
             }
-
-            const price = parseFloat(product.price) 
-            const total = (price * item.quantity).toFixed(2);  
-
-            return {
-                name: product.name,
-                price: price,
-                quantity: item.quantity,
-                imageUrl: product.imageUrl,  // Default or placeholder image URL
-                total: total
-            };
         }));
 
-        res.render('checkout', { 
+        res.render('checkout', {
             cartDetails,
         });
+
     } catch (error) {
         console.error(`Error loading checkout page: ${error.message}`);
         res.status(500).send('Server Error');
@@ -257,10 +244,10 @@ router.post('/reviews', async (req, res) => {
 });
 
 // POST remove item from cart
-router.delete('/remove-item', async (req, res) => {
-    const { productId } = req.body;
+router.post('/remove-item', async (req, res) => {
+    const { itemId, itemType } = req.body;
     try {
-        removeFromCart(req.session.username, productId);
+        await removeFromCart(req.session.username, itemId, itemType);
         res.redirect('/store/cart');
     } catch (error) {
         console.error('Error removing item from cart:', error);
@@ -270,15 +257,16 @@ router.delete('/remove-item', async (req, res) => {
 
 
 router.post('/update-quantity', async (req, res) => {
-    const { productId, quantity } = req.body;
+    const { itemId, quantity, itemType } = req.body;
     try {
-        updateCartQuantity(req.session.username, productId, parseInt(quantity, 10));
+        await updateCartQuantity(req.session.username, itemId, parseInt(quantity, 10), itemType);
         res.redirect('/store/cart');
     } catch (error) {
         console.error('Error updating cart quantity:', error);
         res.status(500).send('Failed to update cart quantity.');
     }
 });
+
 
 
 router.post('/checkout/process', async (req, res) => {
@@ -290,18 +278,21 @@ router.post('/checkout/process', async (req, res) => {
             return res.redirect('/store/cart'); // Redirect back to cart if it's empty
         }
 
-        // Map cartDetails to only include productId and quantity for the order items
+        // Map cartDetails to include both products and custom blends
         const orderItems = cartDetails.map(item => ({
-            productId: item.id,  // Assuming `id` corresponds to `productId`
+            itemId: item.id,
+            itemType: item.itemType,
+            name: item.name,
+            price: item.price,
             quantity: item.quantity
         }));
 
         // Create an order object using the checkout details
         const order = {
-            id: Date.now(), // Simple unique ID
+            id: Date.now().toString(), // Simple unique ID
             user: req.session.username,
-            items: orderItems,  // Use stripped down orderItems
-            total, // Use the total from getCheckoutDetails
+            items: orderItems,
+            total: total,
             date: new Date().toISOString(),
         };
 
@@ -320,7 +311,7 @@ router.post('/checkout/process', async (req, res) => {
 
 // GET thank you page
 router.get('/thank-you', (req, res) => {
-    res.render('thank-you-payment', { user: req.session.username });
+    res.render('thank-you-payment');
 });
 
 // GET map page

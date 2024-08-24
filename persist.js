@@ -4,6 +4,9 @@ const Tea = require('./modules/tea');
 
 const DATA_DIR = path.join(__dirname, 'data');
 const PRODUCTS_FILE = 'products.json';
+const BLENDS_FILE = path.join(__dirname, 'data', 'blends.json');
+const FLAVORS_FILE = path.join(__dirname, 'data', 'flavors.json');
+
 
 // Create a directory if it doesn't exist
 fs.mkdir(DATA_DIR, { recursive: true }).catch(console.error);
@@ -128,6 +131,66 @@ async function writeOrders(file, orders) {
     await fs.writeFile(filePath, JSON.stringify(orders, null, 2));
 }
 
+async function readBlends() {
+    try {
+        const data = await fs.readFile(BLENDS_FILE, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            return {};
+        }
+        throw error;
+    }
+}
+
+async function writeBlends(blends) {
+    await fs.writeFile(BLENDS_FILE, JSON.stringify(blends, null, 2));
+}
+
+async function createBlend(username, blend) {
+    const blends = await readBlends();
+    if (!blends[username]) {
+        blends[username] = [];
+    }
+    blend.id = Date.now().toString();
+    blend.createdAt = new Date().toISOString();
+    blends[username].push(blend);
+    await writeBlends(blends);
+    return blend;
+}
+
+async function deleteBlend(username, blendId) { 
+    const blends = await readBlends();
+    if (!blends[username]) {
+        return;
+    }
+    const index = blends[username].findIndex(blend => blend.id === blendId);
+    if (index !== -1) {
+        blends[username].splice(index, 1);
+        await writeBlends(blends);
+    }
+}
+
+async function getUserBlends(username) {
+    const blends = await readBlends();
+    return blends[username] || [];
+}
+
+async function getBlendById(username, blendId) {
+    const userBlends = await getUserBlends(username);
+    return userBlends.find(blend => blend.id === blendId);
+}
+
+async function readFlavors() {
+    try {
+        const data = await fs.readFile(FLAVORS_FILE, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading flavors:', error);
+        return [];
+    }
+}
+
 module.exports = {
     readUsers,
     writeUsers,
@@ -138,4 +201,11 @@ module.exports = {
     deleteProduct,
     readOrders,
     writeOrders,
+    readBlends,
+    writeBlends,
+    createBlend,
+    deleteBlend,
+    getUserBlends,
+    getBlendById,
+    readFlavors
 };

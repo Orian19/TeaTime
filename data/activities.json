@@ -1660,5 +1660,215 @@
     "username": "talsolovey",
     "type": "login",
     "datetime": "2024-08-23T15:35:34.077Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-24T12:08:23.666Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-08-24T12:20:12.863Z"
+  },
+  {
+    "username": "admin",
+    "type": "logout",
+    "datetime": "2024-08-24T12:20:16.649Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:20:19.338Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:20:38.456Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:29:30.323Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:31:17.616Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:35:14.351Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:36:42.761Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:38:33.155Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:39:02.839Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:40:44.012Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:41:05.322Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:44:23.369Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:46:32.790Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:50:00.386Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:51:13.424Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T12:53:55.635Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:01:41.654Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:05:53.251Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:06:49.737Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:08:50.464Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:09:06.577Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:11:26.491Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:11:55.699Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "add-to-cart",
+    "datetime": "2024-08-24T13:11:59.072Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:19:05.861Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:23:24.157Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:27:34.319Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:28:11.224Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:31:04.661Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:32:38.580Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "add-to-cart",
+    "datetime": "2024-08-24T13:32:51.672Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "add-to-cart",
+    "datetime": "2024-08-24T13:32:52.825Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "add-to-cart",
+    "datetime": "2024-08-24T13:34:03.528Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:39:26.836Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:43:59.310Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:45:23.406Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:45:57.004Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:48:23.975Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:50:24.561Z"
+  },
+  {
+    "username": "talsolovey",
+    "type": "login",
+    "datetime": "2024-08-24T13:53:47.026Z"
   }
 ]
