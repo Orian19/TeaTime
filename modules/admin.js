@@ -7,6 +7,7 @@ function isAdmin(req, res, next) {
     if (req.session.isAdmin) {
         return next();
     }
+    
     res.status(403).send('Access denied');
 }
 
@@ -19,6 +20,7 @@ async function getUserActivities() {
         return Array.isArray(activities) ? activities.filter(activity => 
             activity && typeof activity === 'object' && 'username' in activity
         ) : [];
+
     } catch (error) {
         if (error.code === 'ENOENT') {
             // If the file doesn't exist, return an empty array
@@ -35,6 +37,7 @@ async function addUserActivity(activity) {
         ...activity,
         datetime: new Date().toISOString() // Ensure we always have a datetime
     });
+    
     await fs.writeFile(ACTIVITIES_FILE, JSON.stringify(activities, null, 2));
 }
 

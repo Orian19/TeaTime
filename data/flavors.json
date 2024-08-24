@@ -13,5 +13,40 @@
     "id": "F003",
     "name": "Lemon",
     "category": "Flavor"
+  },
+  {
+    "id": "F004",
+    "name": "Peach",
+    "category": "Flavor"
+  },
+  {
+    "id": "F005",
+    "name": "Mint",
+    "category": "Flavor"
+  },
+  {
+    "id": "F006",
+    "name": "Ginger",
+    "category": "Flavor"
+  },
+  {
+    "id": "F007",
+    "name": "Chamomile",
+    "category": "Flavor"
+  },
+  {
+    "id": "F008",
+    "name": "Hibiscus",
+    "category": "Flavor"
+  },
+  {
+    "id": "F009",
+    "name": "Jasmine",
+    "category": "Flavor"
+  },
+  {
+    "id": "F010",
+    "name": "Rose",
+    "category": "Flavor"
   }
 ]

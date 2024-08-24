@@ -193,12 +193,13 @@ function displayUserBlends(blends) {
         const addToCartButton = document.createElement('button');
         addToCartButton.textContent = 'Add to Cart';
         addToCartButton.onclick = () => addToCart(blend.id);
+        addToCartButton.className = 'button add-btn';
         blendItem.appendChild(addToCartButton);
 
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove Blend';
         removeButton.onclick = () => removeBlend(blend.id);
-        removeButton.className = 'remove-btn';
+        removeButton.className = 'button remove-btn';
         blendItem.appendChild(removeButton);
 
         blendsList.appendChild(blendItem);

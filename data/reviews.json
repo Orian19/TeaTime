@@ -1,14 +1,62 @@
 [
   {
-    "name": "Tal Solovey",
-    "rating": 5,
-    "comment": "Amazing tea selection!!",
-    "date": "2024-08-17T14:36:15.915Z"
+    "name": "Emily Johnson",
+    "rating": 4,
+    "comment": "The Earl Grey tea is simply exquisite. The bergamot flavor is perfectly balanced, and it's my go-to morning tea.",
+    "date": "2024-08-23T09:30:00.000Z"
   },
   {
-    "name": "Orian",
-    "rating": 3,
-    "comment": "Great!!",
-    "date": "2024-08-20T16:19:50.710Z"
+    "name": "Michael Davis",
+    "rating": 5,
+    "comment": "I'm in love with the Jasmine Green Tea! The floral aroma is so soothing, and the taste is incredibly refreshing.",
+    "date": "2024-08-22T14:45:00.000Z"
+  },
+  {
+    "name": "Sarah Thompson",
+    "rating": 4,
+    "comment": "The Chamomile Herbal Tea is my evening ritual. It helps me unwind after a long day and promotes a peaceful night's sleep.",
+    "date": "2024-08-21T19:20:00.000Z"
+  },
+  {
+    "name": "David Wilson",
+    "rating": 5,
+    "comment": "I'm impressed by the quality of the Masala Chai. The blend of spices is authentic and invigorating. It transports me to the streets of India with every sip.",
+    "date": "2024-08-20T11:00:00.000Z"
+  },
+  {
+    "name": "Jessica Roberts",
+    "rating": 4,
+    "comment": "The Peppermint Herbal Tea is a refreshing treat. It's my go-to choice after a heavy meal, as it aids in digestion and leaves a cooling sensation.",
+    "date": "2024-08-19T16:15:00.000Z"
+  },
+  {
+    "name": "Andrew Martinez",
+    "rating": 5,
+    "comment": "I can't start my day without a cup of the English Breakfast Tea. It's robust, full-bodied, and provides the perfect kick to wake me up.",
+    "date": "2024-08-18T08:00:00.000Z"
+  },
+  {
+    "name": "Olivia Anderson",
+    "rating": 4,
+    "comment": "The Lemon Ginger Herbal Tea is a lifesaver when I'm feeling under the weather. The combination of ginger and lemon is so soothing and comforting.",
+    "date": "2024-08-17T13:30:00.000Z"
+  },
+  {
+    "name": "Daniel Taylor",
+    "rating": 5,
+    "comment": "I've tried many green teas, but the Japanese Sencha from this store is hands down the best. It has a delicate flavor and a beautiful green color.",
+    "date": "2024-08-16T10:45:00.000Z"
+  },
+  {
+    "name": "Sophia Harris",
+    "rating": 4,
+    "comment": "The Oolong Tea is a hidden gem. It has a smooth, slightly roasted flavor that I find irresistible. It's my afternoon pick-me-up.",
+    "date": "2024-08-15T15:20:00.000Z"
+  },
+  {
+    "name": "James Robinson",
+    "rating": 5,
+    "comment": "I'm a tea enthusiast, and this store has become my go-to source for high-quality teas. The variety and freshness of the leaves are unparalleled.",
+    "date": "2024-08-14T12:10:00.000Z"
   }
 ]

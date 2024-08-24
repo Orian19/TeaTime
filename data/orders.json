@@ -189,5 +189,82 @@
     ],
     "total": "18.48",
     "date": "2024-08-24T13:54:23.217Z"
+  },
+  {
+    "id": "1724510253485",
+    "user": "admin",
+    "items": [
+      {
+        "itemId": "EG001",
+        "itemType": "product",
+        "name": "Classic Earl Grey",
+        "price": 7.99,
+        "quantity": 4
+      },
+      {
+        "itemId": "1724510234507",
+        "itemType": "custom_blend",
+        "price": 9.99,
+        "quantity": 4
+      }
+    ],
+    "total": "71.92",
+    "date": "2024-08-24T14:37:33.485Z"
+  },
+  {
+    "id": "1724510940289",
+    "user": "admin",
+    "items": [
+      {
+        "itemId": "1724510365040",
+        "itemType": "custom_blend",
+        "price": 9.99,
+        "quantity": 1
+      },
+      {
+        "itemId": "GT002",
+        "itemType": "product",
+        "name": "Jasmine Green Tea",
+        "price": 8.49,
+        "quantity": 1
+      },
+      {
+        "itemId": "1724510916543",
+        "itemType": "custom_blend",
+        "price": 9.99,
+        "quantity": 1
+      }
+    ],
+    "total": "28.47",
+    "date": "2024-08-24T14:49:00.289Z"
+  },
+  {
+    "id": "1724512534294",
+    "user": "admin",
+    "items": [
+      {
+        "itemId": "EG001",
+        "itemType": "product",
+        "name": "Classic Earl Grey",
+        "price": 7.99,
+        "quantity": 1
+      },
+      {
+        "itemId": "GT002",
+        "itemType": "product",
+        "name": "Jasmine Green Tea",
+        "price": 8.49,
+        "quantity": 2
+      },
+      {
+        "itemId": "BT003",
+        "itemType": "product",
+        "name": "Chai Masala",
+        "price": 9.99,
+        "quantity": 1
+      }
+    ],
+    "total": "34.96",
+    "date": "2024-08-24T15:15:34.294Z"
   }
 ]

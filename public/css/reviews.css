@@ -1,4 +1,9 @@
 /* Reviews Page*/
+#reviews-list {
+    display: grid;
+    gap: 2rem;
+}
+
 .review { 
     background-color: #fff;
     border-radius: 8px;
@@ -7,9 +12,8 @@
     transition: transform 0.3s ease;
 }
 
-#reviews-list {
-    display: grid;
-    gap: 2rem;
+.review:hover {
+    transform: translateY(-5px);
 }
 
 .review h3 {
@@ -24,32 +28,70 @@
     color: #555;
 }
 
-.review p:last-child {
+.review-rating {
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.review-date {
     font-size: 0.9rem;
     color: #888;
     margin-top: 1rem;
 }
 
-#add-review-btn {
+.button {
     display: block;
     margin: 2rem auto 0;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    background-color: #2e7d32;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 #add-review-btn:hover {
     background-color: #1b5e20;
 }
 
-/* Popup Page */
+/* Modal Styles */
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#review-form {
+    display: flex;
+    flex-direction: column;
+}
+
 #review-form label {
-    display: block;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     color: #333;
@@ -72,8 +114,6 @@
 }
 
 #review-form input[type="submit"] {
-    display: block;
-    width: 100%;
     margin-top: 1.5rem;
     padding: 0.75rem;
     background-color: #2e7d32;

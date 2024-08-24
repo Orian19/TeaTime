@@ -8,13 +8,15 @@
                     <div class="review">
                         <h3><%= review.name %></h3>
                         <p class="review-rating">Rating: <%= review.rating %>/5</p>
-                        <p><%= review.comment %></p>
+                        <p class="review-comment"><%= review.comment %></p>
                         <p class="review-date">Date: <%= new Date(review.date).toLocaleDateString() %></p>
                     </div>
                 <% }); %>
+            <% } else { %>
+                <p>No reviews yet. Be the first to leave a review!</p>
             <% } %>
         </div>
-        <button id="add-review-btn">Add a Review</button>
+        <button class="button" id="add-review-btn">Add a Review</button>
         <div id="modal">
             <div id="modal-content">
                 <span class="close">&times;</span>

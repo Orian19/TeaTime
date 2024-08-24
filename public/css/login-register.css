@@ -1,6 +1,5 @@
-/* Login Page */
-
-.login-container {
+/* Login and Register Pages */
+.login-container, .register-container {
     max-width: 400px;
     margin: 2rem auto;
     padding: 2rem;
@@ -9,19 +8,21 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.login-form {
+.login-form, .register-form {
     display: flex;
     flex-direction: column;
 }
 
-.login-form label {
+.login-form label, .register-form label {
     margin-bottom: 0.5rem;
     color: #333;
     font-weight: 600;
 }
 
 .login-form input[type="text"],
-.login-form input[type="password"] {
+.login-form input[type="password"],
+.register-form input[type="text"],
+.register-form input[type="password"] {
     padding: 0.75rem;
     margin-bottom: 1rem;
     border: 1px solid #ddd;
@@ -30,7 +31,9 @@
 }
 
 .login-form input[type="text"]:focus,
-.login-form input[type="password"]:focus {
+.login-form input[type="password"]:focus,
+.register-form input[type="text"]:focus,
+.register-form input[type="password"]:focus {
     outline: none;
     border-color: #2e7d32;
     box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
@@ -46,34 +49,9 @@
     margin-right: 0.5rem;
 }
 
-.login-form button {
-    background-color: #2e7d32;
-    color: white;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.login-form button:hover {
-    background-color: #1b5e20;
-}
-
-.login-form p {
+.login-form p, .register-form p {
     text-align: center;
     margin-top: 1rem;
-}
-
-.login-form a {
-    color: #2e7d32;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.login-form a:hover {
-    text-decoration: underline;
 }
 
 /* Alert Styles */
@@ -89,7 +67,6 @@
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
-
 
 .close-btn {
     background: none;

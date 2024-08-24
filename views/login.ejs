@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="/css/login-register.css">
 <main>
     <div class="login-container">
-        <h1>Login to TeaTime</h1>
+        <h1 class="page-heading">Login to TeaTime</h1>
         
         <% if (locals.error) { %>
             <div class="alert-error" id="loginAlert">
@@ -21,7 +21,7 @@
                 <input type="checkbox" id="rememberMe" name="rememberMe">
                 <label for="rememberMe">Remember me</label>
             </div>
-            <button type="submit">Login</button>
+            <button class="button" type="submit">Login</button>
             
             <p>Don't have an account? <a href="/auth/register">Register</a></p>
         </form>

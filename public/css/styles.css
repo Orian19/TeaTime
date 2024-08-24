@@ -11,7 +11,7 @@ body {
 }
 
 .add-padding {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -119,8 +119,7 @@ footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-.add-btn:hover {
+.button:hover {
     background-color: #1b5e20; 
 }
 
@@ -128,8 +127,8 @@ footer {
     background-color: #e74c3c;
 }
 
-.remove-btn button:hover {
-    background-color: #c0392b;
+.remove-btn:hover {
+    background-color: #b43122;
   }
 
 /* Products */
