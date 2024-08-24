@@ -44,8 +44,12 @@
 }
 
 .products-container {
-    padding-left: 17rem;
-    padding-right: 17rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    align-items: center;
 }
 
 .newsletter {
