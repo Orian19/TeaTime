@@ -8,8 +8,33 @@ router.use(isAuthenticated);
 router.use(isAdmin);
 
 // Get admin page
-router.get('/', (req, res) => {
-    res.render('admin');
+router.get('/', async (req, res) => {
+    const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
+    let activities = await getUserActivities();
+    
+    if (searchTerm) {
+        activities = activities.filter(activity => 
+            activity && activity.username && 
+            activity.username.toLowerCase().startsWith(searchTerm)
+        );
+    }
+    
+    res.render('admin', { activities, searchTerm });
+});
+
+// Get filtered activities
+router.get('/filtered-activities', async (req, res) => {
+    const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
+    let activities = await getUserActivities();
+    
+    if (searchTerm) {
+        activities = activities.filter(activity => 
+            activity && activity.username && 
+            activity.username.toLowerCase().startsWith(searchTerm)
+        );
+    }
+    
+    res.json(activities);
 });
 
 // Get user activities
@@ -19,25 +44,6 @@ router.get('/activities', async (req, res) => {
         res.json(activities);
     } catch (error) {
         console.error(`Error fetching user activities: ${error.message}`);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
-// Search user activities
-router.get('/search', async (req, res) => {
-    try {
-        const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
-        let activities = await getUserActivities();
-
-        if (searchTerm) {
-            activities = activities.filter(activity => 
-                activity.username.toLowerCase().startsWith(searchTerm)
-            );
-        }
-
-        res.json(activities);
-    } catch (error) {
-        console.error(`Error searching activities: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
     }
 });

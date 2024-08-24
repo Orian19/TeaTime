@@ -4,7 +4,10 @@
         <h1 class="page-heading">Admin Panel</h1>
         <h2>User Activities</h2>
         <div class="search">
-            <input type="text" id="userSearchInput" name="search" placeholder="Search by username...">
+            <form action="/admin" method="GET">
+                <input type="text" id="searchInput" name="search" placeholder="Search users..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+                <button class="button" type="submit">Search</button>
+            </form>
         </div>
         <div class="table-container">
             <table id="activityTable">
@@ -16,9 +19,10 @@
                     </tr>
                 </thead>
                 <tbody id="activityTableBody">
-                <!-- Activities will be populated here by JavaScript -->
+                    <!-- Activities will be populated by JavaScript -->
                 </tbody>
             </table>
+        </div>
     </section>
 
     <section class="admin-section manage-products">

@@ -1,39 +1,75 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const userSearchInput = document.getElementById('userSearchInput');
+let allActivities = [];
 
-    userSearchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.trim();
-        filterUserActivities(searchTerm);
+document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.querySelector('.search form');
+    const searchInput = document.getElementById('searchInput');
+
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const searchTerm = searchInput.value.trim();
+        filterActivities(searchTerm);
     });
 
-    productSearchInput.addEventListener('input', (e) => {
+    // Add event listener for real-time filtering
+    searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.trim();
-        filterProducts(searchTerm);
+        filterActivities(searchTerm);
     });
 
     // Initial load of activities
-    getUserActivities();
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get('search') || '';
+    if (searchTerm) {
+        searchInput.value = searchTerm;
+        getFilteredActivities(searchTerm);
+    } else {
+        getUserActivities();
+    }
+
+    getProducts();
+    document.getElementById('addProductForm').addEventListener('submit', addProduct);
 });
 
-function filterUserActivities(searchTerm) {
-    axios.get(`/admin/search/users?search=${encodeURIComponent(searchTerm)}`)
-        .then(response => {
-            populateUserActivityTable(response.data);
-        })
-        .catch(error => console.error('Error filtering user activities:', error));
-}
-
 function getUserActivities() {
-    axios.get('/admin/search')
+    axios.get('/admin/activities')
         .then(response => {
-            populateActivityTable(response.data);
+            allActivities = response.data;
+            populateActivityTable(allActivities);
         })
         .catch(error => console.error('Error fetching activities:', error));
 }
 
+function getFilteredActivities(searchTerm) {
+    axios.get(`/admin/filtered-activities?search=${encodeURIComponent(searchTerm)}`)
+        .then(response => {
+            allActivities = response.data;
+            populateActivityTable(allActivities);
+        })
+        .catch(error => console.error('Error fetching filtered activities:', error));
+}
+
+function filterActivities(searchTerm) {
+    if (searchTerm) {
+        getFilteredActivities(searchTerm);
+    } else {
+        getUserActivities();
+    }
+    updateURL(searchTerm);
+}
+
+function updateURL(searchTerm) {
+    const url = new URL(window.location);
+    if (searchTerm) {
+        url.searchParams.set('search', searchTerm);
+    } else {
+        url.searchParams.delete('search');
+    }
+    window.history.pushState({}, '', url);
+}
+
 function populateActivityTable(activities) {
     const tbody = document.getElementById('activityTableBody');
-    tbody.innerHTML = ''; // Clear existing table data
+    tbody.innerHTML = '';
     activities.forEach(activity => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -44,6 +80,7 @@ function populateActivityTable(activities) {
         tbody.appendChild(tr);
     });
 }
+
 
 function getProducts() {
     axios.get('/admin/products')
