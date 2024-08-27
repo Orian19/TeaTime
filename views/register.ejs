@@ -3,8 +3,9 @@
     <h1 class="page-heading">Register for TeaTime</h1>
 
     <% if (locals.error) { %>
-        <div class="error-message">
-            <%= error %>
+        <div class="alert-error" id="loginAlert">
+            <p><%= error %></p>
+            <button type="button" class="close-btn" onclick="closeAlert()">&times;</button>
         </div>
     <% } %>
 
@@ -20,4 +21,9 @@
             <p>Already have an account? <a href="/auth/login">Login</a></p>
 
     </form>
+    <div id="loginAlert" style="display: none;">
+        <span id="loginAlertMessage"></span>
+        <button id="closeAlertButton">Close</button>
+    </div>
 </main>
+<script src="/js/alert.js"></script>

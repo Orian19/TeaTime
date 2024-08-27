@@ -9,12 +9,17 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        await registerUser(req.body.username, req.body.password);
-        await addUserActivity({
-            username: req.body.username,
-            type: 'register'
-        });
-        res.redirect('/auth/login');
+        const isRegisterd =  await registerUser(req.body.username, req.body.password);
+        if (isRegisterd) {
+            await addUserActivity({
+                username: req.body.username,
+                type: 'register'
+            });
+            res.redirect('/auth/login');
+        } else {
+            console.log(`User already exists with username: ${req.body.username}`);
+            res.render('register', { error: 'User already exists' });
+        }
     } catch(error) {
         res.status(400).send(error.message);
     }

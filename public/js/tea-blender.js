@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const newBlend = await response.json();
             console.log('New blend created:', newBlend);
-            alert('Blend created successfully!');
+            // alert('Blend created successfully!');
             fetchAndDisplayUserBlends();
         } catch (error) {
             console.error('Error creating blend:', error);

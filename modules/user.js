@@ -9,17 +9,18 @@ const USERS_FILE = 'users.json';
     * @param {string} username - The username of the user
     * @param {string} password - The password of the user
     * @param {boolean} isAdmin - Whether the user is an admin
-    * @returns {Promise<void>}
+    * @returns {Promise<boolean>}
     * @throws {Error} If the user already exists
  */
 async function registerUser(username, password, isAdmin = false) {
     const users = await readUsers(USERS_FILE) || {};
     if (users[username]) {
-        throw new Error('User already exists');
+        return false;
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     users[username] = { password: hashedPassword, isAdmin };
     await writeUsers(USERS_FILE, users);
+    return true;
 }
 
 /**
