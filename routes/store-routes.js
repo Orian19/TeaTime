@@ -8,6 +8,7 @@ const { getReviews, addReview } = require('../modules/reviews');
 const {addOrder} = require("../modules/orders");
 const {addUserActivity} = require("../modules/admin");
 const { getBlendableTeas, getUserBlendsList, getBlend, removeBlend, createUserBlend } = require('../modules/tea-blender');
+
 // GET store page
 router.get('/', async (req, res) => {
     const products = await getProducts();
@@ -25,6 +26,17 @@ router.get('/', async (req, res) => {
         title: originFilter ? `Products from ${originFilter}` : 'Our Tea Selection',
         products: filteredProducts
     });
+});
+
+router.get('/product/:id', async (req, res) => {
+    const productId = req.params.id;
+    const product = await getProduct(productId);
+
+    if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
+    }
+
+    res.json(product);
 });
 
 // Search functionality
