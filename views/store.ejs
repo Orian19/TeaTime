@@ -34,6 +34,36 @@
                 </div>
             <% }); %>
         </div>
+
+        <!-- Pagination Links -->
+        <div class="pagination">
+            <% if (pagination.currentPage > 1) { %>
+                <a href="?page=<%= pagination.currentPage - 1 %>">&laquo; Previous</a>
+            <% } %>
+
+            <% if (pagination.startPage > 1) { %>
+                <a href="?page=1">1</a>
+                <% if (pagination.startPage > 2) { %>
+                    <span>...</span>
+                <% } %>
+            <% } %>
+
+            <% for (let i = pagination.startPage; i <= pagination.endPage; i++) { %>
+                <a href="?page=<%= i %>" class="<%= pagination.currentPage === i ? 'active' : '' %>"><%= i %></a>
+            <% } %>
+
+            <% if (pagination.endPage < pagination.totalPages) { %>
+                <% if (pagination.endPage < pagination.totalPages - 1) { %>
+                    <span>...</span>
+                <% } %>
+                <a href="?page=<%= pagination.totalPages %>"><%= pagination.totalPages %></a>
+            <% } %>
+
+            <% if (pagination.currentPage < pagination.totalPages) { %>
+                <a href="?page=<%= pagination.currentPage + 1 %>">Next &raquo;</a>
+            <% } %>
+        </div>
+
     </div>
 
     <!-- Product Details Popup Modal -->
@@ -50,7 +80,7 @@
                 <p><strong>Origin:</strong> <span id="productOrigin"></span></p>
                 <p><strong>Caffeine Level:</strong> <span id="productCaffeine"></span></p>
                 <p><strong>Brewing Temperature:</strong> <span id="productTemperature"></span></p>
-                <p><strong>Brewing Time:</strong> <span id="productBrewingTime"></span></p>
+<!--                <p><strong>Brewing Time:</strong> <span id="productBrewingTime"></span></p>-->
                 <form action="/store/add-to-cart" method="POST">
                     <input type="hidden" id="productId" name="productId" value="">
                     <div class="quantity-input">

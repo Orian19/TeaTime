@@ -9,25 +9,45 @@ const {addOrder} = require("../modules/orders");
 const {addUserActivity} = require("../modules/admin");
 const { getBlendableTeas, getUserBlendsList, getBlend, removeBlend, createUserBlend } = require('../modules/tea-blender');
 
-// GET store page
+// GET store page with pagination
 router.get('/', async (req, res) => {
     const products = await getProducts();
     const originFilter = req.query.origin;
-    console.log('User:', req.session.user);
+    const page = parseInt(req.query.page) || 1;
+    const limit = 9; // Number of products per page
+    const totalProducts = products.length;
+    const totalPages = Math.ceil(totalProducts / limit);
 
     let filteredProducts = products;
 
     if (originFilter) {
-        // Filter products by origin if the origin parameter is given
         filteredProducts = products.filter(product => product.origin === originFilter);
     }
 
+    // Paginate filtered products
+    const startIndex = (page - 1) * limit;
+    const paginatedProducts = filteredProducts.slice(startIndex, startIndex + limit);
+
+    // Dynamic Pagination Logic
+    const maxVisiblePages = 5; // Number of pages to show before/after current page
+    const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    const pagination = {
+        currentPage: page,
+        totalPages,
+        startPage,
+        endPage,
+    };
+
     res.render('store', {
         title: originFilter ? `Products from ${originFilter}` : 'Our Tea Selection',
-        products: filteredProducts
+        products: paginatedProducts,
+        pagination,
     });
 });
 
+// GET product details
 router.get('/product/:id', async (req, res) => {
     const productId = req.params.id;
     const product = await getProduct(productId);
@@ -39,7 +59,7 @@ router.get('/product/:id', async (req, res) => {
     res.json(product);
 });
 
-// Search functionality
+// Search functionality with pagination
 router.get('/search', async (req, res) => {
     const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
     let products = await getProducts();
@@ -51,10 +71,30 @@ router.get('/search', async (req, res) => {
         );
     }
 
+    // Pagination logic
+    const page = parseInt(req.query.page) || 1;
+    const limit = 9; // Number of products per page
+    const totalProducts = products.length;
+    const totalPages = Math.ceil(totalProducts / limit);
+    const paginatedProducts = products.slice((page - 1) * limit, page * limit);
+
+    // Dynamic Pagination Logic
+    const maxVisiblePages = 5; // Number of pages to show before/after current page
+    const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    const pagination = {
+        currentPage: page,
+        totalPages,
+        startPage,
+        endPage,
+    };
+
     res.render('store', {
-        title: 'Our Tea Selection',
-        products,
-        searchTerm
+        title: 'Search Results',
+        products: paginatedProducts,
+        searchTerm,
+        pagination,
     });
 });
 
