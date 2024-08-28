@@ -10,6 +10,39 @@ body {
     min-height: 100vh;
 }
 
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    margin-right: 10px; /* Adjust the spacing between the logo and the title */
+    width: 50px;
+    height: 50px;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.logo-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+}
+
 .add-padding {
     max-width: 800px;
     margin: 0 auto;
