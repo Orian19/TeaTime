@@ -10,7 +10,7 @@ async function getProducts() {
 
 async function getFeaturedProducts() {
     const allProducts = await readProducts();
-    return allProducts.slice(0, 3); // Return the first 3 products
+    return allProducts.slice(0, 4); // Return the first 4 products
 }
 
 /**
