@@ -11,7 +11,7 @@
 }
 
 .hero-content {
-    background-color: rgba(252, 253, 238, 0.5); 
+    background-color: rgba(252, 253, 238, 0.5);
     padding: 2rem;
     border-radius: 10px;
 }
@@ -34,7 +34,7 @@
 }
 
 .introduction {
-    background-color: rgba(48, 69, 47, 0.906); 
+    background-color: rgba(48, 69, 47, 0.906);
     color: whitesmoke;
 }
 
@@ -81,4 +81,41 @@
     font-weight: bold;
     transition: opacity 0.3s ease;
     color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        height: 300px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .intro-container {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .products-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        grid-template-columns: 1fr; /* Stacks products vertically on small screens */
+    }
+
+    .newsletter input[type="email"] {
+        width: 100%;
+        margin-bottom: 1rem; /* Adds spacing on small screens */
+        border-radius: 4px;
+    }
+
+    .newsletter .button {
+        width: 100%;
+        border-radius: 4px;
+    }
 }

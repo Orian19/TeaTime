@@ -17,6 +17,11 @@
         </a>
     </div>
     <nav>
+        <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/store">Store</a>
@@ -38,6 +43,16 @@
                 <a href="/auth/logout">Logout</a>
             <% } %>
         </div>
+        <div class="nav-links-mobile">
+            <a href="/">Home</a>
+            <a href="/store">Store</a>
+            <a href="/store/cart" class="cart-button">Cart</a>
+            <a href="/store/reviews">Reviews</a>
+            <a href="/store/map">Map</a>
+            <a href="/store/quiz">Quiz</a>
+            <a href="/store/tea-blender">Tea Blender</a>
+            <a href="/auth/login">Login</a>
+        </div>
     </nav>
 </header>
 
@@ -48,5 +63,7 @@
 <footer>
     <p>&copy; 2024 TeaTime. All rights reserved.</p>
 </footer>
+
+<script src="/js/home.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-/* Reviews Page*/
+/* Reviews Page */
 #reviews-list {
     display: grid;
     gap: 2rem;
 }
 
-.review { 
+.review {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -127,4 +127,35 @@
 
 #review-form input[type="submit"]:hover {
     background-color: #1b5e20;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust Review List Layout for Mobile */
+    #reviews-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* Adjust Modal Content Width */
+    #modal-content {
+        width: 90%;
+        margin-top: 30%; /* Adjust for better appearance on mobile */
+    }
+
+    /* Adjust Review Text Size */
+    .review h3 {
+        font-size: 1rem;
+    }
+
+    .review p {
+        font-size: 0.9rem;
+    }
+
+    .review-rating {
+        font-size: 1rem;
+    }
+
+    .review-date {
+        font-size: 0.8rem;
+    }
 }

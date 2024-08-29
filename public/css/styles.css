@@ -38,11 +38,6 @@ header h1 {
     color: inherit;
 }
 
-.logo-title-container {
-    display: flex;
-    align-items: center;
-}
-
 .add-padding {
     max-width: 800px;
     margin: 0 auto;
@@ -63,18 +58,7 @@ header {
     padding-top: 10px;
 }
 
-.header-content {
-    text-align: center;
-    position: relative;
-    top: 0;
-}
-
-header h1 {
-    font-size: 2rem;
-    margin: 0;
-}
-
-.page-heading{
+.page-heading {
     font-size: 2.5rem;
     color: #19431bd8;
     text-align: center;
@@ -115,6 +99,25 @@ nav a:hover {
     background-color: rgba(248, 251, 241, 0.902);
 }
 
+/* Mobile Nav Hidden by Default */
+.nav-links-mobile {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(248, 251, 241, 0.902);
+}
+
+.nav-links-mobile.open {
+    display: flex;
+}
+
+.nav-links-mobile a {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
 /* Main */
 main {
     flex: 1;
@@ -153,16 +156,16 @@ footer {
 }
 
 .button:hover {
-    background-color: #1b5e20; 
+    background-color: #1b5e20;
 }
 
-.remove-btn{
+.remove-btn {
     background-color: #e74c3c;
 }
 
 .remove-btn:hover {
     background-color: #b43122;
-  }
+}
 
 /* Products */
 .products-container {
@@ -238,7 +241,6 @@ footer {
     font-size: 1rem;
 }
 
-
 /* Popup Page */
 #modal {
     display: none;
@@ -309,3 +311,52 @@ footer {
     border-radius: 0 4px 4px 0;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Hamburger Menu */
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger div {
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px 0;
+        transition: 0.4s;
+    }
+
+    /* Hide Desktop Navigation Links on Mobile */
+    .nav-links,
+    .nav-admin,
+    .nav-login {
+        display: none;
+    }
+
+    /* Adjust Header */
+    .header-content {
+        justify-content: space-between;
+        padding: 10px 20px;
+    }
+
+    .logo-title-container {
+        justify-content: center;
+    }
+
+    /* Adjust Footer */
+    footer {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+
+    /* Products Grid */
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Modal */
+    #modal-content {
+        width: 90%;
+    }
+}

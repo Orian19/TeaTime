@@ -147,3 +147,20 @@
 .pagination a:hover {
     background-color: #ddd;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .products-container {
+        grid-template-columns: 1fr; /* Single column layout for mobile */
+    }
+
+    .modal-content {
+        width: 90%;
+        margin: 20% auto; /* Adjust the margin for better appearance on mobile */
+    }
+
+    .pagination a {
+        padding: 6px 10px; /* Reduce padding for smaller screens */
+        font-size: 12px; /* Smaller font size on mobile */
+    }
+}

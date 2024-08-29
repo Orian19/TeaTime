@@ -81,3 +81,43 @@
 .close-btn:hover {
     color: #721c24;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust Container Width */
+    .login-container, .register-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    /* Adjust Input Field Sizes */
+    .login-form input[type="text"],
+    .login-form input[type="password"],
+    .register-form input[type="text"],
+    .register-form input[type="password"] {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    /* Adjust Label and Checkbox Sizes */
+    .login-form label, .register-form label {
+        font-size: 0.9rem;
+    }
+
+    .remember-me {
+        font-size: 0.9rem;
+    }
+
+    .remember-me input[type="checkbox"] {
+        transform: scale(0.9);
+    }
+
+    /* Adjust Alert Styles */
+    .alert-error {
+        font-size: 0.9rem;
+    }
+
+    .close-btn {
+        font-size: 1.2rem;
+    }
+}
