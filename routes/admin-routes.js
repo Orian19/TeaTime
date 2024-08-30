@@ -1,12 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const { getUserActivities, filterUserActivities, isAdmin } = require('../modules/admin');
-const { getProducts, createProduct, removeProduct } = require('../modules/products');
+const { getProducts, createProduct, removeProduct, modifyProduct } = require('../modules/products');
 const { isAuthenticated } = require('../modules/user');
 const { getOrders, calculateOrderStats } = require('../modules/orders');
 
 router.use(isAuthenticated);
 router.use(isAdmin);
+
+router.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+    next();
+});
+
 
 // Get admin page
 router.get('/', async (req, res) => {
@@ -88,59 +94,35 @@ router.get('/products', async (req, res) => {
 // Add a new product
 router.post('/products', async (req, res) => {
     try {
-        // const { id, name, description, price, quantity, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
-        const { id, name, description, price, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
+        const product = req.body;
+        const createdProduct = await createProduct(product);
 
-        const newProduct = await createProduct({
-            id,
-            name,
-            description,
-            price: parseFloat(price),
-            // quantity: parseInt(quantity),
-            category,
-            origin,
-            lat: parseFloat(lat),
-            lng: parseFloat(lng),
-            caffeine,
-            temperature,
-            imageUrl
-        });
+        if (!createdProduct) {
+            return res.status(409).json({ message: `A product with the ID "${product.id}" already exists.` });
+        }
 
-        res.status(201).json(newProduct);
-
+        res.status(201).json({ message: 'Product added successfully' });
     } catch (error) {
         console.error(`Error adding product: ${error.message}`);
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
-// Update a product
+// Update an existing product
 router.put('/products/:id', async (req, res) => {
     try {
-        const { id } = req.params;
-        const { name, description, price, quantity, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
-        await updateProduct(
-            id,
-            name,
-            description,
-            parseFloat(price),
-            // parseInt(quantity),
-            category,
-            origin,
-            parseFloat(lat),
-            parseFloat(lng),
-            caffeine,
-            temperature,
-            imageUrl,
-        );
+        const product = req.body;
+        product.id = req.params.id; // Ensure the ID in the URL is used
 
-        res.json(updatedProduct);
-
+        await modifyProduct(product);
+        res.status(200).json({ message: 'Product updated successfully' });
     } catch (error) {
         console.error(`Error updating product: ${error.message}`);
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ message: 'Server error' });
     }
 });
+
+
 
 // Remove a product
 router.post('/products/:id', async (req, res) => {

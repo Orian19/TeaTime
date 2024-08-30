@@ -204,7 +204,6 @@ function addProduct(event) {
         name: document.getElementById('productName').value,
         description: document.getElementById('productDescription').value,
         price: parseFloat(document.getElementById('productPrice').value),
-        // quantity: parseInt(document.getElementById('productQuantity').value),
         category: document.getElementById('productCategory').value,
         origin: document.getElementById('productOrigin').value,
         lat: parseFloat(document.getElementById('productLat').value),
@@ -213,36 +212,58 @@ function addProduct(event) {
         temperature: document.getElementById('productTemperature').value,
         imageUrl: document.getElementById('productImageUrl').value
     };
-    console.log('Sending product:', product);
-    axios.post('/admin/products', product)
-        .then(() => {
-            getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
-            document.getElementById('addProductForm').reset();
-        })
-        .catch(error => console.error('Error adding product:', error));
+
+    if (editingProductId) {
+        axios.put(`/admin/products/${editingProductId}`, product)
+            .then(() => {
+                getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
+                cancelEdit();
+            })
+            .catch(error => {
+                console.error('Error updating product:', error);
+                alert('An error occurred while updating the product.');
+            });
+    } else {
+        axios.post('/admin/products', product)
+            .then(() => {
+                getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
+                document.getElementById('addProductForm').reset();
+            })
+            .catch(error => {
+                if (error.response && error.response.status === 409) {
+                    alert(error.response.data.message); // Display the conflict message
+                } else {
+                    console.error('Error adding product:', error);
+                    alert('An error occurred while adding the product.');
+                }
+            });
+    }
 }
 
 
 
 function updateProduct(product) {
-    axios.put(`/admin/products/${editingProductId}`, product)
+    console.log('Sending update request for product:', product);  // Log the product being sent
+    axios.put(`/admin/products/${product.id}`, product)
         .then(() => {
             getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
             cancelEdit();
         })
-        .catch(error => console.error('Error updating product:', error));
+        .catch(error => {
+            console.error('Error updating product:', error);  // Log the error if the update fails
+        });
 }
+
 
 function editProduct(productId) {
     const product = allProducts.find(p => p.id === productId);
     if (product) {
-        editingProductId = productId;
+        editingProductId = productId;  // Correctly set the ID of the product being edited
         document.getElementById('productFormTitle').textContent = 'Edit Product';
         document.getElementById('productId').value = product.id;
         document.getElementById('productName').value = product.name;
         document.getElementById('productDescription').value = product.description;
         document.getElementById('productPrice').value = product.price;
-        // document.getElementById('productQuantity').value = product.quantity;
         document.getElementById('productCategory').value = product.category;
         document.getElementById('productOrigin').value = product.origin;
         document.getElementById('productLat').value = product.lat;
@@ -253,6 +274,8 @@ function editProduct(productId) {
         document.getElementById('cancelEdit').style.display = 'inline-block';
     }
 }
+
+
 
 function cancelEdit() {
     editingProductId = null;

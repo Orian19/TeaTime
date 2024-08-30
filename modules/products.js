@@ -29,7 +29,16 @@ async function getProduct(id) {
  * @returns {Promise<void>}
  */
 async function createProduct(product) {
+    const products = await readProducts();
+
+    // Check if a product with the same ID already exists
+    const existingProduct = products.find(p => p.id === product.id);
+    if (existingProduct) {
+        return null;
+    }
+
     await addProduct(product);
+    return product;
 }
 
 /**
@@ -56,5 +65,5 @@ module.exports = {
     createProduct,
     modifyProduct,
     removeProduct,
-    getFeaturedProducts
+    getFeaturedProducts,
 };

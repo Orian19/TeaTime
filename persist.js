@@ -89,11 +89,26 @@ async function addProduct(product) {
 async function updateProduct(product) {
     const products = await readProducts();
     const index = products.findIndex(p => p.id === product.id);
+
+    console.log('Product ID to update:', product.id); // Log the ID to update
+    console.log('Products list:', products); // Log the list of products
+
     if (index !== -1) {
-        products[index] = product;
+        console.log('Found product at index:', index, 'Product:', products[index]); // Log the found product
+
+        products[index] = {
+            ...products[index],
+            ...product
+        };
+
         await writeProducts(products);
+        console.log('Updated product:', products[index]); // Log after update
+    } else {
+        console.error(`Product with ID ${product.id} not found for update`);
     }
 }
+
+
 
 /**
  * Delete a product from the database file - products.json
