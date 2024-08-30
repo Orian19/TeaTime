@@ -1,8 +1,12 @@
 let allActivities = [];
+let allProducts = [];
+let currentPage = 1;
+const productsPerPage = 10;
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.querySelector('.search form');
     const searchInput = document.getElementById('searchInput');
+    const productSearchInput = document.getElementById('productSearchInput');
 
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -10,13 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
         filterActivities(searchTerm);
     });
 
-    // Add event listener for real-time filtering
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.trim();
         filterActivities(searchTerm);
     });
 
-    // Initial load of activities
+    productSearchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.trim();
+        filterProducts(searchTerm);
+    });
+
     const urlParams = new URLSearchParams(window.location.search);
     const searchTerm = urlParams.get('search') || '';
     if (searchTerm) {
@@ -81,14 +88,20 @@ function populateActivityTable(activities) {
     });
 }
 
-
-function getProducts() {
-    axios.get('/admin/products')
+function getProducts(page = 1, searchTerm = '') {
+    axios.get(`/admin/products?page=${page}&search=${encodeURIComponent(searchTerm)}`)
         .then(response => {
-            const products = response.data;
-            populateProductList(products);
+            allProducts = response.data.products;
+            const totalPages = response.data.totalPages;
+            populateProductList(allProducts);
+            updatePagination(totalPages, page);
         })
         .catch(error => console.error('Error fetching products:', error));
+}
+
+function filterProducts(searchTerm) {
+    currentPage = 1;
+    getProducts(currentPage, searchTerm);
 }
 
 function populateProductList(products) {
@@ -113,6 +126,22 @@ function populateProductList(products) {
     });
 }
 
+function updatePagination(totalPages, currentPage) {
+    const paginationContainer = document.getElementById('productPagination');
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.innerText = i;
+        button.classList.add('pagination-button');
+        if (i === currentPage) {
+            button.classList.add('active');
+        }
+        button.addEventListener('click', () => getProducts(i, document.getElementById('productSearchInput').value.trim()));
+        paginationContainer.appendChild(button);
+    }
+}
+
 function addProduct(event) {
     event.preventDefault();
     const product = {
@@ -131,7 +160,7 @@ function addProduct(event) {
     console.log('Sending product:', product);
     axios.post('/admin/products', product)
         .then(() => {
-            getProducts();
+            getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
             document.getElementById('addProductForm').reset();
         })
         .catch(error => console.error('Error adding product:', error));
@@ -139,13 +168,6 @@ function addProduct(event) {
 
 function removeProduct(productId) {
     axios.post(`/admin/products/${productId}`)
-        .then(() => getProducts())
+        .then(() => getProducts(currentPage, document.getElementById('productSearchInput').value.trim()))
         .catch(error => console.error('Error removing product:', error));
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    getUserActivities();
-    getProducts();
-    document.getElementById('userFilter').addEventListener('input', filterUserActivities);
-    document.getElementById('addProductForm').addEventListener('submit', addProduct);
-});

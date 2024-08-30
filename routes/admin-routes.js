@@ -11,14 +11,14 @@ router.use(isAdmin);
 router.get('/', async (req, res) => {
     const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
     let activities = await getUserActivities();
-    
+
     if (searchTerm) {
-        activities = activities.filter(activity => 
-            activity && activity.username && 
+        activities = activities.filter(activity =>
+            activity && activity.username &&
             activity.username.toLowerCase().startsWith(searchTerm)
         );
     }
-    
+
     res.render('admin', { activities, searchTerm });
 });
 
@@ -26,14 +26,14 @@ router.get('/', async (req, res) => {
 router.get('/filtered-activities', async (req, res) => {
     const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
     let activities = await getUserActivities();
-    
+
     if (searchTerm) {
-        activities = activities.filter(activity => 
-            activity && activity.username && 
+        activities = activities.filter(activity =>
+            activity && activity.username &&
             activity.username.toLowerCase().startsWith(searchTerm)
         );
     }
-    
+
     res.json(activities);
 });
 
@@ -48,11 +48,36 @@ router.get('/activities', async (req, res) => {
     }
 });
 
-// Get all products
+// Get all products with pagination and search
 router.get('/products', async (req, res) => {
     try {
-        const products = await getProducts();
-        res.json(products);
+        const page = parseInt(req.query.page) || 1;
+        const limit = 10; // Number of products per page
+        const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
+
+        let products = await getProducts();
+
+        if (searchTerm) {
+            products = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        const totalProducts = products.length;
+        const totalPages = Math.ceil(totalProducts / limit);
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+
+        const paginatedProducts = products.slice(startIndex, endIndex);
+
+        res.json({
+            products: paginatedProducts,
+            currentPage: page,
+            totalPages: totalPages,
+            totalProducts: totalProducts
+        });
     } catch (error) {
         console.error(`Error fetching products: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
@@ -96,6 +121,5 @@ router.post('/products/:id', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
-
 
 module.exports = router;
