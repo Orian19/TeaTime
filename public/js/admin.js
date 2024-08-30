@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     getProducts();
+    getOrders(); // Fetch and display orders when the page loads
     document.getElementById('addProductForm').addEventListener('submit', addProduct);
     document.getElementById('cancelEdit').addEventListener('click', cancelEdit);
 });
@@ -104,6 +105,40 @@ function getProducts(page = 1, searchTerm = '') {
 function filterProducts(searchTerm) {
     currentPage = 1;
     getProducts(currentPage, searchTerm);
+}
+
+function getOrders() {
+    axios.get('/admin/orders')
+        .then(response => {
+            populateOrdersTable(response.data.orders);
+            displayOrderStats(response.data.stats);
+        })
+        .catch(error => console.error('Error fetching orders:', error));
+}
+
+function populateOrdersTable(orders) {
+    const ordersTableBody = document.getElementById('ordersTableBody');
+    ordersTableBody.innerHTML = '';
+
+    orders.forEach(order => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.user}</td>
+            <td>$${order.total}</td>
+            <td>${new Date(order.date).toLocaleString()}</td>
+        `;
+        ordersTableBody.appendChild(tr);
+    });
+}
+
+function displayOrderStats(stats) {
+    const statsContainer = document.getElementById('orderStats');
+    statsContainer.innerHTML = `
+        <p>Total Orders: ${stats.totalOrders}</p>
+        <p>Total Revenue: $${stats.totalRevenue.toFixed(2)}</p>
+        <p>Average Order Value: $${stats.averageOrderValue.toFixed(2)}</p>
+    `;
 }
 
 function populateProductList(products) {

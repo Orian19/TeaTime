@@ -70,6 +70,30 @@
             </div>
         </div>
     </section>
+
+    <section class="admin-section manage-orders">
+        <h2>Orders</h2>
+        <div class="order-table-container">
+            <table class="order-table">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                <!-- Orders will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <h3>Order Statistics</h3>
+        <div class="order-stats" id="orderStats">
+            <!-- Statistics will be populated by JavaScript -->
+        </div>
+    </section>
+
 </main>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

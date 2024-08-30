@@ -3,6 +3,7 @@ const router = express.Router();
 const { getUserActivities, filterUserActivities, isAdmin } = require('../modules/admin');
 const { getProducts, createProduct, removeProduct } = require('../modules/products');
 const { isAuthenticated } = require('../modules/user');
+const { getOrders, calculateOrderStats } = require('../modules/orders');
 
 router.use(isAuthenticated);
 router.use(isAdmin);
@@ -149,6 +150,17 @@ router.post('/products/:id', async (req, res) => {
         res.json({ message: 'Product removed successfully' });
     } catch (error) {
         console.error(`Error removing product: ${error.message}`);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+router.get('/orders', async (req, res) => {
+    try {
+        const orders = await getOrders();
+        const stats = calculateOrderStats(orders);
+        res.json({ orders, stats });
+    } catch (error) {
+        console.error(`Error fetching orders: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
     }
 });

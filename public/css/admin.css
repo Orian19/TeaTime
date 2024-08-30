@@ -162,6 +162,56 @@
   background-color: #c0392b;
 }
 
+/* Order Management Section */
+.order-table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th, .order-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-table th {
+  background-color: #264714;
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+.order-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.order-table tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Order Statistics Section */
+.order-stats {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  margin-top: 1rem;
+}
+
+.order-stats p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #34495e;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   /* Manage Products Section */
@@ -182,6 +232,16 @@
   .pagination-button {
     padding: 6px 10px;
     font-size: 12px;
+  }
+
+  /* Order Management Section */
+  .order-table th, .order-table td {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .order-stats p {
+    font-size: 0.9rem;
   }
 }
 

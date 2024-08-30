@@ -38,8 +38,21 @@ async function getOrdersByUser(username) {
     return orders.filter(order => order.user === username);
 }
 
+function calculateOrderStats(orders) {
+    const totalOrders = orders.length;
+    const totalRevenue = orders.reduce((sum, order) => sum + parseFloat(order.total), 0);
+    const averageOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
+    return {
+        totalOrders,
+        totalRevenue,
+        averageOrderValue,
+    };
+}
+
 module.exports = {
     addOrder,
     getOrders,
     getOrdersByUser,
+    calculateOrderStats,
 };
