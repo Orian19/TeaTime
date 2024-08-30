@@ -2,6 +2,7 @@ let allActivities = [];
 let allProducts = [];
 let currentPage = 1;
 const productsPerPage = 10;
+let editingProductId = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.querySelector('.search form');
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     getProducts();
     document.getElementById('addProductForm').addEventListener('submit', addProduct);
+    document.getElementById('cancelEdit').addEventListener('click', cancelEdit);
 });
 
 function getUserActivities() {
@@ -115,11 +117,13 @@ function populateProductList(products) {
             <img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100px;">
             <p>${product.description}</p>
             <p>Price: $${product.price.toFixed(2)}</p>
+<!--            <p>Quantity: ${product.quantity}</p>-->
             <p>Category: ${product.category}</p>
             <p>Origin: ${product.origin}</p>
             <p>Location: ${product.lat}, ${product.lng}</p>
             <p>Caffeine: ${product.caffeine}</p>
             <p>Temperature: ${product.temperature}</p>
+            <button class="button edit-btn" onclick="editProduct('${product.id}')">Edit</button>
             <button class="button remove-btn" onclick="removeProduct('${product.id}')">Remove</button>
         `;
         productList.appendChild(div);
@@ -142,6 +146,22 @@ function updatePagination(totalPages, currentPage) {
     }
 }
 
+function handleProductSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const product = Object.fromEntries(formData.entries());
+    product.price = parseFloat(product.price);
+    // product.quantity = parseInt(product.quantity);
+    product.lat = parseFloat(product.lat);
+    product.lng = parseFloat(product.lng);
+
+    if (editingProductId) {
+        updateProduct(product);
+    } else {
+        addProduct(product);
+    }
+}
+
 function addProduct(event) {
     event.preventDefault();
     const product = {
@@ -149,6 +169,7 @@ function addProduct(event) {
         name: document.getElementById('productName').value,
         description: document.getElementById('productDescription').value,
         price: parseFloat(document.getElementById('productPrice').value),
+        // quantity: parseInt(document.getElementById('productQuantity').value),
         category: document.getElementById('productCategory').value,
         origin: document.getElementById('productOrigin').value,
         lat: parseFloat(document.getElementById('productLat').value),
@@ -164,6 +185,45 @@ function addProduct(event) {
             document.getElementById('addProductForm').reset();
         })
         .catch(error => console.error('Error adding product:', error));
+}
+
+
+
+function updateProduct(product) {
+    axios.put(`/admin/products/${editingProductId}`, product)
+        .then(() => {
+            getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
+            cancelEdit();
+        })
+        .catch(error => console.error('Error updating product:', error));
+}
+
+function editProduct(productId) {
+    const product = allProducts.find(p => p.id === productId);
+    if (product) {
+        editingProductId = productId;
+        document.getElementById('productFormTitle').textContent = 'Edit Product';
+        document.getElementById('productId').value = product.id;
+        document.getElementById('productName').value = product.name;
+        document.getElementById('productDescription').value = product.description;
+        document.getElementById('productPrice').value = product.price;
+        // document.getElementById('productQuantity').value = product.quantity;
+        document.getElementById('productCategory').value = product.category;
+        document.getElementById('productOrigin').value = product.origin;
+        document.getElementById('productLat').value = product.lat;
+        document.getElementById('productLng').value = product.lng;
+        document.getElementById('productCaffeine').value = product.caffeine;
+        document.getElementById('productTemperature').value = product.temperature;
+        document.getElementById('productImageUrl').value = product.imageUrl;
+        document.getElementById('cancelEdit').style.display = 'inline-block';
+    }
+}
+
+function cancelEdit() {
+    editingProductId = null;
+    document.getElementById('productFormTitle').textContent = 'Add a New Product';
+    document.getElementById('addProductForm').reset();
+    document.getElementById('cancelEdit').style.display = 'none';
 }
 
 function removeProduct(productId) {

@@ -52,7 +52,7 @@ router.get('/activities', async (req, res) => {
 router.get('/products', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = 10; // Number of products per page
+        const limit = 6; // Number of products per page
         const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
 
         let products = await getProducts();
@@ -87,12 +87,15 @@ router.get('/products', async (req, res) => {
 // Add a new product
 router.post('/products', async (req, res) => {
     try {
+        // const { id, name, description, price, quantity, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
         const { id, name, description, price, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
+
         const newProduct = await createProduct({
             id,
             name,
             description,
             price: parseFloat(price),
+            // quantity: parseInt(quantity),
             category,
             origin,
             lat: parseFloat(lat),
@@ -106,6 +109,34 @@ router.post('/products', async (req, res) => {
 
     } catch (error) {
         console.error(`Error adding product: ${error.message}`);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Update a product
+router.put('/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, description, price, quantity, category, origin, lat, lng, caffeine, temperature, imageUrl } = req.body;
+        await updateProduct(
+            id,
+            name,
+            description,
+            parseFloat(price),
+            // parseInt(quantity),
+            category,
+            origin,
+            parseFloat(lat),
+            parseFloat(lng),
+            caffeine,
+            temperature,
+            imageUrl,
+        );
+
+        res.json(updatedProduct);
+
+    } catch (error) {
+        console.error(`Error updating product: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
     }
 });

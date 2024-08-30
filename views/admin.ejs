@@ -27,31 +27,34 @@
 
     <section class="admin-section manage-products">
         <div class="add-product">
-            <h2>Add a New Product</h2>
+            <h2 id="productFormTitle">Add a New Product</h2>
             <form id="addProductForm">
+<!--                <input type="hidden" id="productId" name="id">-->
                 <input type="text" id="productId" placeholder="Product ID (e.g., HT007)" required>
-                <input type="text" id="productName" placeholder="Product Name" required>
-                <textarea id="productDescription" placeholder="Product Description" required></textarea>
-                <input type="number" id="productPrice" placeholder="Price" step="0.01" required>
-                <input type="text" id="productCategory" placeholder="Category (e.g., Herbal Tea)" required>
-                <input type="text" id="productOrigin" placeholder="Origin" required>
-                <input type="number" id="productLat" placeholder="Latitude" step="0.0001" required>
-                <input type="number" id="productLng" placeholder="Longitude" step="0.0001" required>
-                <select id="productCaffeine" required>
+                <input type="text" id="productName" name="name" placeholder="Product Name" required>
+                <textarea id="productDescription" name="description" placeholder="Product Description" required></textarea>
+                <input type="number" id="productPrice" name="price" placeholder="Price" step="0.01" required>
+<!--                <input type="number" id="productQuantity" name="quantity" placeholder="Quantity" required>-->
+                <input type="text" id="productCategory" name="category" placeholder="Category (e.g., Herbal Tea)" required>
+                <input type="text" id="productOrigin" name="origin" placeholder="Origin" required>
+                <input type="number" id="productLat" name="lat" placeholder="Latitude" step="0.0001" required>
+                <input type="number" id="productLng" name="lng" placeholder="Longitude" step="0.0001" required>
+                <select id="productCaffeine" name="caffeine" required>
                     <option value="">Select Caffeine Level</option>
                     <option value="None">None</option>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
                 </select>
-                <select id="productTemperature" required>
+                <select id="productTemperature" name="temperature" required>
                     <option value="">Select Temperature</option>
                     <option value="Hot">Hot</option>
                     <option value="Cold">Cold</option>
                     <option value="Both">Both</option>
                 </select>
-                <input type="text" id="productImageUrl" placeholder="Image URL" required>
-                <button class="button" type="submit">Add Product</button>
+                <input type="text" id="productImageUrl" name="imageUrl" placeholder="Image URL" required>
+                <button class="button" type="submit">Save Product</button>
+                <button class="button" type="button" id="cancelEdit" style="display: none;">Cancel</button>
             </form>
         </div>
         <div class="product-list">
