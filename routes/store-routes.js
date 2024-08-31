@@ -190,9 +190,11 @@ router.post('/add-to-cart', async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error adding to cart:', error.message);
+        res.status(400).json({ error: error.message }); // Send a 400 Bad Request with the error message
     }
 });
+
 
 // GET cart page
 router.get('/cart', async (req, res) => {
@@ -319,18 +321,14 @@ router.post('/update-quantity', async (req, res) => {
     }
 });
 
-
-
 router.post('/checkout/process', async (req, res) => {
     try {
-        // Get detailed checkout information, including the total
         const { cartDetails, total } = await getCheckoutDetails(req.session.username);
 
         if (cartDetails.length === 0) {
             return res.redirect('/store/cart'); // Redirect back to cart if it's empty
         }
 
-        // Map cartDetails to include both products and custom blends
         const orderItems = cartDetails.map(item => ({
             itemId: item.id,
             itemType: item.itemType,
@@ -339,25 +337,22 @@ router.post('/checkout/process', async (req, res) => {
             quantity: item.quantity
         }));
 
-        // Create an order object using the checkout details
         const order = {
-            id: Date.now().toString(), // Simple unique ID
+            id: Date.now().toString(),
             user: req.session.username,
             items: orderItems,
             total: total,
             date: new Date().toISOString(),
         };
 
-        await addOrder(order);
+        await addOrder(order);  // Save the order
 
-        // Process the checkout (clear the cart, etc.)
-        await processCheckout(req.session.username);
+        await processCheckout(req.session.username);  // Deduct stock and clear cart
 
-        // Redirect to the thank you page
         res.redirect('/store/thank-you');
     } catch (error) {
-        console.error('Error during checkout processing:', error);
-        res.status(500).send('An error occurred during the checkout process.');
+        console.error('Error during checkout processing:', error.message);
+        res.status(400).json({ error: error.message }); // Provide error feedback
     }
 });
 

@@ -10,7 +10,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/earl-grey.jpeg"
+    "imageUrl": "/images/earl-grey.jpeg",
+    "quantity": 100
   },
   {
     "id": "GT002",
@@ -23,7 +24,8 @@
     "lng": 116.4074,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/jasmine.jpeg"
+    "imageUrl": "/images/jasmine.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT003",
@@ -36,7 +38,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/chai-masala.jpeg"
+    "imageUrl": "/images/chai-masala.jpeg",
+    "quantity": 150
   },
   {
     "id": "HT004",
@@ -49,7 +52,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/camomille.jpeg"
+    "imageUrl": "/images/camomille.jpeg",
+    "quantity": 80
   },
   {
     "id": "GT005",
@@ -62,7 +66,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/green-mint.jpeg"
+    "imageUrl": "/images/green-mint.jpeg",
+    "quantity": 120
   },
   {
     "id": "BT006",
@@ -75,7 +80,8 @@
     "lng": 80.7718,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/english-breakfast.jpeg"
+    "imageUrl": "/images/english-breakfast.jpeg",
+    "quantity": 180
   },
   {
     "id": "HT007",
@@ -88,7 +94,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/peppermint.jpeg"
+    "imageUrl": "/images/peppermint.jpeg",
+    "quantity": 90
   },
   {
     "id": "BT008",
@@ -101,7 +108,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/darjeeling.jpeg"
+    "imageUrl": "/images/darjeeling.jpeg",
+    "quantity": 160
   },
   {
     "id": "GT009",
@@ -114,7 +122,8 @@
     "lng": 139.6917,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/matcha.jpeg"
+    "imageUrl": "/images/matcha.jpeg",
+    "quantity": 220
   },
   {
     "id": "HT010",
@@ -127,7 +136,8 @@
     "lng": 100.5018,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemongrass.jpeg"
+    "imageUrl": "/images/lemongrass.jpeg",
+    "quantity": 70
   },
   {
     "id": "OT011",
@@ -140,7 +150,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/oolong.jpeg"
+    "imageUrl": "/images/oolong.jpeg",
+    "quantity": 130
   },
   {
     "id": "RT012",
@@ -153,7 +164,8 @@
     "lng": 22.9375,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rooibos.jpeg"
+    "imageUrl": "/images/rooibos.jpeg",
+    "quantity": 110
   },
   {
     "id": "BT013",
@@ -166,7 +178,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/assam.jpeg"
+    "imageUrl": "/images/assam.jpeg",
+    "quantity": 170
   },
   {
     "id": "HT014",
@@ -179,7 +192,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/hibiscus.jpeg"
+    "imageUrl": "/images/hibiscus.jpeg",
+    "quantity": 60
   },
   {
     "id": "BT015",
@@ -192,7 +206,8 @@
     "lng": 80.7718,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/ceylon.jpeg"
+    "imageUrl": "/images/ceylon.jpeg",
+    "quantity": 190
   },
   {
     "id": "GT016",
@@ -205,7 +220,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha.jpeg"
+    "imageUrl": "/images/sencha.jpeg",
+    "quantity": 210
   },
   {
     "id": "BT017",
@@ -218,7 +234,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/lapsang.jpeg"
+    "imageUrl": "/images/lapsang.jpeg",
+    "quantity": 140
   },
   {
     "id": "HT018",
@@ -231,7 +248,8 @@
     "lng": 22.9375,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rooibos-chai.jpeg"
+    "imageUrl": "/images/rooibos-chai.jpeg",
+    "quantity": 100
   },
   {
     "id": "GT019",
@@ -244,7 +262,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/gunpowder.jpeg"
+    "imageUrl": "/images/gunpowder.jpeg",
+    "quantity": 200
   },
   {
     "id": "HT020",
@@ -257,7 +276,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/ginger-lemon.jpeg"
+    "imageUrl": "/images/ginger-lemon.jpeg",
+    "quantity": 80
   },
   {
     "id": "BT021",
@@ -270,7 +290,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/russian-caravan.jpeg"
+    "imageUrl": "/images/russian-caravan.jpeg",
+    "quantity": 150
   },
   {
     "id": "GT022",
@@ -283,7 +304,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/dragonwell.jpeg"
+    "imageUrl": "/images/dragonwell.jpeg",
+    "quantity": 220
   },
   {
     "id": "HT023",
@@ -296,7 +318,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/spearmint.jpeg"
+    "imageUrl": "/images/spearmint.jpeg",
+    "quantity": 90
   },
   {
     "id": "BT024",
@@ -309,7 +332,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/irish-breakfast.jpeg"
+    "imageUrl": "/images/irish-breakfast.jpeg",
+    "quantity": 170
   },
   {
     "id": "HT025",
@@ -322,7 +346,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/turmeric-ginger.jpeg"
+    "imageUrl": "/images/turmeric-ginger.jpeg",
+    "quantity": 100
   },
   {
     "id": "BT026",
@@ -335,7 +360,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/darjeeling-second-flush.jpeg"
+    "imageUrl": "/images/darjeeling-second-flush.jpeg",
+    "quantity": 1500
   },
   {
     "id": "GT027",
@@ -348,7 +374,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/mao-feng.jpeg"
+    "imageUrl": "/images/mao-feng.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT028",
@@ -361,7 +388,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/chamomile-lavender.jpeg"
+    "imageUrl": "/images/chamomile-lavender.jpeg",
+    "quantity": 300
   },
   {
     "id": "OT029",
@@ -374,7 +402,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/wuyi-oolong.jpeg"
+    "imageUrl": "/images/wuyi-oolong.jpeg",
+    "quantity": 400
   },
   {
     "id": "RT030",
@@ -387,7 +416,8 @@
     "lng": 22.9375,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/vanilla-rooibos.jpeg"
+    "imageUrl": "/images/vanilla-rooibos.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT031",
@@ -400,7 +430,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/nilgiri.jpeg"
+    "imageUrl": "/images/nilgiri.jpeg",
+    "quantity": 500
   },
   {
     "id": "HT032",
@@ -413,7 +444,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/licorice-root.jpeg"
+    "imageUrl": "/images/licorice-root.jpeg",
+    "quantity": 100
   },
   {
     "id": "GT033",
@@ -426,7 +458,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/bancha.jpeg"
+    "imageUrl": "/images/bancha.jpeg",
+    "quantity": 800
   },
   {
     "id": "BT034",
@@ -439,7 +472,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/pu-erh.jpeg"
+    "imageUrl": "/images/pu-erh.jpeg",
+    "quantity": 300
   },
   {
     "id": "HT035",
@@ -452,7 +486,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rosehip.jpeg"
+    "imageUrl": "/images/rosehip.jpeg",
+    "quantity": 200
   },
   {
     "id": "GT036",
@@ -465,7 +500,8 @@
     "lng": 139.6917,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/gyokuro.jpeg"
+    "imageUrl": "/images/gyokuro.jpeg",
+    "quantity": 400
   },
   {
     "id": "BT037",
@@ -478,7 +514,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/golden-monkey.jpeg"
+    "imageUrl": "/images/golden-monkey.jpeg",
+    "quantity": 500
   },
   {
     "id": "HT038",
@@ -491,7 +528,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/peppermint-lemon.jpeg"
+    "imageUrl": "/images/peppermint-lemon.jpeg",
+    "quantity": 100
   },
   {
     "id": "OT039",
@@ -504,7 +542,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/tie-guan-yin.jpeg"
+    "imageUrl": "/images/tie-guan-yin.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT040",
@@ -517,7 +556,8 @@
     "lng": 36.8219,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/kenyan-black.jpeg"
+    "imageUrl": "/images/kenyan-black.jpeg",
+    "quantity": 200
   },
   {
     "id": "HT041",
@@ -530,7 +570,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/echinacea.jpeg"
+    "imageUrl": "/images/echinacea.jpeg",
+    "quantity": 150
   },
   {
     "id": "GT042",
@@ -543,7 +584,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha-fukamushi.jpeg"
+    "imageUrl": "/images/sencha-fukamushi.jpeg",
+    "quantity": 250
   },
   {
     "id": "BT043",
@@ -556,7 +598,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/keemun.jpeg"
+    "imageUrl": "/images/keemun.jpeg",
+    "quantity": 300
   },
   {
     "id": "HT044",
@@ -569,7 +612,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/hibiscus.jpeg"
+    "imageUrl": "/images/hibiscus.jpeg",
+    "quantity": 200
   },
   {
     "id": "GT045",
@@ -582,7 +626,8 @@
     "lng": 139.6917,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/hojicha.jpeg"
+    "imageUrl": "/images/hojicha.jpeg",
+    "quantity": 400
   },
   {
     "id": "BT046",
@@ -595,7 +640,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/yunnan-gold.jpeg"
+    "imageUrl": "/images/yunnan-gold.jpeg",
+    "quantity": 500
   },
   {
     "id": "HT047",
@@ -608,7 +654,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/elderflower.jpeg"
+    "imageUrl": "/images/elderflower.jpeg",
+    "quantity": 300
   },
   {
     "id": "GT048",
@@ -621,7 +668,8 @@
     "lng": 120.9605,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/jade-mountain.jpeg"
+    "imageUrl": "/images/jade-mountain.jpeg",
+    "quantity": 600
   },
   {
     "id": "BT049",
@@ -634,7 +682,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/assam-ctc.jpeg"
+    "imageUrl": "/images/assam-ctc.jpeg",
+    "quantity": 400
   },
   {
     "id": "HT050",
@@ -647,7 +696,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/tulsi.jpeg"
+    "imageUrl": "/images/tulsi.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT051",
@@ -660,7 +710,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/golden-assam.jpeg"
+    "imageUrl": "/images/golden-assam.jpeg",
+    "quantity": 500
   },
   {
     "id": "HT052",
@@ -673,7 +724,8 @@
     "lng": 100.5018,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemongrass.jpeg"
+    "imageUrl": "/images/lemongrass.jpeg",
+    "quantity": 300
   },
   {
     "id": "GT053",
@@ -686,7 +738,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/dragonwell.jpeg"
+    "imageUrl": "/images/dragonwell.jpeg",
+    "quantity": 600
   },
   {
     "id": "BT054",
@@ -699,7 +752,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/earl-grey-lavender.jpeg"
+    "imageUrl": "/images/earl-grey-lavender.jpeg",
+    "quantity": 400
   },
   {
     "id": "HT055",
@@ -712,7 +766,8 @@
     "lng": 22.9375,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/honeybush.jpeg"
+    "imageUrl": "/images/honeybush.jpeg",
+    "quantity": 200
   },
   {
     "id": "GT056",
@@ -725,7 +780,8 @@
     "lng": 139.6917,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/matcha.jpeg"
+    "imageUrl": "/images/matcha.jpeg",
+    "quantity": 800
   },
   {
     "id": "BT057",
@@ -738,7 +794,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/yunnan-red.jpeg"
+    "imageUrl": "/images/yunnan-red.jpeg",
+    "quantity": 500
   },
   {
     "id": "HT058",
@@ -751,7 +808,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/fennel.jpeg"
+    "imageUrl": "/images/fennel.jpeg",
+    "quantity": 300
   },
   {
     "id": "GT059",
@@ -764,7 +822,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/genmaicha.jpeg"
+    "imageUrl": "/images/genmaicha.jpeg",
+    "quantity": 600
   },
   {
     "id": "BT060",
@@ -777,7 +836,8 @@
     "lng": 80.7718,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/ceylon-orange-pekoe.jpeg"
+    "imageUrl": "/images/ceylon-orange-pekoe.jpeg",
+    "quantity": 400
   },
   {
     "id": "HT061",
@@ -790,7 +850,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/mint-rose.jpeg"
+    "imageUrl": "/images/mint-rose.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT062",
@@ -803,7 +864,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/chun-mee.jpeg"
+    "imageUrl": "/images/chun-mee.jpeg",
+    "quantity": 500
   },
   {
     "id": "HT063",
@@ -816,7 +878,8 @@
     "lng": 22.9375,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rooibos-chai.jpeg"
+    "imageUrl": "/images/rooibos-chai.jpeg",
+    "quantity": 300
   },
   {
     "id": "GT064",
@@ -829,7 +892,8 @@
     "lng": 139.6917,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/kukicha.jpeg"
+    "imageUrl": "/images/kukicha.jpeg",
+    "quantity": 600
   },
   {
     "id": "BT065",
@@ -842,7 +906,8 @@
     "lng": 80.7718,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/irish-breakfast.jpeg"
+    "imageUrl": "/images/irish-breakfast.jpeg",
+    "quantity": 400
   },
   {
     "id": "HT066",
@@ -855,7 +920,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/raspberry-leaf.jpeg"
+    "imageUrl": "/images/raspberry-leaf.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT067",
@@ -868,7 +934,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/yunnan-black.jpeg"
+    "imageUrl": "/images/yunnan-black.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT068",
@@ -881,7 +948,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha-green.jpeg"
+    "imageUrl": "/images/sencha-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT069",
@@ -894,7 +962,8 @@
     "lng": 100.5018,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemongrass-herbal.jpeg"
+    "imageUrl": "/images/lemongrass-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT070",
@@ -907,7 +976,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/assam-breakfast.jpeg"
+    "imageUrl": "/images/assam-breakfast.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT071",
@@ -920,7 +990,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/gyokuro-green.jpeg"
+    "imageUrl": "/images/gyokuro-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT072",
@@ -933,7 +1004,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/hibiscus-herbal.jpeg"
+    "imageUrl": "/images/hibiscus-herbal.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT073",
@@ -946,7 +1018,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/keemun-black.jpeg"
+    "imageUrl": "/images/keemun-black.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT074",
@@ -959,7 +1032,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/dragonwell-green.jpeg"
+    "imageUrl": "/images/dragonwell-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT075",
@@ -972,7 +1046,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/chamomile-rose-herbal.jpeg"
+    "imageUrl": "/images/chamomile-rose-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT076",
@@ -985,7 +1060,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/golden-monkey-black.jpeg"
+    "imageUrl": "/images/golden-monkey-black.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT077",
@@ -998,7 +1074,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/jade-pearl-green.jpeg"
+    "imageUrl": "/images/jade-pearl-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT078",
@@ -1011,7 +1088,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/peppermint-ginger-herbal.jpeg"
+    "imageUrl": "/images/peppermint-ginger-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT079",
@@ -1024,7 +1102,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/darjeeling-second-flush.jpeg"
+    "imageUrl": "/images/darjeeling-second-flush.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT080",
@@ -1037,7 +1116,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/matcha-green.jpeg"
+    "imageUrl": "/images/matcha-green.jpeg",
+    "quantity": 800
   },
   {
     "id": "HT081",
@@ -1050,7 +1130,8 @@
     "lng": 2.3522,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lavender-herbal.jpeg"
+    "imageUrl": "/images/lavender-herbal.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT082",
@@ -1063,7 +1144,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/lapsang-souchong.jpeg"
+    "imageUrl": "/images/lapsang-souchong.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT083",
@@ -1076,7 +1158,8 @@
     "lng": 116.4074,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/white-peony-tea.jpeg"
+    "imageUrl": "/images/white-peony-tea.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT084",
@@ -1089,7 +1172,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rosehip-hibiscus-herbal.jpeg"
+    "imageUrl": "/images/rosehip-hibiscus-herbal.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT085",
@@ -1102,7 +1186,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/nilgiri-black.jpeg"
+    "imageUrl": "/images/nilgiri-black.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT086",
@@ -1115,7 +1200,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha-cherry-blossom.jpeg"
+    "imageUrl": "/images/sencha-cherry-blossom.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT087",
@@ -1128,7 +1214,8 @@
     "lng": 2.3522,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemon-verbena-herbal.jpeg"
+    "imageUrl": "/images/lemon-verbena-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT088",
@@ -1141,7 +1228,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/darjeeling-first-flush.jpeg"
+    "imageUrl": "/images/darjeeling-first-flush.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT089",
@@ -1154,7 +1242,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/genmaicha-green.jpeg"
+    "imageUrl": "/images/genmaicha-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT090",
@@ -1167,7 +1256,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/ginger-turmeric-herbal.jpeg"
+    "imageUrl": "/images/ginger-turmeric-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT091",
@@ -1180,7 +1270,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/yunnan-gold-tea.jpeg"
+    "imageUrl": "/images/yunnan-gold-tea.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT092",
@@ -1193,7 +1284,8 @@
     "lng": 135.7681,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha-kyoto-green.jpeg"
+    "imageUrl": "/images/sencha-kyoto-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT093",
@@ -1206,7 +1298,8 @@
     "lng": 18.4241,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rooibos-chai.jpeg"
+    "imageUrl": "/images/rooibos-chai.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT094",
@@ -1219,7 +1312,8 @@
     "lng": 80.7718,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/ceylon-orange-pekoe.jpeg"
+    "imageUrl": "/images/ceylon-orange-pekoe.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT095",
@@ -1232,7 +1326,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/gunpowder-green.jpeg"
+    "imageUrl": "/images/gunpowder-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT096",
@@ -1245,7 +1340,8 @@
     "lng": -7.9811,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/moroccan-mint-herbal.jpeg"
+    "imageUrl": "/images/moroccan-mint-herbal.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT097",
@@ -1258,7 +1354,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/pu-erh-tea.jpeg"
+    "imageUrl": "/images/pu-erh-tea.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT098",
@@ -1271,7 +1368,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/hojicha-green.jpeg"
+    "imageUrl": "/images/hojicha-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT099",
@@ -1284,7 +1382,8 @@
     "lng": 18.4241,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rooibos-vanilla-herbal.jpeg"
+    "imageUrl": "/images/rooibos-vanilla-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT100",
@@ -1297,7 +1396,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/keemun-mao-feng.jpeg"
+    "imageUrl": "/images/keemun-mao-feng.jpeg",
+    "quantity": 500
   },
   {
     "id": "BT101",
@@ -1310,7 +1410,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/earl-grey-cream.jpeg"
+    "imageUrl": "/images/earl-grey-cream.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT102",
@@ -1323,7 +1424,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha-organic.jpeg"
+    "imageUrl": "/images/sencha-organic.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT103",
@@ -1336,7 +1438,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/ginger-lemon-herbal.jpeg"
+    "imageUrl": "/images/ginger-lemon-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT104",
@@ -1349,7 +1452,8 @@
     "lng": 36.8219,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/kenyan-sunrise.jpeg"
+    "imageUrl": "/images/kenyan-sunrise.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT105",
@@ -1362,7 +1466,8 @@
     "lng": 139.6917,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/bancha-green.jpeg"
+    "imageUrl": "/images/bancha-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT106",
@@ -1375,7 +1480,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/turmeric-herbal.jpeg"
+    "imageUrl": "/images/turmeric-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT107",
@@ -1388,7 +1494,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/yunnan-red.jpeg"
+    "imageUrl": "/images/yunnan-red.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT108",
@@ -1401,7 +1508,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/organic-genmaicha.jpeg"
+    "imageUrl": "/images/organic-genmaicha.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT109",
@@ -1414,7 +1522,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/peppermint-chamomile.jpeg"
+    "imageUrl": "/images/peppermint-chamomile.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT110",
@@ -1427,7 +1536,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/assam-gold.jpeg"
+    "imageUrl": "/images/assam-gold.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT111",
@@ -1440,7 +1550,8 @@
     "lng": 120.9605,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/jade-mountain.jpeg"
+    "imageUrl": "/images/jade-mountain.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT112",
@@ -1453,7 +1564,8 @@
     "lng": 80.7718,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/cinnamon-spice.jpeg"
+    "imageUrl": "/images/cinnamon-spice.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT113",
@@ -1466,7 +1578,8 @@
     "lng": 80.7718,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/ceylon-silver.jpeg"
+    "imageUrl": "/images/ceylon-silver.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT114",
@@ -1479,7 +1592,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/organic-sencha.jpeg"
+    "imageUrl": "/images/organic-sencha.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT115",
@@ -1492,7 +1606,8 @@
     "lng": 2.3522,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemon-balm-herbal.jpeg"
+    "imageUrl": "/images/lemon-balm-herbal.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT116",
@@ -1505,7 +1620,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/russian-caravan.jpeg"
+    "imageUrl": "/images/russian-caravan.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT117",
@@ -1518,7 +1634,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/dragon-phoenix.jpeg"
+    "imageUrl": "/images/dragon-phoenix.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT118",
@@ -1531,7 +1648,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/spearmint-herbal.jpeg"
+    "imageUrl": "/images/spearmint-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT119",
@@ -1544,7 +1662,8 @@
     "lng": 77.209,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/irish-breakfast.jpeg"
+    "imageUrl": "/images/irish-breakfast.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT120",
@@ -1557,7 +1676,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/bi-luo-chun.jpeg"
+    "imageUrl": "/images/bi-luo-chun.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT121",
@@ -1570,7 +1690,8 @@
     "lng": 100.5018,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemongrass-herbal.jpeg"
+    "imageUrl": "/images/lemongrass-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT122",
@@ -1583,7 +1704,8 @@
     "lng": 80.7718,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/scottish-breakfast.jpeg"
+    "imageUrl": "/images/scottish-breakfast.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT123",
@@ -1596,7 +1718,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/mao-feng.jpeg"
+    "imageUrl": "/images/mao-feng.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT124",
@@ -1609,7 +1732,8 @@
     "lng": 18.4241,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/citrus-rooibos.jpeg"
+    "imageUrl": "/images/citrus-rooibos.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT125",
@@ -1622,7 +1746,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/lapsang-souchong.jpeg"
+    "imageUrl": "/images/lapsang-souchong.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT126",
@@ -1635,7 +1760,8 @@
     "lng": 116.4074,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/dragonwell-green.jpeg"
+    "imageUrl": "/images/dragonwell-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT127",
@@ -1648,7 +1774,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/berry-hibiscus.jpeg"
+    "imageUrl": "/images/berry-hibiscus.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT128",
@@ -1661,7 +1788,8 @@
     "lng": 85.3240,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/nepalese-black.jpeg"
+    "imageUrl": "/images/nepalese-black.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT129",
@@ -1674,7 +1802,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/matcha-genmaicha.jpeg"
+    "imageUrl": "/images/matcha-genmaicha.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT130",
@@ -1687,7 +1816,8 @@
     "lng": 13.4050,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/elderberry-herbal.jpeg"
+    "imageUrl": "/images/elderberry-herbal.jpeg",
+    "quantity": 300
   },
   {
     "id": "GT131",
@@ -1700,7 +1830,8 @@
     "lng": -7.0926,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/morrocan-mint.jpeg"
+    "imageUrl": "/images/morrocan-mint.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT132",
@@ -1713,7 +1844,8 @@
     "lng": 18.4241,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/honeybush-herbal.jpeg"
+    "imageUrl": "/images/honeybush-herbal.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT133",
@@ -1726,7 +1858,8 @@
     "lng": 36.8219,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/kenyan-golden.jpeg"
+    "imageUrl": "/images/kenyan-golden.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT134",
@@ -1739,7 +1872,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/gyokuro-green.jpeg"
+    "imageUrl": "/images/gyokuro-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT135",
@@ -1752,7 +1886,8 @@
     "lng": 2.3522,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/chamomile-lavender.jpeg"
+    "imageUrl": "/images/chamomile-lavender.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT136",
@@ -1765,7 +1900,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/keemun-black.jpeg"
+    "imageUrl": "/images/keemun-black.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT137",
@@ -1778,7 +1914,8 @@
     "lng": 139.6917,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/hojicha.jpeg"
+    "imageUrl": "/images/hojicha.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT138",
@@ -1791,7 +1928,8 @@
     "lng": 31.2357,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/rosehip-hibiscus.jpeg"
+    "imageUrl": "/images/rosehip-hibiscus.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT139",
@@ -1804,7 +1942,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/golden-monkey.jpeg"
+    "imageUrl": "/images/golden-monkey.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT140",
@@ -1817,7 +1956,8 @@
     "lng": 116.4074,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/snow-buds.jpeg"
+    "imageUrl": "/images/snow-buds.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT141",
@@ -1830,7 +1970,8 @@
     "lng": 77.209,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/ginger-turmeric.jpeg"
+    "imageUrl": "/images/ginger-turmeric.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT142",
@@ -1843,7 +1984,8 @@
     "lng": 77.209,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/first-flush-darjeeling.jpeg"
+    "imageUrl": "/images/first-flush-darjeeling.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT143",
@@ -1856,7 +1998,8 @@
     "lng": 139.6917,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/kukicha-twig.jpeg"
+    "imageUrl": "/images/kukicha-twig.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT144",
@@ -1869,7 +2012,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/dandelion-root.jpeg"
+    "imageUrl": "/images/dandelion-root.jpeg",
+    "quantity": 200
   },
   {
     "id": "BT145",
@@ -1882,7 +2026,8 @@
     "lng": 116.4074,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/yunnan-gold.jpeg"
+    "imageUrl": "/images/yunnan-gold.jpeg",
+    "quantity": 400
   },
   {
     "id": "GT146",
@@ -1895,7 +2040,8 @@
     "lng": 116.4074,
     "caffeine": "Low",
     "temperature": "Hot",
-    "imageUrl": "/images/white-peony.jpeg"
+    "imageUrl": "/images/white-peony.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT147",
@@ -1908,7 +2054,8 @@
     "lng": -122.4194,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/apple-cinnamon.jpeg"
+    "imageUrl": "/images/apple-cinnamon.jpeg",
+    "quantity": 300
   },
   {
     "id": "BT148",
@@ -1921,7 +2068,8 @@
     "lng": 29.8739,
     "caffeine": "High",
     "temperature": "Hot",
-    "imageUrl": "/images/rwanda-rukeri.jpeg"
+    "imageUrl": "/images/rwanda-rukeri.jpeg",
+    "quantity": 500
   },
   {
     "id": "GT149",
@@ -1934,7 +2082,8 @@
     "lng": 139.6917,
     "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/sencha-green.jpeg"
+    "imageUrl": "/images/sencha-green.jpeg",
+    "quantity": 600
   },
   {
     "id": "HT150",
@@ -1947,6 +2096,7 @@
     "lng": 13.4050,
     "caffeine": "None",
     "temperature": "Hot",
-    "imageUrl": "/images/lemon-balm.jpeg"
+    "imageUrl": "/images/lemon-balm.jpeg",
+    "quantity": 200
   }
 ]

@@ -152,7 +152,7 @@ function populateProductList(products) {
             <img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100px;">
             <p>${product.description}</p>
             <p>Price: $${product.price.toFixed(2)}</p>
-<!--            <p>Quantity: ${product.quantity}</p>-->
+            <p>Quantity: ${product.quantity}</p>
             <p>Category: ${product.category}</p>
             <p>Origin: ${product.origin}</p>
             <p>Location: ${product.lat}, ${product.lng}</p>
@@ -204,6 +204,7 @@ function addProduct(event) {
         name: document.getElementById('productName').value,
         description: document.getElementById('productDescription').value,
         price: parseFloat(document.getElementById('productPrice').value),
+        quantity: parseInt(document.getElementById('productQuantity').value),
         category: document.getElementById('productCategory').value,
         origin: document.getElementById('productOrigin').value,
         lat: parseFloat(document.getElementById('productLat').value),
@@ -264,6 +265,7 @@ function editProduct(productId) {
         document.getElementById('productName').value = product.name;
         document.getElementById('productDescription').value = product.description;
         document.getElementById('productPrice').value = product.price;
+        document.getElementById('productQuantity').value = product.quantity;
         document.getElementById('productCategory').value = product.category;
         document.getElementById('productOrigin').value = product.origin;
         document.getElementById('productLat').value = product.lat;

@@ -26,19 +26,36 @@ async function getCart(username) {
 }
 
 async function addToCart(username, itemId, quantity = 1, itemType = 'product') {
-    const carts = await readCarts();
-    const userCart = carts[username] || [];
-    const existingItemIndex = userCart.findIndex(item => item.itemId === itemId && item.itemType === itemType);
-    
-    if (existingItemIndex !== -1) {
-        userCart[existingItemIndex].quantity += quantity;
-    } else {
-        userCart.push({ itemId, quantity, itemType });
-    }
+    const product = await getProduct(itemId);
 
-    carts[username] = userCart;
-    await writeCarts(carts);
+    if (product && product.quantity >= quantity) {
+        const carts = await readCarts();
+        const userCart = carts[username] || [];
+        const existingItemIndex = userCart.findIndex(item => item.itemId === itemId && item.itemType === itemType);
+
+        if (existingItemIndex !== -1) {
+            const newQuantity = userCart[existingItemIndex].quantity + quantity;
+            if (newQuantity <= product.quantity) {
+                userCart[existingItemIndex].quantity = newQuantity;
+            } else {
+                throw new Error(`Not enough stock. Available: ${product.quantity}`);
+            }
+        } else {
+            if (quantity <= product.quantity) {
+                userCart.push({ itemId, quantity, itemType });
+            } else {
+                throw new Error(`Not enough stock. Available: ${product.quantity}`);
+            }
+        }
+
+        carts[username] = userCart;
+        await writeCarts(carts);
+    } else {
+        throw new Error('Product not available or not enough stock.');
+    }
 }
+
+
 
 async function removeFromCart(username, itemId, itemType) {
     const carts = await readCarts();
@@ -98,5 +115,7 @@ module.exports = {
     removeFromCart,
     updateCartQuantity,
     getCartDetails,
-    clearCart
+    clearCart,
+    readCarts,
+    writeCarts,
 };

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('productImage').alt = product.name;
                 document.getElementById('productDescription').innerText = product.description;
                 document.getElementById('productPrice').innerText = product.price.toFixed(2);
+                document.getElementById('productQuantity').innerText = product.quantity;
                 document.getElementById('productCategory').innerText = product.category;
                 document.getElementById('productOrigin').innerText = product.origin;
                 document.getElementById('productCaffeine').innerText = product.caffeine;

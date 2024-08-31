@@ -1,4 +1,5 @@
-const { getCartDetails, clearCart } = require('./cart');
+const { getCartDetails, clearCart, writeCarts, readCarts} = require('./cart');
+const {modifyProduct, getProduct} = require("./products");
 
 /**
  * Get the cart details for checkout
@@ -31,9 +32,32 @@ async function getCheckoutDetails(username) {
  * @returns {Promise<void>}
  */
 async function processCheckout(username) {
-    // todo: handle payment processing, order creation, etc.
-    await clearCart(username);
+    const carts = await readCarts();
+    const userCart = carts[username];
+
+    if (!userCart || userCart.length === 0) {
+        throw new Error('Cart is empty.');
+    }
+
+    for (const item of userCart) {
+        if (item.itemType === 'product') {
+            const product = await getProduct(item.itemId);
+
+            if (product.quantity < item.quantity) {
+                throw new Error(`Not enough stock for product ${product.name}. Available: ${product.quantity}`);
+            }
+
+            // Deduct the quantity
+            product.quantity -= item.quantity;
+            await modifyProduct(product); // Use your existing modify function
+        }
+    }
+
+    // Clear the user's cart after processing
+    carts[username] = [];
+    await writeCarts(carts);
 }
+
 
 module.exports = {
     getCheckoutDetails,

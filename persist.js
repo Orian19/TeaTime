@@ -54,7 +54,9 @@ async function readProducts() {
             parseFloat(p.lng),
             p.caffeine,
             p.temperature,
-            p.imageUrl));
+            p.imageUrl,
+            parseInt(p.quantity) || 0,
+        ));
     } catch (error) {
         return []; // return an empty array if the file doesn't exist
     }
