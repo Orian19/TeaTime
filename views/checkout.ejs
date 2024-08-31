@@ -1,49 +1,57 @@
 <link rel="stylesheet" href="/css/cart-checkout.css">
+
 <main>
-<div class="add-padding-2">
-    <h1 class="page-heading">Checkout</h1>
-    <% if (cartDetails.length === 0) { %>
-        <p>Your cart is empty.</p>
-    <% } else { %>
-        <table class="checkout-table">
-            <thead>
+    <div class="add-padding-2">
+        <h1 class="page-heading">Checkout</h1>
+        <% if (cartDetails.length === 0) { %>
+            <p>Your cart is empty.</p>
+        <% } else { %>
+            <table class="checkout-table">
+                <thead>
                 <tr>
                     <th>Product</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
                 </tr>
-            </thead>
-            <tbody>
-            <% cartDetails.forEach(function(item) { %>
-                <tr>
-                    <td class="cart-product-info">
-                        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
-                        <div class="cart-product-name">
-                            <%= item.name %>
-                            <% if (item.itemType === 'custom_blend') { %>
-                                <span>(Custom Blend)</span>
-                            <% } %>
-                        </div>
-                    </td>
-                    <td>$<%= item.price.toFixed(2) %></td>
-                    <td><%= item.quantity %></td>
-                    <td>$<%= item.total %></td>
-                </tr>
-            <% }); %>
-            </tbody>
-            <tfoot>
+                </thead>
+                <tbody>
+                <% cartDetails.forEach(function(item) { %>
+                    <tr>
+                        <td class="cart-product-info">
+                            <img src="<%= item.imageUrl %>" alt="<%= item.name %>" class="cart-product-image">
+                            <div class="cart-product-name">
+                                <%= item.name %>
+                                <% if (item.itemType === 'custom_blend') { %>
+                                    <span>(Custom Blend)</span>
+                                <% } %>
+                            </div>
+                        </td>
+                        <td>$<%= item.price.toFixed(2) %></td>
+                        <td><%= item.quantity %></td>
+                        <td>$<%= item.total %></td>
+                    </tr>
+                <% }); %>
+                </tbody>
+                <tfoot>
                 <tr>
                     <td colspan="3">Total</td>
                     <td>$<%= cartDetails.reduce((sum, item) => sum + parseFloat(item.total), 0).toFixed(2) %></td>
                 </tr>
-            </tfoot>
-        </table>
-        <div class="checkout-actions">
-            <form action="/store/checkout/process" method="POST">
-                <button type="submit" class="button">Confirm Payment</button>
-            </form>
-        </div>
-    <% } %>
-</div>
+                </tfoot>
+            </table>
+
+            <!-- Error message should be placed here, under the total row -->
+            <div id="error-message" class="error-message" style="display: none;"></div>
+
+            <div class="checkout-actions">
+                <form action="/store/checkout/process" method="POST">
+                    <button type="submit" class="button">Confirm Payment</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
 </main>
+
+<!-- Link to the external JavaScript file -->
+<script src="/js/checkout.js"></script>
