@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         setTimeout(() => {
                             errorElement.style.display = 'none';
                         }, 5000); // Hide the message after 5 seconds
-                    } else {
-                        window.location.href = '/store/thank-you';
+                    } else if (data.redirect) {
+                        window.location.href = data.redirect;
                     }
                 })
                 .catch(error => {

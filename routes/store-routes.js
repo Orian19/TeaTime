@@ -104,8 +104,8 @@ router.get('/tea-blender', async (req, res) => {
     try {
         const blendableTeas = await getBlendableTeas();
         const userBlends = await getUserBlendsList(req.session.username);
-        res.render('tea-blender', { 
-            title: 'Tea Blending Workshop', 
+        res.render('tea-blender', {
+            title: 'Tea Blending Workshop',
             blendableTeas,
             userBlends
         });
@@ -159,7 +159,7 @@ router.delete('/remove-blend/:blendId', async (req, res) => {
 router.post('/add-blend-to-cart', async (req, res) => {
     const { blendId, quantity } = req.body;
     const blend = await getBlend(req.session.username, blendId);
-    
+
     if (!blend) {
         return res.status(404).json({ error: 'Blend not found' });
     }
@@ -212,15 +212,15 @@ router.get('/checkout', async (req, res) => {
     try {
         const userCart = await getCart(req.session.username);
         const cartDetails = await Promise.all(userCart.map(async item => {
-            
+
             if (item.itemType === 'product') {
                 const product = await getProduct(item.itemId);
-                
+
                 if (!product) {
                     throw new Error(`Product not found: ${item.itemId}`);
                 }
 
-                const price = parseFloat(product.price);    
+                const price = parseFloat(product.price);
                 return {
                     name: product.name,
                     price: price,
@@ -232,11 +232,11 @@ router.get('/checkout', async (req, res) => {
 
             } else if (item.itemType === 'custom_blend') {
                 const blend = await getBlend(req.session.username, item.itemId);
-                
+
                 if (!blend) {
                     throw new Error(`Blend not found: ${item.itemId}`);
                 }
-                
+
                 const price = 9.99; // Or calculate based on blend components
                 return {
                     name: blend.name,
@@ -326,7 +326,7 @@ router.post('/checkout/process', async (req, res) => {
         const { cartDetails, total } = await getCheckoutDetails(req.session.username);
 
         if (cartDetails.length === 0) {
-            return res.redirect('/store/cart'); // Redirect back to cart if it's empty
+            return res.status(400).json({ error: 'Your cart is empty. Please add items to your cart before checking out.' });
         }
 
         const orderItems = cartDetails.map(item => ({
@@ -346,15 +346,17 @@ router.post('/checkout/process', async (req, res) => {
         };
 
         await addOrder(order);  // Save the order
-
         await processCheckout(req.session.username);  // Deduct stock and clear cart
 
-        res.redirect('/store/thank-you');
+        // Send a JSON response indicating success
+        res.json({ success: true, redirect: '/store/thank-you' });
     } catch (error) {
         console.error('Error during checkout processing:', error.message);
-        res.status(400).json({ error: error.message }); // Provide error feedback
+        // Send a JSON response with the error message
+        res.status(400).json({ error: error.message });
     }
 });
+
 
 // GET thank you page
 router.get('/thank-you', (req, res) => {
