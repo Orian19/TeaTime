@@ -111,17 +111,14 @@
         padding: 1.5rem;
     }
 
-    /* Adjust Tea Image Size */
     #tea-image {
         max-width: 150px;
     }
 
-    /* Adjust Tea Name Font Size */
     #tea-name {
         font-size: 1.2rem;
     }
 
-    /* Adjust Popup Page Styles */
     #tea-name {
         font-size: 1.4rem;
     }
@@ -130,13 +127,11 @@
         font-size: 1rem;
     }
 
-    /* Adjust Quantity Input */
     .product-quantity input[type="number"] {
         width: 50px;
         padding: 6px;
     }
 
-    /* Ensure Submit Button is Readable on Small Screens */
     #quiz-form input[type="submit"] {
         font-size: 1rem;
         padding: 0.75rem;

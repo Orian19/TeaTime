@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Open product details modal
+    /**
+     * Fetch product details from the server
+     * @param productId
+     */
     function openProductDetails(productId) {
         fetch(`/store/product/${productId}`)
             .then(response => response.json())
@@ -15,9 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('productOrigin').innerText = product.origin;
                 document.getElementById('productCaffeine').innerText = product.caffeine;
                 document.getElementById('productTemperature').innerText = product.temperature;
-                // document.getElementById('productBrewingTime').innerText = product.brewingTime;
 
-                // Set the product ID in the form for adding to cart
                 document.getElementById('productId').value = product.id;
 
                 const modal = document.getElementById('productDetailsModal');
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching product details:', error));
     }
 
+    /**
+     * Close the product details modal
+     */
     function closeProductDetails() {
         const modal = document.getElementById('productDetailsModal');
         modal.style.display = "none";

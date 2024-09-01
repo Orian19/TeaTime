@@ -98,8 +98,9 @@ router.get('/search', async (req, res) => {
     });
 });
 
-router.use(isAuthenticated); // Protect all routes below this line
+router.use(isAuthenticated); // Protecting all routes below this line
 
+// GET tea blender page
 router.get('/tea-blender', async (req, res) => {
     try {
         const blendableTeas = await getBlendableTeas();
@@ -116,6 +117,7 @@ router.get('/tea-blender', async (req, res) => {
     }
 });
 
+// GET blendable teas API
 router.get('/blendable-teas', async (req, res) => {
     try {
         const blendableTeas = await getBlendableTeas();
@@ -158,16 +160,20 @@ router.delete('/remove-blend/:blendId', async (req, res) => {
 // POST add blend to cart
 router.post('/add-blend-to-cart', async (req, res) => {
     const { blendId, quantity } = req.body;
-    const blend = await getBlend(req.session.username, blendId);
+    try {
+        const blend = await getBlend(req.session.username, blendId);
 
-    if (!blend) {
-        return res.status(404).json({ error: 'Blend not found' });
+        if (!blend) {
+            return res.status(404).json({ error: 'Blend not found' });
+        }
+
+        await addToCart(req.session.username, blendId, quantity, 'custom_blend');
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error adding blend to cart:', error.message);
+        res.status(400).json({ error: error.message });
     }
-
-    await addToCart(req.session.username, blendId, quantity, 'custom_blend');
-    res.json({ success: true });
 });
-
 
 
 // POST add to cart
@@ -194,7 +200,6 @@ router.post('/add-to-cart', async (req, res) => {
         res.status(400).json({ error: error.message }); // Send a 400 Bad Request with the error message
     }
 });
-
 
 // GET cart page
 router.get('/cart', async (req, res) => {
@@ -237,12 +242,12 @@ router.get('/checkout', async (req, res) => {
                     throw new Error(`Blend not found: ${item.itemId}`);
                 }
 
-                const price = 9.99; // Or calculate based on blend components
+                const price = 9.99;
                 return {
                     name: blend.name,
                     price: price,
                     quantity: item.quantity,
-                    imageUrl: '/images/tea-blend.jpg', // Use a default image for blends
+                    imageUrl: '/images/tea-blend.jpg',
                     total: (price * item.quantity).toFixed(2),
                     itemType: 'custom_blend'
                 };
@@ -309,7 +314,7 @@ router.post('/remove-item', async (req, res) => {
     }
 });
 
-
+// POST update cart quantity
 router.post('/update-quantity', async (req, res) => {
     const { itemId, quantity, itemType } = req.body;
     try {
@@ -321,6 +326,7 @@ router.post('/update-quantity', async (req, res) => {
     }
 });
 
+// POST process checkout
 router.post('/checkout/process', async (req, res) => {
     try {
         const { cartDetails, total } = await getCheckoutDetails(req.session.username);
@@ -348,15 +354,12 @@ router.post('/checkout/process', async (req, res) => {
         await addOrder(order);  // Save the order
         await processCheckout(req.session.username);  // Deduct stock and clear cart
 
-        // Send a JSON response indicating success
         res.json({ success: true, redirect: '/store/thank-you' });
     } catch (error) {
         console.error('Error during checkout processing:', error.message);
-        // Send a JSON response with the error message
         res.status(400).json({ error: error.message });
     }
 });
-
 
 // GET thank you page
 router.get('/thank-you', (req, res) => {
@@ -387,6 +390,5 @@ router.get('/api/tea-regions', async (req, res) => {
 
     res.json(Object.values(regions));
 });
-
 
 module.exports = router;

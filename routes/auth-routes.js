@@ -3,10 +3,12 @@ const router = express.Router();
 const { registerUser, authenticateUser } = require('../modules/user');
 const { addUserActivity } = require('../modules/admin');
 
+// Register a new user
 router.get('/register', (req, res) => {
     res.render('register');
 });
 
+// Register a new user - POST
 router.post('/register', async (req, res) => {
     try {
         const isRegisterd =  await registerUser(req.body.username, req.body.password);
@@ -25,10 +27,12 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// Login
 router.get('/login', (req, res) => {
     res.render('login');
 });
 
+// Login - POST
 router.post('/login', async (req, res) => {
     const { username, password, rememberMe } = req.body;
     console.log(`Attempting login with username: ${username}`);
@@ -60,6 +64,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Logout
 router.get('/logout', async (req, res) => {
     await addUserActivity({
         username: req.session.username,
@@ -74,6 +79,5 @@ router.get('/logout', async (req, res) => {
         res.redirect('/auth/login');
     });
 });
-
 
 module.exports = router;

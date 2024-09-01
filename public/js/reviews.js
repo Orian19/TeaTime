@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var reviewsList = document.getElementById('reviews-list');
-    var addReviewBtn = document.getElementById('add-review-btn');
-    var modal = document.getElementById('modal');
-    var closeBtn = document.getElementsByClassName('close')[0];
-    var reviewForm = document.getElementById('review-form');
+    const reviewsList = document.getElementById('reviews-list');
+    const addReviewBtn = document.getElementById('add-review-btn');
+    const modal = document.getElementById('modal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const reviewForm = document.getElementById('review-form');
 
+    /**
+     * Fetch reviews from the server
+     * @returns {Promise<any>}
+     */
     function fetchReviews() {
         return fetch('/store/reviews')
             .then(response => response.json())
@@ -14,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    /**
+     * Display reviews in the HTML
+     */
     function displayReviews() {
         if (reviewsList.children.length > 0) {
             console.log('Reviews already present in HTML');
@@ -39,6 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    /**
+     * Add a new review to the HTML
+     * @param review
+     */
     function addNewReview(review) {
         var noReviewsMessage = reviewsList.querySelector('p');
         if (noReviewsMessage && noReviewsMessage.textContent.includes("No reviews yet")) {

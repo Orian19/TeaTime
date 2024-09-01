@@ -122,8 +122,6 @@ router.put('/products/:id', async (req, res) => {
     }
 });
 
-
-
 // Remove a product
 router.post('/products/:id', async (req, res) => {
     try {
@@ -136,6 +134,7 @@ router.post('/products/:id', async (req, res) => {
     }
 });
 
+// Get all orders
 router.get('/orders', async (req, res) => {
     try {
         const orders = await getOrders();

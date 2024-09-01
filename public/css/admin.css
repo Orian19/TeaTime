@@ -303,7 +303,6 @@
   }
 }
 
-/* Adjust Product List for better alignment with search and pagination */
 .product-list {
   display: flex;
   flex-direction: column;
@@ -314,7 +313,6 @@
   margin-bottom: 1rem;
 }
 
-/* Optional: Add some spacing between products and pagination */
 .pagination {
   margin-top: 1rem;
   padding-top: 1rem;

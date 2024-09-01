@@ -19,7 +19,6 @@ async function addOrder(order) {
     }
 }
 
-
 /**
  * Get all orders
  * @returns {Promise<Array>} - Returns an array of orders
@@ -29,15 +28,10 @@ async function getOrders() {
 }
 
 /**
- * Get orders by a specific user
- * @param {string} username - The username to filter orders by
- * @returns {Promise<Array>} - Returns an array of orders for the user
+ * Calculate order statistics
+ * @param orders
+ * @returns {{averageOrderValue: (number|number), totalOrders: *, totalRevenue: *}}
  */
-async function getOrdersByUser(username) {
-    const orders = await getOrders();
-    return orders.filter(order => order.user === username);
-}
-
 function calculateOrderStats(orders) {
     const totalOrders = orders.length;
     const totalRevenue = orders.reduce((sum, order) => sum + parseFloat(order.total), 0);
@@ -53,6 +47,5 @@ function calculateOrderStats(orders) {
 module.exports = {
     addOrder,
     getOrders,
-    getOrdersByUser,
     calculateOrderStats,
 };

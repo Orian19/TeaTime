@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const reviewsFilePath = path.join(__dirname, '../data/reviews.json');
 
+/**
+ * Read reviews from file
+ * @returns {any|*[]}
+ */
 function readReviews() {
     if (!fs.existsSync(reviewsFilePath)) {
         console.log('Reviews file does not exist. Creating an empty file.');
@@ -27,14 +31,26 @@ function readReviews() {
     }
 }
 
+/**
+ * Write reviews to file
+ * @param reviews
+ */
 function writeReviews(reviews) {
     fs.writeFileSync(reviewsFilePath, JSON.stringify(reviews, null, 2));
 }
 
+/**
+ * Get all reviews
+ * @returns {*|*[]}
+ */
 function getReviews() {
     return readReviews();
 }
 
+/**
+ * Add a new review
+ * @param review
+ */
 function addReview(review) {
     const reviews = readReviews();
     review.date = new Date().toISOString();
@@ -42,6 +58,10 @@ function addReview(review) {
     writeReviews(reviews);
 }
 
+/**
+ * Remove a review
+ * @param reviewIndex
+ */
 function removeReview(reviewIndex) {
     const reviews = readReviews();
     if (reviewIndex >= 0 && reviewIndex < reviews.length) {
@@ -52,6 +72,11 @@ function removeReview(reviewIndex) {
     }
 }
 
+/**
+ * Update a review
+ * @param reviewIndex
+ * @param updatedReview
+ */
 function updateReview(reviewIndex, updatedReview) {
     const reviews = readReviews();
     if (reviewIndex >= 0 && reviewIndex < reviews.length) {

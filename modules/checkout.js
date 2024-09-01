@@ -49,7 +49,7 @@ async function processCheckout(username) {
 
             // Deduct the quantity
             product.quantity -= item.quantity;
-            await modifyProduct(product); // Use your existing modify function
+            await modifyProduct(product);
         }
     }
 

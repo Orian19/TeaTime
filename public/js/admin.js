@@ -4,27 +4,34 @@ let currentPage = 1;
 const productsPerPage = 10;
 let editingProductId = null;
 
+/**
+ * This function is called when the DOM is fully loaded
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.querySelector('.search form');
     const searchInput = document.getElementById('searchInput');
     const productSearchInput = document.getElementById('productSearchInput');
 
+    // Add an event listener to the search form to handle form submission
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const searchTerm = searchInput.value.trim();
         filterActivities(searchTerm);
     });
 
+    // Add an event listener to the search input to filter activities as the user types
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.trim();
         filterActivities(searchTerm);
     });
 
+    // Add an event listener to the product search input to filter products as the user types
     productSearchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.trim();
         filterProducts(searchTerm);
     });
 
+    // Check if there is a search query in the URL and filter activities accordingly
     const urlParams = new URLSearchParams(window.location.search);
     const searchTerm = urlParams.get('search') || '';
     if (searchTerm) {
@@ -34,12 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
         getUserActivities();
     }
 
+    // Get the products and orders when the page loads
     getProducts();
-    getOrders(); // Fetch and display orders when the page loads
+    getOrders();
+
     document.getElementById('addProductForm').addEventListener('submit', addProduct);
     document.getElementById('cancelEdit').addEventListener('click', cancelEdit);
 });
 
+/**
+ * This function is called when the DOM is fully loaded
+ */
 function getUserActivities() {
     axios.get('/admin/activities')
         .then(response => {
@@ -67,6 +79,10 @@ function filterActivities(searchTerm) {
     updateURL(searchTerm);
 }
 
+/**
+ * Update the URL in the browser without reloading the page
+ * @param searchTerm
+ */
 function updateURL(searchTerm) {
     const url = new URL(window.location);
     if (searchTerm) {
@@ -77,6 +93,10 @@ function updateURL(searchTerm) {
     window.history.pushState({}, '', url);
 }
 
+/**
+ * Populate the activity table with the provided activities
+ * @param activities
+ */
 function populateActivityTable(activities) {
     const tbody = document.getElementById('activityTableBody');
     tbody.innerHTML = '';
@@ -91,6 +111,11 @@ function populateActivityTable(activities) {
     });
 }
 
+/**
+ * Get the products from the server and populate the product list
+ * @param page
+ * @param searchTerm
+ */
 function getProducts(page = 1, searchTerm = '') {
     axios.get(`/admin/products?page=${page}&search=${encodeURIComponent(searchTerm)}`)
         .then(response => {
@@ -102,11 +127,18 @@ function getProducts(page = 1, searchTerm = '') {
         .catch(error => console.error('Error fetching products:', error));
 }
 
+/**
+ * Filter the products based on the search term
+ * @param searchTerm
+ */
 function filterProducts(searchTerm) {
     currentPage = 1;
     getProducts(currentPage, searchTerm);
 }
 
+/**
+ * Get the orders from the server and populate the orders table
+ */
 function getOrders() {
     axios.get('/admin/orders')
         .then(response => {
@@ -116,6 +148,10 @@ function getOrders() {
         .catch(error => console.error('Error fetching orders:', error));
 }
 
+/**
+ * Populate the orders table with the provided orders
+ * @param orders
+ */
 function populateOrdersTable(orders) {
     const ordersTableBody = document.getElementById('ordersTableBody');
     ordersTableBody.innerHTML = '';
@@ -132,6 +168,10 @@ function populateOrdersTable(orders) {
     });
 }
 
+/**
+ * Display the order statistics on the page
+ * @param stats
+ */
 function displayOrderStats(stats) {
     const statsContainer = document.getElementById('orderStats');
     statsContainer.innerHTML = `
@@ -141,6 +181,10 @@ function displayOrderStats(stats) {
     `;
 }
 
+/**
+ * Populate the product list with the provided products
+ * @param products
+ */
 function populateProductList(products) {
     const productList = document.getElementById('productList');
     productList.innerHTML = '';
@@ -165,6 +209,11 @@ function populateProductList(products) {
     });
 }
 
+/**
+ * Update the pagination buttons based on the total number of pages and the current
+ * @param totalPages
+ * @param currentPage
+ */
 function updatePagination(totalPages, currentPage) {
     const paginationContainer = document.getElementById('productPagination');
     paginationContainer.innerHTML = '';
@@ -181,6 +230,10 @@ function updatePagination(totalPages, currentPage) {
     }
 }
 
+/**
+ * Handle the form submission for adding a new product
+ * @param event
+ */
 function handleProductSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -197,6 +250,10 @@ function handleProductSubmit(event) {
     }
 }
 
+/**
+ * Add a new product to the database
+ * @param event
+ */
 function addProduct(event) {
     event.preventDefault();
     const product = {
@@ -241,8 +298,10 @@ function addProduct(event) {
     }
 }
 
-
-
+/**
+ * Update an existing product in the database
+ * @param product
+ */
 function updateProduct(product) {
     console.log('Sending update request for product:', product);  // Log the product being sent
     axios.put(`/admin/products/${product.id}`, product)
@@ -255,7 +314,10 @@ function updateProduct(product) {
         });
 }
 
-
+/**
+ * Edit a product by populating the form with the product details
+ * @param productId
+ */
 function editProduct(productId) {
     const product = allProducts.find(p => p.id === productId);
     if (product) {
@@ -277,8 +339,9 @@ function editProduct(productId) {
     }
 }
 
-
-
+/**
+ * Cancel the edit of a product and reset the form
+ */
 function cancelEdit() {
     editingProductId = null;
     document.getElementById('productFormTitle').textContent = 'Add a New Product';
@@ -286,6 +349,10 @@ function cancelEdit() {
     document.getElementById('cancelEdit').style.display = 'none';
 }
 
+/**
+ * Remove a product from the database
+ * @param productId
+ */
 function removeProduct(productId) {
     axios.post(`/admin/products/${productId}`)
         .then(() => getProducts(currentPage, document.getElementById('productSearchInput').value.trim()))

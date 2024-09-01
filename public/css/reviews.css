@@ -131,18 +131,15 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* Adjust Review List Layout for Mobile */
     #reviews-list {
         grid-template-columns: 1fr;
     }
 
-    /* Adjust Modal Content Width */
     #modal-content {
         width: 90%;
-        margin-top: 30%; /* Adjust for better appearance on mobile */
+        margin-top: 30%;
     }
 
-    /* Adjust Review Text Size */
     .review h3 {
         font-size: 1rem;
     }

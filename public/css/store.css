@@ -1,9 +1,9 @@
 /* Store Page */
 .products-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Reduced min-width to allow for more items per row */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
-    align-items: stretch; /* Ensure all items stretch to the same height */
+    align-items: stretch;
 }
 
 /* Product Cards */
@@ -24,10 +24,9 @@
     transform: translateY(-5px);
 }
 
-/* Uniform Image Size */
 .product-image {
     width: 100%;
-    height: 150px; /* Adjust height to ensure uniform size */
+    height: 150px;
     object-fit: cover;
     margin-bottom: 1rem;
     border-radius: 8px;
@@ -39,13 +38,13 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     color: #333;
-    text-align: center; /* Align title to the center */
+    text-align: center;
 }
 
 .product-details p {
     color: #666;
     margin-bottom: 0.5rem;
-    text-align: center; /* Align text to the center */
+    text-align: center;
 }
 
 /* Product Quantity Section */
@@ -158,16 +157,16 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .products-container {
-        grid-template-columns: 1fr; /* Single column layout for mobile */
+        grid-template-columns: 1fr;
     }
 
     .modal-content {
         width: 90%;
-        margin: 20% auto; /* Adjust the margin for better appearance on mobile */
+        margin: 20% auto;
     }
 
     .pagination a {
-        padding: 6px 10px; /* Reduce padding for smaller screens */
-        font-size: 12px; /* Smaller font size on mobile */
+        padding: 6px 10px;
+        font-size: 12px;
     }
 }

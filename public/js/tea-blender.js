@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching blendable teas:', error));
 
+    /**
+     * Update the pie chart with the current blend data
+     */
     function updateChart() {
         const data = [];
         const labels = [];
@@ -114,6 +117,11 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayUserBlends();
 });
 
+/**
+ * Create a pie chart for the blend
+ * @param canvas
+ * @param blend
+ */
 function createBlendChart(canvas, blend) {
     const ctx = canvas.getContext('2d');
     const data = [];
@@ -155,6 +163,10 @@ function createBlendChart(canvas, blend) {
     });
 }
 
+/**
+ * Display user's saved blends
+ * @param blends
+ */
 function displayUserBlends(blends) {
     const blendsList = document.getElementById('blendsList');
     blendsList.innerHTML = '';
@@ -208,6 +220,10 @@ function displayUserBlends(blends) {
     });
 }
 
+/**
+ * Remove a blend from the user's saved blends
+ * @param blendId
+ */
 function removeBlend(blendId) {
     if (confirm('Are you sure you want to remove this blend?')) {
         fetch(`/store/remove-blend/${blendId}`, {
@@ -229,6 +245,10 @@ function removeBlend(blendId) {
     }
 }
 
+/**
+ * Add a blend to the user's cart
+ * @param blendId
+ */
 function addToCart(blendId) {
     fetch('/store/add-blend-to-cart', {
         method: 'POST',
@@ -251,6 +271,9 @@ function addToCart(blendId) {
     });
 }
 
+/**
+ * Fetch and display user's saved blends
+ */
 function fetchAndDisplayUserBlends() {
     fetch('/store/user-blends')
         .then(response => response.json())

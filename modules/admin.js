@@ -3,6 +3,13 @@ const path = require('path');
 
 const ACTIVITIES_FILE = path.join(__dirname, '..', 'data', 'activities.json');
 
+/**
+ * check if user is admin
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
 function isAdmin(req, res, next) {
     if (req.session.isAdmin) {
         return next();
@@ -11,6 +18,10 @@ function isAdmin(req, res, next) {
     res.status(403).send('Access denied');
 }
 
+/**
+ * get user activities
+ * @returns {Promise<*|*[]>}
+ */
 async function getUserActivities() {
     try {
         const data = await fs.readFile(ACTIVITIES_FILE, 'utf8');
@@ -31,6 +42,11 @@ async function getUserActivities() {
     }
 }
 
+/**
+ * add user activity
+ * @param activity
+ * @returns {Promise<void>}
+ */
 async function addUserActivity(activity) {
     const activities = await getUserActivities();
     activities.push({

@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var quizForm = document.getElementById('quiz-form');
-    var modal = document.getElementById('modal');
-    var closeBtn = document.getElementsByClassName('close')[0];
-    var addToCartBtn = document.getElementById('add-to-cart');
+    const quizForm = document.getElementById('quiz-form');
+    const modal = document.getElementById('modal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const addToCartBtn = document.getElementById('add-to-cart');
 
+    /**
+     * Function to find the matching tea based on user preferences
+     * @param preferences
+     * @param products
+     * @returns {*}
+     */
     function findMatchingTea(preferences, products) {
         return products.find(tea =>
           ((tea.category === preferences.type) && (tea.caffeine === preferences.caffeine) && (tea.temperature === preferences.temperature))
@@ -14,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ) || products[0]; // Default to first tea if no match found
       }
 
+     // Add event listener to quiz form
     quizForm.addEventListener('submit', function(e) {
         e.preventDefault();
         var preferences = {

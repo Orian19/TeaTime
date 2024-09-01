@@ -84,13 +84,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* Adjust Container Width */
     .login-container, .register-container {
         padding: 1.5rem;
         margin: 1rem;
     }
 
-    /* Adjust Input Field Sizes */
     .login-form input[type="text"],
     .login-form input[type="password"],
     .register-form input[type="text"],
@@ -99,7 +97,6 @@
         padding: 0.6rem;
     }
 
-    /* Adjust Label and Checkbox Sizes */
     .login-form label, .register-form label {
         font-size: 0.9rem;
     }
@@ -112,7 +109,6 @@
         transform: scale(0.9);
     }
 
-    /* Adjust Alert Styles */
     .alert-error {
         font-size: 0.9rem;
     }

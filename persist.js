@@ -110,8 +110,6 @@ async function updateProduct(product) {
     }
 }
 
-
-
 /**
  * Delete a product from the database file - products.json
  * @param id
@@ -148,6 +146,10 @@ async function writeOrders(file, orders) {
     await fs.writeFile(filePath, JSON.stringify(orders, null, 2));
 }
 
+/**
+ * Read data from database file - blends
+ * @returns {Promise<{}|any>}
+ */
 async function readBlends() {
     try {
         const data = await fs.readFile(BLENDS_FILE, 'utf8');
@@ -160,10 +162,21 @@ async function readBlends() {
     }
 }
 
+/**
+ * Write data to database file - blends
+ * @param blends
+ * @returns {Promise<void>}
+ */
 async function writeBlends(blends) {
     await fs.writeFile(BLENDS_FILE, JSON.stringify(blends, null, 2));
 }
 
+/**
+ * Create a new blend and save it to the database
+ * @param username
+ * @param blend
+ * @returns {Promise<*>}
+ */
 async function createBlend(username, blend) {
     const blends = await readBlends();
     if (!blends[username]) {
@@ -176,6 +189,12 @@ async function createBlend(username, blend) {
     return blend;
 }
 
+/**
+ * Delete a blend from the database
+ * @param username
+ * @param blendId
+ * @returns {Promise<void>}
+ */
 async function deleteBlend(username, blendId) { 
     const blends = await readBlends();
     if (!blends[username]) {
@@ -188,16 +207,31 @@ async function deleteBlend(username, blendId) {
     }
 }
 
+/**
+ * Get a user's blends from the database
+ * @param username
+ * @returns {Promise<*|*[]>}
+ */
 async function getUserBlends(username) {
     const blends = await readBlends();
     return blends[username] || [];
 }
 
+/**
+ * Get a specific blend by ID
+ * @param username
+ * @param blendId
+ * @returns {Promise<T>}
+ */
 async function getBlendById(username, blendId) {
     const userBlends = await getUserBlends(username);
     return userBlends.find(blend => blend.id === blendId);
 }
 
+/**
+ * Read data from database file - flavors
+ * @returns {Promise<any|*[]>}
+ */
 async function readFlavors() {
     try {
         const data = await fs.readFile(FLAVORS_FILE, 'utf8');
