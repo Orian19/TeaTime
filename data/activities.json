@@ -1818,5 +1818,30 @@
     "username": "admin",
     "type": "logout",
     "datetime": "2024-08-24T15:29:42.442Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-01T12:06:22.262Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-01T12:12:12.395Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-01T12:22:42.905Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-01T13:10:46.742Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-01T14:13:19.471Z"
   }
 ]

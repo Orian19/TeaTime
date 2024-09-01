@@ -26,6 +26,7 @@
     "express-rate-limit": "^7.4.0",
     "express-session": "^1.18.0",
     "node-fetch": "^2.7.0",
-    "node-geocoder": "^4.4.0"
+    "node-geocoder": "^4.4.0",
+    "packages": "^0.0.8"
   }
 }
