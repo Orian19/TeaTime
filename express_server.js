@@ -34,7 +34,7 @@ app.use((req, res, next) => {
         username: req.session.username || false,
         isAdmin: req.session.isAdmin || false
     };
-    
+
     next();
 });
 
@@ -53,19 +53,24 @@ const storeRoutes = require('./routes/store-routes');
 const { getFeaturedProducts } = require('./modules/products');
 
 // root route
-app.get('/', async (req, res) => {
+app.get('/', async (req, res, next) => {
     try {
         const featuredProducts = await getFeaturedProducts();
         res.render('home', { featuredProducts });
     } catch (error) {
-        console.error('Error fetching featured products:', error);
-        res.status(500).send('An error occurred while loading the home page');
+        next(error);
     }
 });
 
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/store', storeRoutes);
+
+// Error handling middleware (new addition)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).render('error', { message: 'Something went wrong!' });
+});
 
 // start server
 app.listen(port, () => {

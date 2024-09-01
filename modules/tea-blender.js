@@ -1,13 +1,25 @@
-const { readProducts, createBlend, getUserBlends, getBlendById, readFlavors, deleteBlend } = require('../persist');
+const {
+    readProducts,
+    createBlend,
+    getUserBlends,
+    getBlendById,
+    readFlavors,
+    deleteBlend
+} = require('../persist');
 
 /**
  * Get all blendable teas
  * @returns {Promise<*[]>}
  */
 async function getBlendableTeas() {
-    const [products, flavors] = await Promise.all([readProducts(), readFlavors()]);
-    const baseTeas = products.filter(product => product.category !== 'Flavor');
-    return [...baseTeas, ...flavors];
+    try {
+        const [products, flavors] = await Promise.all([readProducts(), readFlavors()]);
+        const baseTeas = products.filter(product => product.category !== 'Flavor');
+        return [...baseTeas, ...flavors];
+    } catch (error) {
+        console.error('Error fetching blendable teas:', error);
+        throw error;
+    }
 }
 
 /**
@@ -17,7 +29,12 @@ async function getBlendableTeas() {
  * @returns {Promise<*>}
  */
 async function createUserBlend(username, blendData) {
-    return await createBlend(username, blendData);
+    try {
+        return await createBlend(username, blendData);
+    } catch (error) {
+        console.error(`Error creating blend for user ${username}:`, error);
+        throw error;
+    }
 }
 
 /**
@@ -26,7 +43,12 @@ async function createUserBlend(username, blendData) {
  * @returns {Promise<*>}
  */
 async function getUserBlendsList(username) {
-    return await getUserBlends(username);
+    try {
+        return await getUserBlends(username);
+    } catch (error) {
+        console.error(`Error fetching blends for user ${username}:`, error);
+        throw error;
+    }
 }
 
 /**
@@ -36,7 +58,12 @@ async function getUserBlendsList(username) {
  * @returns {Promise<*>}
  */
 async function getBlend(username, blendId) {
-    return await getBlendById(username, blendId);
+    try {
+        return await getBlendById(username, blendId);
+    } catch (error) {
+        console.error(`Error fetching blend ${blendId} for user ${username}:`, error);
+        throw error;
+    }
 }
 
 /**
@@ -46,7 +73,12 @@ async function getBlend(username, blendId) {
  * @returns {Promise<void>}
  */
 async function removeBlend(username, blendId) {
-    return await deleteBlend(username, blendId);
+    try {
+        return await deleteBlend(username, blendId);
+    } catch (error) {
+        console.error(`Error removing blend ${blendId} for user ${username}:`, error);
+        throw error;
+    }
 }
 
 module.exports = {

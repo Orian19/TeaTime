@@ -21,7 +21,12 @@ async function readUsers(file) {
         const data = await fs.readFile(filePath, 'utf-8');
         return JSON.parse(data);
     } catch (error) {
-        return {}; // return an empty object if the file doesn't exist
+        if (error.code === 'ENOENT') {
+            console.warn(`File not found: ${file}. Returning empty object.`);
+            return {}; // return an empty object if the file doesn't exist
+        }
+        console.error(`Error reading users from ${file}:`, error);
+        throw error;
     }
 }
 
@@ -31,7 +36,12 @@ async function readUsers(file) {
  */
 async function writeUsers(file, users) {
     const filePath = path.join(DATA_DIR, file);
-    await fs.writeFile(filePath, JSON.stringify(users, null, 2));
+    try {
+        await fs.writeFile(filePath, JSON.stringify(users, null, 2));
+    } catch (error) {
+        console.error(`Error writing users to ${file}:`, error);
+        throw error;
+    }
 }
 
 /**
@@ -58,7 +68,12 @@ async function readProducts() {
             parseInt(p.quantity) || 0,
         ));
     } catch (error) {
-        return []; // return an empty array if the file doesn't exist
+        if (error.code === 'ENOENT') {
+            console.warn('Products file not found. Returning empty array.');
+            return []; // return an empty array if the file doesn't exist
+        }
+        console.error('Error reading products:', error);
+        throw error;
     }
 }
 
@@ -69,7 +84,12 @@ async function readProducts() {
  */
 async function writeProducts(products) {
     const filePath = path.join(DATA_DIR, PRODUCTS_FILE);
-    await fs.writeFile(filePath, JSON.stringify(products, null, 2));
+    try {
+        await fs.writeFile(filePath, JSON.stringify(products, null, 2));
+    } catch (error) {
+        console.error('Error writing products:', error);
+        throw error;
+    }
 }
 
 /**
@@ -78,9 +98,14 @@ async function writeProducts(products) {
  * @returns {Promise<void>}
  */
 async function addProduct(product) {
-    const products = await readProducts();
-    products.push(product);
-    await writeProducts(products);
+    try {
+        const products = await readProducts();
+        products.push(product);
+        await writeProducts(products);
+    } catch (error) {
+        console.error('Error adding product:', error);
+        throw error;
+    }
 }
 
 /**
@@ -107,6 +132,7 @@ async function updateProduct(product) {
         console.log('Updated product:', products[index]); // Log after update
     } else {
         console.error(`Product with ID ${product.id} not found for update`);
+        throw new Error(`Product with ID ${product.id} not found for update`);
     }
 }
 
@@ -116,9 +142,14 @@ async function updateProduct(product) {
  * @returns {Promise<void>}
  */
 async function deleteProduct(id) {
-    const products = await readProducts();
-    const updatedProducts = products.filter(p => p.id !== id);
-    await writeProducts(updatedProducts);
+    try {
+        const products = await readProducts();
+        const updatedProducts = products.filter(p => p.id !== id);
+        await writeProducts(updatedProducts);
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        throw error;
+    }
 }
 
 /**
@@ -131,7 +162,12 @@ async function readOrders(file) {
         const data = await fs.readFile(filePath, 'utf-8');
         return JSON.parse(data);
     } catch (error) {
-        return []; // return an empty array if the file doesn't exist
+        if (error.code === 'ENOENT') {
+            console.warn(`Orders file not found: ${file}. Returning empty array.`);
+            return []; // return an empty array if the file doesn't exist
+        }
+        console.error(`Error reading orders from ${file}:`, error);
+        throw error;
     }
 }
 
@@ -143,7 +179,12 @@ async function readOrders(file) {
  */
 async function writeOrders(file, orders) {
     const filePath = path.join(DATA_DIR, file);
-    await fs.writeFile(filePath, JSON.stringify(orders, null, 2));
+    try {
+        await fs.writeFile(filePath, JSON.stringify(orders, null, 2));
+    } catch (error) {
+        console.error(`Error writing orders to ${file}:`, error);
+        throw error;
+    }
 }
 
 /**
@@ -158,6 +199,7 @@ async function readBlends() {
         if (error.code === 'ENOENT') {
             return {};
         }
+        console.error('Error reading blends:', error);
         throw error;
     }
 }
@@ -168,7 +210,12 @@ async function readBlends() {
  * @returns {Promise<void>}
  */
 async function writeBlends(blends) {
-    await fs.writeFile(BLENDS_FILE, JSON.stringify(blends, null, 2));
+    try {
+        await fs.writeFile(BLENDS_FILE, JSON.stringify(blends, null, 2));
+    } catch (error) {
+        console.error('Error writing blends:', error);
+        throw error;
+    }
 }
 
 /**
@@ -178,15 +225,20 @@ async function writeBlends(blends) {
  * @returns {Promise<*>}
  */
 async function createBlend(username, blend) {
-    const blends = await readBlends();
-    if (!blends[username]) {
-        blends[username] = [];
+    try {
+        const blends = await readBlends();
+        if (!blends[username]) {
+            blends[username] = [];
+        }
+        blend.id = Date.now().toString();
+        blend.createdAt = new Date().toISOString();
+        blends[username].push(blend);
+        await writeBlends(blends);
+        return blend;
+    } catch (error) {
+        console.error('Error creating blend:', error);
+        throw error;
     }
-    blend.id = Date.now().toString();
-    blend.createdAt = new Date().toISOString();
-    blends[username].push(blend);
-    await writeBlends(blends);
-    return blend;
 }
 
 /**
@@ -195,15 +247,20 @@ async function createBlend(username, blend) {
  * @param blendId
  * @returns {Promise<void>}
  */
-async function deleteBlend(username, blendId) { 
-    const blends = await readBlends();
-    if (!blends[username]) {
-        return;
-    }
-    const index = blends[username].findIndex(blend => blend.id === blendId);
-    if (index !== -1) {
-        blends[username].splice(index, 1);
-        await writeBlends(blends);
+async function deleteBlend(username, blendId) {
+    try {
+        const blends = await readBlends();
+        if (!blends[username]) {
+            return;
+        }
+        const index = blends[username].findIndex(blend => blend.id === blendId);
+        if (index !== -1) {
+            blends[username].splice(index, 1);
+            await writeBlends(blends);
+        }
+    } catch (error) {
+        console.error('Error deleting blend:', error);
+        throw error;
     }
 }
 
@@ -213,8 +270,13 @@ async function deleteBlend(username, blendId) {
  * @returns {Promise<*|*[]>}
  */
 async function getUserBlends(username) {
-    const blends = await readBlends();
-    return blends[username] || [];
+    try {
+        const blends = await readBlends();
+        return blends[username] || [];
+    } catch (error) {
+        console.error('Error getting user blends:', error);
+        throw error;
+    }
 }
 
 /**
@@ -224,8 +286,13 @@ async function getUserBlends(username) {
  * @returns {Promise<T>}
  */
 async function getBlendById(username, blendId) {
-    const userBlends = await getUserBlends(username);
-    return userBlends.find(blend => blend.id === blendId);
+    try {
+        const userBlends = await getUserBlends(username);
+        return userBlends.find(blend => blend.id === blendId);
+    } catch (error) {
+        console.error('Error getting blend by ID:', error);
+        throw error;
+    }
 }
 
 /**

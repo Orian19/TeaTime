@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const emailInput = this.querySelector('input[type="email"]');
             const email = emailInput.value;
+
+            if (!validateEmail(email)) {
+                displayErrorMessage('Please enter a valid email address.');
+                return;
+            }
+
+            // Simulate an asynchronous operation
             setTimeout(() => {
                 subscriptionMessage.textContent = `Thank you for subscribing with ${email}! You've been added to our mailing list.`;
                 subscriptionMessage.style.display = 'block';
@@ -27,5 +34,19 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.addEventListener('click', function() {
             mobileNavLinks.classList.toggle('open');
         });
+    }
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function displayErrorMessage(message) {
+        subscriptionMessage.textContent = message;
+        subscriptionMessage.style.display = 'block';
+        subscriptionMessage.style.color = 'red';
+        setTimeout(() => {
+            subscriptionMessage.style.display = 'none';
+        }, 5000);
     }
 });

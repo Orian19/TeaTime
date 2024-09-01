@@ -239,7 +239,6 @@ function handleProductSubmit(event) {
     const formData = new FormData(event.target);
     const product = Object.fromEntries(formData.entries());
     product.price = parseFloat(product.price);
-    // product.quantity = parseInt(product.quantity);
     product.lat = parseFloat(product.lat);
     product.lng = parseFloat(product.lng);
 
@@ -311,6 +310,7 @@ function updateProduct(product) {
         })
         .catch(error => {
             console.error('Error updating product:', error);  // Log the error if the update fails
+            alert('An error occurred while updating the product.');
         });
 }
 
@@ -354,7 +354,10 @@ function cancelEdit() {
  * @param productId
  */
 function removeProduct(productId) {
-    axios.post(`/admin/products/${productId}`)
+    axios.delete(`/admin/products/${productId}`)
         .then(() => getProducts(currentPage, document.getElementById('productSearchInput').value.trim()))
-        .catch(error => console.error('Error removing product:', error));
+        .catch(error => {
+            console.error('Error removing product:', error);
+            alert('An error occurred while removing the product.');
+        });
 }

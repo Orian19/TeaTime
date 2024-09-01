@@ -8,14 +8,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch blendable teas data
     fetch('/store/blendable-teas')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(teas => {
             blendableTeas = teas.reduce((acc, tea) => {
                 acc[tea.id] = tea;
                 return acc;
             }, {});
         })
-        .catch(error => console.error('Error fetching blendable teas:', error));
+        .catch(error => {
+            console.error('Error fetching blendable teas:', error);
+            alert('Failed to load blendable teas. Please try again later.');
+        });
 
     /**
      * Update the pie chart with the current blend data
@@ -105,11 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const newBlend = await response.json();
             console.log('New blend created:', newBlend);
-            // alert('Blend created successfully!');
             fetchAndDisplayUserBlends();
         } catch (error) {
             console.error('Error creating blend:', error);
-            alert(error.message);
+            alert(`Failed to create blend: ${error.message}`);
         }
     });
 
@@ -126,7 +133,7 @@ function createBlendChart(canvas, blend) {
     const ctx = canvas.getContext('2d');
     const data = [];
     const labels = [];
-    
+
     Object.entries(blend.flavors).forEach(([flavorId, percentage]) => {
         if (percentage > 0) {
             data.push(percentage);
@@ -174,7 +181,7 @@ function displayUserBlends(blends) {
     blends.forEach(blend => {
         const blendItem = document.createElement('div');
         blendItem.className = 'blend-item';
-        
+
         const chartContainer = document.createElement('div');
         chartContainer.className = 'saved-chart-container';
         const canvas = document.createElement('canvas');
@@ -199,9 +206,9 @@ function displayUserBlends(blends) {
                 </div>
             </div>
         `;
-        
+
         blendItem.querySelector('.saved-chart-container').appendChild(canvas);
-        
+
         const addToCartButton = document.createElement('button');
         addToCartButton.textContent = 'Add to Cart';
         addToCartButton.onclick = () => addToCart(blend.id);
@@ -215,7 +222,7 @@ function displayUserBlends(blends) {
         blendItem.appendChild(removeButton);
 
         blendsList.appendChild(blendItem);
-        
+
         createBlendChart(canvas, blend);
     });
 }
@@ -229,19 +236,24 @@ function removeBlend(blendId) {
         fetch(`/store/remove-blend/${blendId}`, {
             method: 'DELETE',
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Blend removed successfully');
-                fetchAndDisplayUserBlends();
-            } else {
-                alert('Error removing blend. Please try again.');
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('Error removing blend. Please try again.');
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Blend removed successfully');
+                    fetchAndDisplayUserBlends();
+                } else {
+                    alert('Error removing blend. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error removing blend:', error);
+                alert(`Error removing blend: ${error.message}`);
+            });
     }
 }
 
@@ -257,18 +269,23 @@ function addToCart(blendId) {
         },
         body: JSON.stringify({ blendId: blendId }),
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Blend added to cart!');
-        } else {
-            alert('Error adding blend to cart. Please try again.');
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-        alert('Error adding blend to cart. Please try again.');
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Blend added to cart!');
+            } else {
+                alert('Error adding blend to cart. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error adding blend to cart:', error);
+            alert(`Error adding blend to cart: ${error.message}`);
+        });
 }
 
 /**
@@ -276,7 +293,15 @@ function addToCart(blendId) {
  */
 function fetchAndDisplayUserBlends() {
     fetch('/store/user-blends')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(blends => displayUserBlends(blends))
-        .catch(error => console.error('Error fetching user blends:', error));
+        .catch(error => {
+            console.error('Error fetching user blends:', error);
+            alert('Failed to load user blends. Please try again later.');
+        });
 }

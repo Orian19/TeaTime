@@ -11,7 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function fetchReviews() {
         return fetch('/store/reviews')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch reviews');
+                }
+                return response.json();
+            })
             .catch(error => {
                 console.error('Error fetching reviews:', error);
                 return [];
@@ -29,12 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchReviews().then(reviews => {
             reviewsList.innerHTML = '';
             if (reviews.length === 0) {
-                var messageElement = document.createElement('p');
+                const messageElement = document.createElement('p');
                 messageElement.textContent = "No reviews yet, be the first to add a review!";
                 reviewsList.appendChild(messageElement);
             } else {
                 reviews.forEach(function(review) {
-                    var reviewElement = document.createElement('div');
+                    const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
                     reviewElement.innerHTML = '<h3>' + review.name + '</h3>' +
                         '<p>Rating: ' + review.rating + '/5</p>' +
@@ -51,11 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param review
      */
     function addNewReview(review) {
-        var noReviewsMessage = reviewsList.querySelector('p');
+        const noReviewsMessage = reviewsList.querySelector('p');
         if (noReviewsMessage && noReviewsMessage.textContent.includes("No reviews yet")) {
             reviewsList.innerHTML = '';
         }
-        var reviewElement = document.createElement('div');
+        const reviewElement = document.createElement('div');
         reviewElement.className = 'review';
         reviewElement.innerHTML = '<h3>' + review.name + '</h3>' +
             '<p>Rating: ' + review.rating + '/5</p>' +
@@ -82,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     reviewForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        var newReview = {
+        const newReview = {
             name: document.getElementById('name').value,
             rating: parseInt(document.getElementById('rating').value),
             comment: document.getElementById('comment').value
@@ -96,20 +101,21 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(newReview),
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Review added successfully:', data);
-            addNewReview(newReview);
-            modal.style.display = 'none';
-            reviewForm.reset();
-        })
-        .catch((error) => {
-            console.error('Error adding review:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Review added successfully:', data);
+                addNewReview(newReview);
+                modal.style.display = 'none';
+                reviewForm.reset();
+            })
+            .catch((error) => {
+                console.error('Error adding review:', error);
+                alert('There was an issue submitting your review. Please try again later.');
+            });
     });
 });

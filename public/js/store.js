@@ -5,7 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     function openProductDetails(productId) {
         fetch(`/store/product/${productId}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(product => {
                 // Update modal content with product details
                 document.getElementById('productName').innerText = product.name;
@@ -24,7 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById('productDetailsModal');
                 modal.style.display = "block";
             })
-            .catch(error => console.error('Error fetching product details:', error));
+            .catch(error => {
+                console.error('Error fetching product details:', error);
+                alert('Failed to load product details. Please try again later.');
+            });
     }
 
     /**
@@ -53,5 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Close modal when the close button is clicked
     document.querySelector('.modal .close').addEventListener('click', closeProductDetails);
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('productDetailsModal');
+        if (event.target === modal) {
+            closeProductDetails();
+        }
+    });
 });

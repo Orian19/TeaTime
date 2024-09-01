@@ -14,7 +14,7 @@ function isAdmin(req, res, next) {
     if (req.session.isAdmin) {
         return next();
     }
-    
+
     res.status(403).send('Access denied');
 }
 
@@ -26,19 +26,20 @@ async function getUserActivities() {
     try {
         const data = await fs.readFile(ACTIVITIES_FILE, 'utf8');
         const activities = JSON.parse(data);
-        
+
         // Ensure activities is an array and filter out invalid entries
-        return Array.isArray(activities) ? activities.filter(activity => 
+        return Array.isArray(activities) ? activities.filter(activity =>
             activity && typeof activity === 'object' && 'username' in activity
         ) : [];
 
     } catch (error) {
         if (error.code === 'ENOENT') {
             // If the file doesn't exist, return an empty array
+            console.warn('Activities file not found. Returning empty array.');
             return [];
         }
         console.error('Error reading activities file:', error);
-        return [];
+        throw error;
     }
 }
 
@@ -48,13 +49,18 @@ async function getUserActivities() {
  * @returns {Promise<void>}
  */
 async function addUserActivity(activity) {
-    const activities = await getUserActivities();
-    activities.push({
-        ...activity,
-        datetime: new Date().toISOString() // Ensure we always have a datetime
-    });
-    
-    await fs.writeFile(ACTIVITIES_FILE, JSON.stringify(activities, null, 2));
+    try {
+        const activities = await getUserActivities();
+        activities.push({
+            ...activity,
+            datetime: new Date().toISOString() // Ensure we always have a datetime
+        });
+
+        await fs.writeFile(ACTIVITIES_FILE, JSON.stringify(activities, null, 2));
+    } catch (error) {
+        console.error('Error adding user activity:', error);
+        throw error;
+    }
 }
 
 module.exports = {

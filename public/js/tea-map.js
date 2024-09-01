@@ -16,14 +16,22 @@ function initMap() {
     const map = L.map('map').setView([20, 0], 2);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 18
     }).addTo(map);
 
     fetch('/store/api/tea-regions')
         .then(function(response) {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             return response.json();
         })
         .then(function(regions) {
+            if (!Array.isArray(regions)) {
+                throw new Error("Invalid data format: Expected an array of regions.");
+            }
+
             regions.forEach(function(region) {
                 if (region.lat && region.lng) {
                     const marker = L.marker([region.lat, region.lng]).addTo(map);
@@ -49,10 +57,13 @@ function initMap() {
                     marker.on('click', function() {
                         this.openPopup();
                     });
+                } else {
+                    console.warn(`Invalid region data: ${JSON.stringify(region)}`);
                 }
             });
         })
         .catch(function(error) {
-            console.error('Error:', error);
+            console.error('Error fetching tea regions:', error);
+            alert('Failed to load tea regions. Please try again later.');
         });
 }

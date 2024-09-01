@@ -12,18 +12,18 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function findMatchingTea(preferences, products) {
         return products.find(tea =>
-          ((tea.category === preferences.type) && (tea.caffeine === preferences.caffeine) && (tea.temperature === preferences.temperature))
-          || ((tea.category === preferences.type) && (tea.caffeine === preferences.caffeine))
-          || ((tea.category === preferences.type) && (tea.temperature === preferences.temperature))
-          || ((tea.caffeine === preferences.caffeine) && (tea.temperature === preferences.temperature))
-          || (tea.category === preferences.type) || (tea.caffeine === preferences.caffeine) || (tea.temperature === preferences.temperature)
+            ((tea.category === preferences.type) && (tea.caffeine === preferences.caffeine) && (tea.temperature === preferences.temperature))
+            || ((tea.category === preferences.type) && (tea.caffeine === preferences.caffeine))
+            || ((tea.category === preferences.type) && (tea.temperature === preferences.temperature))
+            || ((tea.caffeine === preferences.caffeine) && (tea.temperature === preferences.temperature))
+            || (tea.category === preferences.type) || (tea.caffeine === preferences.caffeine) || (tea.temperature === preferences.temperature)
         ) || products[0]; // Default to first tea if no match found
-      }
+    }
 
-     // Add event listener to quiz form
+    // Add event listener to quiz form
     quizForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        var preferences = {
+        const preferences = {
             type: document.getElementById('type').value,
             caffeine: document.getElementById('caffeine').value,
             temperature: document.getElementById('temperature').value
@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(products => {
-                var recommendedTea = findMatchingTea(preferences, products);
-                
+                const recommendedTea = findMatchingTea(preferences, products);
+
                 if (!recommendedTea) {
                     throw new Error('No matching tea found');
                 }
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('tea-image').src = recommendedTea.imageUrl;
                 document.getElementById('tea-name').textContent = recommendedTea.name;
                 document.getElementById('tea-description').textContent = recommendedTea.description;
-                document.getElementById('tea-price').textContent = `Price: $${recommendedTea.price}`;
+                document.getElementById('tea-price').textContent = `Price: $${recommendedTea.price.toFixed(2)}`;
                 document.getElementById('tea-origin').textContent = `Origin: ${recommendedTea.origin}`;
                 document.getElementById('tea-type').textContent = `Type: ${recommendedTea.category}`;
                 document.getElementById('tea-caffeine').textContent = `Caffeine: ${recommendedTea.caffeine}`;
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.style.display = 'block';
             })
             .catch(error => {
-                alert('Detailed error: ' + error.message);
+                alert('Error: ' + error.message);
             });
     });
 
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    addToCartBtn.onclick = function() { 
+    addToCartBtn.onclick = function() {
         alert('Tea added to cart!');
     };
 });

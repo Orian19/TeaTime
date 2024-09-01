@@ -14,8 +14,8 @@ async function addOrder(order) {
         await writeOrders(ORDERS_FILE, orders);
         console.log('Order added successfully');
     } catch (error) {
-        console.error('Error adding order:', error);
-        throw error;
+        console.error('Error adding order:', error.message);
+        throw new Error('Failed to add order. Please try again.');
     }
 }
 
@@ -24,7 +24,12 @@ async function addOrder(order) {
  * @returns {Promise<Array>} - Returns an array of orders
  */
 async function getOrders() {
-    return await readOrders(ORDERS_FILE) || [];
+    try {
+        return await readOrders(ORDERS_FILE) || [];
+    } catch (error) {
+        console.error('Error retrieving orders:', error.message);
+        throw new Error('Failed to retrieve orders. Please try again later.');
+    }
 }
 
 /**

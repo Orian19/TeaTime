@@ -5,22 +5,27 @@ const { isAdmin } = require('../modules/admin');
 const USERS_FILE = 'users.json';
 
 /**
-    * Register a new user
-    * @param {string} username - The username of the user
-    * @param {string} password - The password of the user
-    * @param {boolean} isAdmin - Whether the user is an admin
-    * @returns {Promise<boolean>}
-    * @throws {Error} If the user already exists
+ * Register a new user
+ * @param {string} username - The username of the user
+ * @param {string} password - The password of the user
+ * @param {boolean} isAdmin - Whether the user is an admin
+ * @returns {Promise<boolean>}
+ * @throws {Error} If the user already exists
  */
 async function registerUser(username, password, isAdmin = false) {
-    const users = await readUsers(USERS_FILE) || {};
-    if (users[username]) {
-        return false;
+    try {
+        const users = await readUsers(USERS_FILE) || {};
+        if (users[username]) {
+            return false; // User already exists
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        users[username] = { password: hashedPassword, isAdmin };
+        await writeUsers(USERS_FILE, users);
+        return true;
+    } catch (error) {
+        console.error(`Error registering user ${username}:`, error);
+        throw error;
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    users[username] = { password: hashedPassword, isAdmin };
-    await writeUsers(USERS_FILE, users);
-    return true;
 }
 
 /**
@@ -30,14 +35,19 @@ async function registerUser(username, password, isAdmin = false) {
  * @returns {Promise<object|boolean>} The user object if authentication is successful, false otherwise
  */
 async function authenticateUser(username, password) {
-    const users = await readUsers(USERS_FILE) || {};
-    const user = users[username];
-    
-    if (user && await bcrypt.compare(password, user.password)) {
-        return { username, isAdmin: user.isAdmin };
-    }
+    try {
+        const users = await readUsers(USERS_FILE) || {};
+        const user = users[username];
 
-    return false;
+        if (user && await bcrypt.compare(password, user.password)) {
+            return { username, isAdmin: user.isAdmin };
+        }
+
+        return false;
+    } catch (error) {
+        console.error(`Error authenticating user ${username}:`, error);
+        throw error;
+    }
 }
 
 function isAuthenticated(req, res, next) {
@@ -48,7 +58,6 @@ function isAuthenticated(req, res, next) {
     res.redirect('/auth/login');
 }
 
-
 /**
  * Initialize the admin user
  * @returns {Promise<void>}
@@ -56,7 +65,7 @@ function isAuthenticated(req, res, next) {
 async function initAdmin() {
     try {
         const users = await readUsers(USERS_FILE) || {};
-        
+
         // Check if any user has admin privileges
         const adminExists = Object.values(users).some(user => user.isAdmin);
 
@@ -66,7 +75,7 @@ async function initAdmin() {
         } else {
             console.log('Admin user already exists');
         }
-        
+
     } catch (error) {
         console.error('Error initializing admin user:', error);
         throw error;

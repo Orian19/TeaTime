@@ -5,12 +5,26 @@ const { readProducts, addProduct, updateProduct, deleteProduct } = require('../p
  * @returns {Promise<*|*[]>}
  */
 async function getProducts() {
-    return await readProducts();
+    try {
+        return await readProducts();
+    } catch (error) {
+        console.error('Error retrieving products:', error.message);
+        throw new Error('Failed to retrieve products. Please try again later.');
+    }
 }
 
+/**
+ * Get featured products
+ * @returns {Promise<*>}
+ */
 async function getFeaturedProducts() {
-    const allProducts = await readProducts();
-    return allProducts.slice(0, 4); // Return the first 4 products
+    try {
+        const allProducts = await readProducts();
+        return allProducts.slice(0, 4); // Return the first 4 products
+    } catch (error) {
+        console.error('Error retrieving featured products:', error.message);
+        throw new Error('Failed to retrieve featured products. Please try again later.');
+    }
 }
 
 /**
@@ -19,26 +33,36 @@ async function getFeaturedProducts() {
  * @returns {Promise<*>}
  */
 async function getProduct(id) {
-    const products = await readProducts();
-    return products.find(p => p.id === id);
+    try {
+        const products = await readProducts();
+        return products.find(p => p.id === id);
+    } catch (error) {
+        console.error(`Error retrieving product with ID ${id}:`, error.message);
+        throw new Error('Failed to retrieve the product. Please try again later.');
+    }
 }
 
 /**
  * Create a new product
  * @param product
- * @returns {Promise<void>}
+ * @returns {Promise<*>}
  */
 async function createProduct(product) {
-    const products = await readProducts();
+    try {
+        const products = await readProducts();
 
-    // Check if a product with the same ID already exists
-    const existingProduct = products.find(p => p.id === product.id);
-    if (existingProduct) {
-        return null;
+        // Check if a product with the same ID already exists
+        const existingProduct = products.find(p => p.id === product.id);
+        if (existingProduct) {
+            throw new Error('Product with the same ID already exists.');
+        }
+
+        await addProduct(product);
+        return product;
+    } catch (error) {
+        console.error('Error creating product:', error.message);
+        throw new Error('Failed to create product. Please try again later.');
     }
-
-    await addProduct(product);
-    return product;
 }
 
 /**
@@ -47,7 +71,12 @@ async function createProduct(product) {
  * @returns {Promise<void>}
  */
 async function modifyProduct(product) {
-    await updateProduct(product);
+    try {
+        await updateProduct(product);
+    } catch (error) {
+        console.error('Error modifying product:', error.message);
+        throw new Error('Failed to modify product. Please try again later.');
+    }
 }
 
 /**
@@ -56,7 +85,12 @@ async function modifyProduct(product) {
  * @returns {Promise<void>}
  */
 async function removeProduct(id) {
-    await deleteProduct(id);
+    try {
+        await deleteProduct(id);
+    } catch (error) {
+        console.error(`Error removing product with ID ${id}:`, error.message);
+        throw new Error('Failed to remove product. Please try again later.');
+    }
 }
 
 module.exports = {
