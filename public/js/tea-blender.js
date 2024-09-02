@@ -189,15 +189,17 @@ function displayUserBlends(blends) {
 
         let flavorsList = '<ul class="flavors-list">';
         Object.entries(blend.flavors).forEach(([flavorId, percentage]) => {
-            if (percentage > 0) {
+            if (percentage > 0 && blendableTeas[flavorId]) {  // Check if flavor exists in blendableTeas
                 flavorsList += `<li>${blendableTeas[flavorId].name}: ${percentage}%</li>`;
+            } else {
+                console.warn(`Flavor with ID ${flavorId} not found in blendableTeas.`);
             }
         });
         flavorsList += '</ul>';
 
         blendItem.innerHTML = `
             <h3>${blend.name}</h3>
-            <p>Base Tea: ${blendableTeas[blend.baseTea].name}</p>
+            <p>Base Tea: ${blendableTeas[blend.baseTea] ? blendableTeas[blend.baseTea].name : 'Unknown Base Tea'}</p>
             <div class="blend-details">
                 <div class="saved-chart-container"></div>
                 <div class="flavors-container">
@@ -226,6 +228,7 @@ function displayUserBlends(blends) {
         createBlendChart(canvas, blend);
     });
 }
+
 
 /**
  * Remove a blend from the user's saved blends
