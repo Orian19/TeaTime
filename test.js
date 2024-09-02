@@ -29,8 +29,6 @@ async function runTests() {
     await testFilterProducts();
     await testBlendableTeas();
     await testGetUserBlends();
-    //await testCreateBlend();
-    //await testRemoveBlend();
     await testGetTeaRegions();
     await testLogout();
     await testInvalidLogin();
