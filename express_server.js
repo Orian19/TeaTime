@@ -6,6 +6,13 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+app.get('/readme.html', (req, res) => {
+    res.render('readme');
+});
+app.get('/llm.html', (req, res) => {
+    res.render('llm');
+});
+
 // rate limiter
 const limiter = rateLimit({
     windowMs: 30 * 60 * 1000, // 30 minutes
