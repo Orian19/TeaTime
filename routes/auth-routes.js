@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
             res.redirect('/auth/login');
         } else {
             console.log(`User already exists with username: ${req.body.username}`);
-            res.render('register', { error: 'User already exists' });
+            res.status(400).render('register', { error: 'User already exists' });
         }
     } catch(error) {
         res.status(400).send(error.message);
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
 
         } else {
             console.log(`Login failed for username: ${username}`);
-            res.render('login', { error: 'Invalid username or password' });
+            res.status(401).render('login', { error: 'Invalid username or password' });
         }
 
     } catch(error) {
