@@ -1,101 +1,118 @@
 const express = require('express');
 const router = express.Router();
 const { isAuthenticated } = require('../modules/user');
-const { addToCart, getCart, removeFromCart, updateCartQuantity, getCartDetails, clearCart} = require('../modules/cart');
+const { addToCart, getCart, removeFromCart, updateCartQuantity, getCartDetails, clearCart } = require('../modules/cart');
 const { getProducts, getProduct } = require('../modules/products');
 const { getCheckoutDetails, processCheckout } = require('../modules/checkout');
 const { getReviews, addReview } = require('../modules/reviews');
-const {addOrder} = require("../modules/orders");
-const {addUserActivity} = require("../modules/admin");
+const { addOrder } = require("../modules/orders");
+const { addUserActivity } = require("../modules/admin");
 const { getBlendableTeas, getUserBlendsList, getBlend, removeBlend, createUserBlend } = require('../modules/tea-blender');
 
 // GET store page with pagination
 router.get('/', async (req, res) => {
-    const products = await getProducts();
-    const originFilter = req.query.origin;
-    const page = parseInt(req.query.page) || 1;
-    const limit = 9; // Number of products per page
-    const totalProducts = products.length;
-    const totalPages = Math.ceil(totalProducts / limit);
+    try {
+        const products = await getProducts();
+        const originFilter = req.query.origin;
+        const page = Math.max(1, parseInt(req.query.page) || 1); // Validate and sanitize
+        const limit = 6; // Number of products per page
+        const totalProducts = products.length;
+        const totalPages = Math.ceil(totalProducts / limit);
 
-    let filteredProducts = products;
+        let filteredProducts = products;
 
-    if (originFilter) {
-        filteredProducts = products.filter(product => product.origin === originFilter);
+        if (originFilter) {
+            filteredProducts = products.filter(product => product.origin === originFilter);
+        }
+
+        // Paginate filtered products
+        const startIndex = (page - 1) * limit;
+        const paginatedProducts = filteredProducts.slice(startIndex, startIndex + limit);
+
+        // Dynamic Pagination Logic
+        const maxVisiblePages = 5; // Number of pages to show before/after current page
+        const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
+        const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        const pagination = {
+            currentPage: page,
+            totalPages,
+            startPage,
+            endPage,
+        };
+
+        res.render('store', {
+            title: originFilter ? `Products from ${originFilter}` : 'Our Tea Selection',
+            products: paginatedProducts,
+            pagination,
+        });
+    } catch (error) {
+        console.error('Error fetching store page:', error.message);
+        res.status(500).send('Internal Server Error');
     }
-
-    // Paginate filtered products
-    const startIndex = (page - 1) * limit;
-    const paginatedProducts = filteredProducts.slice(startIndex, startIndex + limit);
-
-    // Dynamic Pagination Logic
-    const maxVisiblePages = 5; // Number of pages to show before/after current page
-    const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-    const pagination = {
-        currentPage: page,
-        totalPages,
-        startPage,
-        endPage,
-    };
-
-    res.render('store', {
-        title: originFilter ? `Products from ${originFilter}` : 'Our Tea Selection',
-        products: paginatedProducts,
-        pagination,
-    });
 });
 
 // GET product details
 router.get('/product/:id', async (req, res) => {
-    const productId = req.params.id;
-    const product = await getProduct(productId);
+    try {
+        const productId = req.params.id;
 
-    if (!product) {
-        return res.status(404).json({ error: 'Product not found' });
+        const product = await getProduct(productId);
+
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        res.json(product);
+    } catch (error) {
+        console.error('Error fetching product details:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    res.json(product);
 });
+
 
 // Search functionality with pagination
 router.get('/search', async (req, res) => {
-    const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
-    let products = await getProducts();
+    try {
+        const searchTerm = req.query.search ? req.query.search.toLowerCase() : '';
+        let products = await getProducts();
 
-    if (searchTerm) {
-        products = products.filter(product =>
-            product.name.toLowerCase().includes(searchTerm) ||
-            product.description.toLowerCase().includes(searchTerm)
-        );
+        if (searchTerm) {
+            products = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        // Pagination logic
+        const page = Math.max(1, parseInt(req.query.page) || 1); // Validate and sanitize
+        const limit = 9; // Number of products per page
+        const totalProducts = products.length;
+        const totalPages = Math.ceil(totalProducts / limit);
+        const paginatedProducts = products.slice((page - 1) * limit, page * limit);
+
+        // Dynamic Pagination Logic
+        const maxVisiblePages = 5; // Number of pages to show before/after current page
+        const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
+        const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        const pagination = {
+            currentPage: page,
+            totalPages,
+            startPage,
+            endPage,
+        };
+
+        res.render('store', {
+            title: 'Search Results',
+            products: paginatedProducts,
+            searchTerm,
+            pagination,
+        });
+    } catch (error) {
+        console.error('Error during search:', error.message);
+        res.status(500).send('Internal Server Error');
     }
-
-    // Pagination logic
-    const page = parseInt(req.query.page) || 1;
-    const limit = 9; // Number of products per page
-    const totalProducts = products.length;
-    const totalPages = Math.ceil(totalProducts / limit);
-    const paginatedProducts = products.slice((page - 1) * limit, page * limit);
-
-    // Dynamic Pagination Logic
-    const maxVisiblePages = 5; // Number of pages to show before/after current page
-    const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-    const pagination = {
-        currentPage: page,
-        totalPages,
-        startPage,
-        endPage,
-    };
-
-    res.render('store', {
-        title: 'Search Results',
-        products: paginatedProducts,
-        searchTerm,
-        pagination,
-    });
 });
 
 router.use(isAuthenticated); // Protecting all routes below this line
@@ -112,7 +129,7 @@ router.get('/tea-blender', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error loading tea blender:', error);
+        console.error('Error loading tea blender:', error.message);
         res.status(500).send('An error occurred while loading the tea blender');
     }
 });
@@ -123,15 +140,20 @@ router.get('/blendable-teas', async (req, res) => {
         const blendableTeas = await getBlendableTeas();
         res.json(blendableTeas);
     } catch (error) {
-        console.error('Error fetching blendable teas:', error);
+        console.error('Error fetching blendable teas:', error.message);
         res.status(500).json({ error: 'Failed to fetch blendable teas' });
     }
 });
 
 // POST create new blend
 router.post('/tea-blender', async (req, res) => {
-    const blend = await createUserBlend(req.session.username, req.body);
-    res.json(blend);
+    try {
+        const blend = await createUserBlend(req.session.username, req.body);
+        res.json(blend);
+    } catch (error) {
+        console.error('Error creating blend:', error.message);
+        res.status(500).json({ error: 'Failed to create blend' });
+    }
 });
 
 // GET user blends
@@ -140,7 +162,7 @@ router.get('/user-blends', async (req, res) => {
         const userBlends = await getUserBlendsList(req.session.username);
         res.json(userBlends);
     } catch (error) {
-        console.error('Error fetching user blends:', error);
+        console.error('Error fetching user blends:', error.message);
         res.status(500).json({ error: 'Failed to fetch user blends' });
     }
 });
@@ -152,7 +174,7 @@ router.delete('/remove-blend/:blendId', async (req, res) => {
         await removeBlend(req.session.username, blendId);
         res.json({ success: true, message: 'Blend removed successfully' });
     } catch (error) {
-        console.error('Error removing blend:', error);
+        console.error('Error removing blend:', error.message);
         res.status(500).json({ error: 'Failed to remove blend' });
     }
 });
@@ -174,7 +196,6 @@ router.post('/add-blend-to-cart', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-
 
 // POST add to cart
 router.post('/add-to-cart', async (req, res) => {
@@ -207,7 +228,7 @@ router.get('/cart', async (req, res) => {
         const cartDetails = await getCartDetails(req.session.username);
         res.render('cart', { cart: cartDetails });
     } catch (error) {
-        console.error('Error fetching cart details:', error);
+        console.error('Error fetching cart details:', error.message);
         res.status(500).send('An error occurred while loading the cart.');
     }
 });
@@ -264,7 +285,6 @@ router.get('/checkout', async (req, res) => {
     }
 });
 
-
 // GET quiz page
 router.get('/quiz', (req, res) => {
     res.render('quiz');
@@ -276,15 +296,20 @@ router.get('/api/products', async (req, res) => {
         const products = await getProducts();
         res.json(products);
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching products:', error.message);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
 // GET reviews page
 router.get('/reviews', async(req, res) => {
-    const reviews = await getReviews();
-    res.render('reviews', { reviews });
+    try {
+        const reviews = await getReviews();
+        res.render('reviews', { reviews });
+    } catch (error) {
+        console.error('Error fetching reviews:', error.message);
+        res.status(500).send('An error occurred while loading the reviews.');
+    }
 });
 
 // POST review
@@ -297,7 +322,7 @@ router.post('/reviews', async (req, res) => {
         await addReview({ name, rating: parseInt(rating, 10), comment });
         res.json({ success: true, message: 'Review added successfully' });
     } catch (error) {
-        console.error('Error adding review:', error);
+        console.error('Error adding review:', error.message);
         res.status(500).json({ success: false, message: 'Failed to add review' });
     }
 });
@@ -309,7 +334,7 @@ router.post('/remove-item', async (req, res) => {
         await removeFromCart(req.session.username, itemId, itemType);
         res.redirect('/store/cart');
     } catch (error) {
-        console.error('Error removing item from cart:', error);
+        console.error('Error removing item from cart:', error.message);
         res.status(500).send('Failed to remove item from cart.');
     }
 });
@@ -321,7 +346,7 @@ router.post('/update-quantity', async (req, res) => {
         await updateCartQuantity(req.session.username, itemId, parseInt(quantity, 10), itemType);
         res.redirect('/store/cart');
     } catch (error) {
-        console.error('Error updating cart quantity:', error);
+        console.error('Error updating cart quantity:', error.message);
         res.status(500).send('Failed to update cart quantity.');
     }
 });
@@ -373,22 +398,27 @@ router.get('/map', (req, res) => {
 
 // GET tea regions API
 router.get('/api/tea-regions', async (req, res) => {
-    const products = await getProducts();
-    const regions = {};
+    try {
+        const products = await getProducts();
+        const regions = {};
 
-    products.forEach(product => {
-        if (!regions[product.origin]) {
-            regions[product.origin] = {
-                name: product.origin,
-                products: [],
-                lat: product.lat,
-                lng: product.lng,
-            };
-        }
-        regions[product.origin].products.push(product.name);
-    });
+        products.forEach(product => {
+            if (!regions[product.origin]) {
+                regions[product.origin] = {
+                    name: product.origin,
+                    products: [],
+                    lat: product.lat,
+                    lng: product.lng,
+                };
+            }
+            regions[product.origin].products.push(product.name);
+        });
 
-    res.json(Object.values(regions));
+        res.json(Object.values(regions));
+    } catch (error) {
+        console.error('Error fetching tea regions:', error.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 module.exports = router;
