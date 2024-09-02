@@ -2260,7 +2260,68 @@
     "datetime": "2024-09-02T11:27:22.976Z"
   },
   {
-    "type": "logout",
-    "datetime": "2024-09-02T11:27:23.121Z"
+    "username": "testuser1725281363216",
+    "type": "register",
+    "datetime": "2024-09-02T12:49:23.339Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T12:49:23.455Z"
+  },
+  {
+    "username": "testuser1725281382024",
+    "type": "register",
+    "datetime": "2024-09-02T12:49:42.146Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T12:49:42.265Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T12:53:17.613Z"
+  },
+  {
+    "username": "testuser1725282045035",
+    "type": "register",
+    "datetime": "2024-09-02T13:00:45.159Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T13:00:45.272Z"
+  },
+  {
+    "username": "testuser1725282089578",
+    "type": "register",
+    "datetime": "2024-09-02T13:01:29.678Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T13:01:29.784Z"
+  },
+  {
+    "username": "testuser1725282263692",
+    "type": "register",
+    "datetime": "2024-09-02T13:04:23.820Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T13:04:23.934Z"
+  },
+  {
+    "username": "testuser1725282273099",
+    "type": "register",
+    "datetime": "2024-09-02T13:04:33.208Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T13:04:33.342Z"
   }
 ]

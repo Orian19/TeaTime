@@ -31,7 +31,6 @@ async function runTests() {
     await testGetUserBlends();
     //await testCreateBlend();
     //await testRemoveBlend();
-    //await testAddBlendToCart();
     await testGetTeaRegions();
     await testLogout();
     await testInvalidLogin();
@@ -64,10 +63,21 @@ async function testLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: 'admin', password: 'admin' })
     });
-    if (response.ok) {
-        authCookie = response.headers.get('set-cookie');
+    console.log("Login Status:", response.status);
+    console.log("Login Headers:", response.headers.raw());
+    const responseText = await response.text();
+    console.log("Login Response Body:", responseText);
+    
+    try {
+        const responseJson = JSON.parse(responseText);
+        if (response.ok) {
+            authCookie = response.headers.get('set-cookie');
+        }
+        logTestResult("Login", response.ok);
+    } catch (error) {
+        console.error("Failed to parse login response as JSON:", error);
+        logTestResult("Login", false);
     }
-    logTestResult("Login", response.ok);
 }
 
 async function testStore() {
@@ -281,6 +291,53 @@ async function testGetUserBlends() {
         headers: { 'Cookie': authCookie }
     });
     logTestResult("Get User Blends", response.ok);
+}
+
+async function testCreateBlend() {
+    console.log("Testing Create Blend...");
+    const blendData = {
+        blendName: "Test Custom Blend",
+        baseTea: "BT001",
+        flavors: {
+            "F001": 30,  
+            "F002": 40, 
+            "F003": 30   
+        }
+    };
+
+    const response = await fetch(`${BASE_URL}/store/tea-blender`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Cookie': authCookie
+        },
+        body: JSON.stringify(blendData)
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        testBlendId = result.id;  // Save the blend ID for later tests
+        logTestResult("Create Blend", true);
+    } else {
+        logTestResult("Create Blend", false);
+        console.error("Failed to create blend:", await response.text());
+    }
+}
+
+async function testRemoveBlend() {
+    console.log("Testing Remove Blend...");
+    if (!testBlendId) {
+        console.log("No blend ID available. Skipping remove blend test.");
+        return;
+    }
+
+    const response = await fetch(`${BASE_URL}/store/remove-blend/${testBlendId}`, {
+        method: 'DELETE',
+        headers: { 'Cookie': authCookie }
+    });
+
+    const result = await response.json();
+    logTestResult("Remove Blend", response.ok && result.success);
 }
 
 async function testGetTeaRegions() {
