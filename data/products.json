@@ -1,5 +1,19 @@
 [
   {
+    "id": "GT006",
+    "name": "Matcha",
+    "description": "Finely ground green tea powder, traditionally used in Japanese tea ceremonies.",
+    "price": 24.99,
+    "category": "Green Tea",
+    "origin": "Japan",
+    "lat": 35.0116,
+    "lng": 135.7681,
+    "caffeine": "High",
+    "temperature": "Hot/Cold",
+    "imageUrl": "/images/matcha.jpeg",
+    "quantity": 50
+  },
+  {
     "id": "BT001",
     "name": "Classic Earl Grey",
     "description": "A timeless black tea infused with oil of bergamot for a citrusy twist.",
@@ -25,6 +39,34 @@
     "caffeine": "High",
     "temperature": "Hot",
     "imageUrl": "/images/english-breakfast.jpeg",
+    "quantity": 90
+  },
+  {
+    "id": "HT005",
+    "name": "Hibiscus",
+    "description": "Tart and fruity herbal tea rich in vitamin C.",
+    "price": 6.99,
+    "category": "Herbal Tea",
+    "origin": "Egypt",
+    "lat": 26.8206,
+    "lng": 30.8025,
+    "caffeine": "None",
+    "temperature": "Hot/Cold",
+    "imageUrl": "/images/hibiscus.jpeg",
+    "quantity": 75
+  },
+  {
+    "id": "HT001",
+    "name": "Chamomile",
+    "description": "Caffeine-free herbal infusion with calming properties.",
+    "price": 6.99,
+    "category": "Herbal Tea",
+    "origin": "Egypt",
+    "lat": 26.8206,
+    "lng": 30.8025,
+    "caffeine": "None",
+    "temperature": "Hot",
+    "imageUrl": "/images/chamomile.jpeg",
     "quantity": 90
   },
   {
@@ -68,6 +110,20 @@
     "temperature": "Hot",
     "imageUrl": "/images/lapsang.jpeg",
     "quantity": 50
+  },
+  {
+    "id": "WL001",
+    "name": "Wild Lapsang Souchong",
+    "description": "Unsmoked version of Lapsang Souchong with natural pine and floral notes.",
+    "price": 14.99,
+    "category": "Black Tea",
+    "origin": "China",
+    "lat": 27.7542,
+    "lng": 118.0353,
+    "caffeine": "Medium",
+    "temperature": "Hot",
+    "imageUrl": "/images/wild-lapsang.jpeg",
+    "quantity": 55
   },
   {
     "id": "BT006",
@@ -210,6 +266,20 @@
     "quantity": 45
   },
   {
+    "id": "BB001",
+    "name": "Buddha's Tears",
+    "description": "Hand-rolled jasmine tea pearls with a delicate floral aroma.",
+    "price": 16.99,
+    "category": "Green Tea",
+    "origin": "China",
+    "lat": 24.4798,
+    "lng": 118.0894,
+    "caffeine": "Low",
+    "temperature": "Hot",
+    "imageUrl": "/images/buddha-tears.jpeg",
+    "quantity": 60
+  },
+  {
     "id": "WT001",
     "name": "Silver Needle",
     "description": "Delicate white tea made from young buds with a subtle, sweet flavor.",
@@ -266,20 +336,6 @@
     "quantity": 35
   },
   {
-    "id": "HT001",
-    "name": "Chamomile",
-    "description": "Caffeine-free herbal infusion with calming properties.",
-    "price": 6.99,
-    "category": "Herbal Tea",
-    "origin": "Egypt",
-    "lat": 26.8206,
-    "lng": 30.8025,
-    "caffeine": "None",
-    "temperature": "Hot",
-    "imageUrl": "/images/chamomile.jpeg",
-    "quantity": 90
-  },
-  {
     "id": "HT002",
     "name": "Peppermint",
     "description": "Refreshing herbal tea with a cool, minty flavor.",
@@ -320,20 +376,6 @@
     "temperature": "Hot",
     "imageUrl": "/images/ginger-lemon.jpeg",
     "quantity": 70
-  },
-  {
-    "id": "HT005",
-    "name": "Hibiscus",
-    "description": "Tart and fruity herbal tea rich in vitamin C.",
-    "price": 6.99,
-    "category": "Herbal Tea",
-    "origin": "Egypt",
-    "lat": 26.8206,
-    "lng": 30.8025,
-    "caffeine": "None",
-    "temperature": "Hot/Cold",
-    "imageUrl": "/images/hibiscus.jpeg",
-    "quantity": 75
   },
   {
     "id": "HT018",
@@ -377,18 +419,18 @@
     "quantity": 80
   },
   {
-    "id": "YC001",
-    "name": "Yellow Tea (Junshan Yinzhen)",
-    "description": "Rare Chinese yellow tea with a gentle, sweet flavor and smooth finish.",
-    "price": 18.99,
-    "category": "Yellow Tea",
-    "origin": "China",
-    "lat": 29.3746,
-    "lng": 113.1105,
-    "caffeine": "Low",
+    "id": "GY001",
+    "name": "Gyokuro",
+    "description": "High-grade Japanese green tea with a rich, umami flavor.",
+    "price": 22.99,
+    "category": "Green Tea",
+    "origin": "Japan",
+    "lat": 35.3622,
+    "lng": 138.7313,
+    "caffeine": "Medium",
     "temperature": "Hot",
-    "imageUrl": "/images/yellow-tea.jpeg",
-    "quantity": 40
+    "imageUrl": "/images/gyokuro.jpeg",
+    "quantity": 50
   },
   {
     "id": "DB001",
@@ -447,20 +489,6 @@
     "quantity": 55
   },
   {
-    "id": "GT006",
-    "name": "Matcha",
-    "description": "Finely ground green tea powder, traditionally used in Japanese tea ceremonies.",
-    "price": 24.99,
-    "category": "Green Tea",
-    "origin": "Japan",
-    "lat": 35.0116,
-    "lng": 135.7681,
-    "caffeine": "High",
-    "temperature": "Hot/Cold",
-    "imageUrl": "/images/matcha.jpeg",
-    "quantity": 50
-  },
-  {
     "id": "HT006",
     "name": "Honeybush",
     "description": "Caffeine-free herb similar to rooibos with a honey-like flavor.",
@@ -501,5 +529,33 @@
     "temperature": "Hot",
     "imageUrl": "/images/russian-caravan.jpeg",
     "quantity": 70
+  },
+  {
+    "id": "NH001",
+    "name": "Nilgiri Frost Tea",
+    "description": "Unique black tea from Southern India with a crisp, brisk flavor.",
+    "price": 10.99,
+    "category": "Black Tea",
+    "origin": "India",
+    "lat": 11.4916,
+    "lng": 76.7399,
+    "caffeine": "Medium",
+    "temperature": "Hot",
+    "imageUrl": "/images/nilgiri.jpeg",
+    "quantity": 70
+  },
+  {
+    "id": "TG001",
+    "name": "Taiping Houkui",
+    "description": "Distinctive Chinese green tea with large, flat leaves and a gentle, sweet taste.",
+    "price": 17.99,
+    "category": "Green Tea",
+    "origin": "China",
+    "lat": 30.4383,
+    "lng": 117.4912,
+    "caffeine": "Low",
+    "temperature": "Hot",
+    "imageUrl": "/images/taiping.jpeg",
+    "quantity": 45
   }
 ]
