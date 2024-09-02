@@ -1,17 +1,12 @@
 {
   "admin": [
     {
-      "itemId": "1724510234507",
+      "itemId": "GT006",
       "quantity": 1,
-      "itemType": "custom_blend"
+      "itemType": "product"
     },
     {
-      "itemId": "1725273872540",
-      "quantity": 1,
-      "itemType": "custom_blend"
-    },
-    {
-      "itemId": "1725275449427",
+      "itemId": "1725284572253",
       "quantity": 1,
       "itemType": "custom_blend"
     }

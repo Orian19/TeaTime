@@ -182,15 +182,10 @@ function displayUserBlends(blends) {
         const blendItem = document.createElement('div');
         blendItem.className = 'blend-item';
 
-        const chartContainer = document.createElement('div');
-        chartContainer.className = 'saved-chart-container';
-        const canvas = document.createElement('canvas');
-        chartContainer.appendChild(canvas);
-
         let flavorsList = '<ul class="flavors-list">';
         Object.entries(blend.flavors).forEach(([flavorId, percentage]) => {
-            if (percentage > 0 && blendableTeas[flavorId]) {  // Check if flavor exists in blendableTeas
-                flavorsList += `<li>${blendableTeas[flavorId].name}: ${percentage}%</li>`;
+            if (percentage > 0 && blendableTeas[flavorId]) {
+                flavorsList += `<li><span>${blendableTeas[flavorId].name}:</span> <span>${percentage}%</span></li>`;
             } else {
                 console.warn(`Flavor with ID ${flavorId} not found in blendableTeas.`);
             }
@@ -198,34 +193,32 @@ function displayUserBlends(blends) {
         flavorsList += '</ul>';
 
         blendItem.innerHTML = `
-            <h3>${blend.name}</h3>
-            <p>Base Tea: ${blendableTeas[blend.baseTea] ? blendableTeas[blend.baseTea].name : 'Unknown Base Tea'}</p>
+            <div class="blend-item-header">
+                <h3>${blend.name}</h3>
+                <p>Base Tea: ${blendableTeas[blend.baseTea] ? blendableTeas[blend.baseTea].name : 'Unknown Base Tea'}</p>
+            </div>
             <div class="blend-details">
-                <div class="saved-chart-container"></div>
+                <div class="saved-chart-container">
+                    <canvas></canvas>
+                </div>
                 <div class="flavors-container">
                     <h4>Flavors:</h4>
                     ${flavorsList}
                 </div>
             </div>
+            <div class="blend-item-footer">
+                <button class="button add-to-cart-btn">Add to Cart</button>
+                <button class="remove-btn">Remove</button>
+            </div>
         `;
 
-        blendItem.querySelector('.saved-chart-container').appendChild(canvas);
+        const canvas = blendItem.querySelector('.saved-chart-container canvas');
+        createBlendChart(canvas, blend);
 
-        const addToCartButton = document.createElement('button');
-        addToCartButton.textContent = 'Add to Cart';
-        addToCartButton.onclick = () => addToCart(blend.id);
-        addToCartButton.className = 'button add-btn';
-        blendItem.appendChild(addToCartButton);
-
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove Blend';
-        removeButton.onclick = () => removeBlend(blend.id);
-        removeButton.className = 'button remove-btn';
-        blendItem.appendChild(removeButton);
+        blendItem.querySelector('.add-to-cart-btn').onclick = () => addToCart(blend.id);
+        blendItem.querySelector('.remove-btn').onclick = () => removeBlend(blend.id);
 
         blendsList.appendChild(blendItem);
-
-        createBlendChart(canvas, blend);
     });
 }
 
