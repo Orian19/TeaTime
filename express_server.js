@@ -9,6 +9,9 @@ const port = 3000;
 app.get('/readme.html', (req, res) => {
     res.render('readme');
 });
+app.get('/readme2.html', (req, res) => {
+    res.render('readme-2');
+});
 app.get('/llm.html', (req, res) => {
     res.render('llm');
 });

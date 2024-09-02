@@ -161,6 +161,7 @@ footer {
 
 .remove-btn {
     background-color: #e74c3c;
+    color: white;
 }
 
 .remove-btn:hover {

@@ -6,75 +6,78 @@
     <title>TeaTime - README</title>
     <style>
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: black;
-            max-width: 900px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
-            background-color: #f7f6f6;
+            max-width: 800px;
+            margin: 0 auto;
         }
-
-        h1, h2, h3 {
-            color: #216f0e;
-            border-bottom: 2px solid #4f8b13;
-            padding-bottom: 5px;
+        h1 {
+            color: #2e7d32;
         }
-
+        h2 {
+            color: #1b5e20;
+        }
     </style>
 </head>
 <body>
     <h1>TeaTime - README</h1>
     
-    <h2>Store Name</h2>
+    <h2>1. Store Name</h2>
     <p>TeaTime</p>
     
     <h2>What are you selling?</h2>
-    <p>We are selling a variety of teas from around the world, including black teas, green teas, herbal teas, and custom tea blends.</p>
+    <p>Our store sells a diverse range of teas including:</p>
+    <ul>
+        <li>Black teas</li>
+        <li>Green teas</li>
+        <li>Herbal teas</li>
+        <li>Custom tea blends</li>
+    </ul>
     
-    <h2>Additional Pages and How to Operate Them</h2>
-    <p>We added the following additional pages:</p>
-    <ol>
+    <h2>2. What Additional Pages did you add?</h2>
         <li>
             <strong>Tea Quiz:</strong> 
-            <p>A interactive quiz that helps users find their perfect tea based on their preferences.</p>
-            <p>To use: Navigate to /store/quiz, answer the questions about your tea preferences, and receive a personalized tea recommendation.</p>
+            <p>Description: A quiz that provides customers with the perfect tea to match their preferences.</p>
+            <p>Location: /store/quiz</p>
+            <p>How to use: Answer the quiz questions, and press "Find My Tea" to recieve a tea recommendation.</p>
         </li>
         <li>
             <strong>Tea Blender:</strong> 
-            <p>A custom tea blending tool where users can create their own unique tea blends.</p>
-            <p>To use: Go to /store/tea-blender, select a base tea, add flavors using the sliders, name your blend, and click "Create Blend" to save it to your account.</p>
+            <p>Description: Customers can create their own custom blends, by adding flavors so t\our store blends.</p>
+            <p>Location: /store/tea-blender</p>
+            <p>How to use: Choose a name for the bland, Select a base tea, add flavors, and click "Create Blend" to add the tea to your own custom blends.</p>
         </li>
         <li>
             <strong>Tea Map:</strong> 
-            <p>An interactive map showing the origins of our teas.</p>
-            <p>To use: Visit /store/map, explore the interactive world map, click on markers to see a list of teas from different regions.</p>
+            <p>Description:An interactive map showing the origins of our teas.</p>
+            <p>Location: /store/map</p>
+            <p>How to use: Click on markers to see a viriety of teas from different regions all over the world.</p>
         </li>
         <li>
             <strong>Reviews:</strong> 
-            <p>A page where customers can leave and view product reviews.</p>
-            <p>To use: Navigate to /store/reviews, read existing reviews, or click "Add a Review" to submit your own review</p>
+            <p>Description:A page where customers can leave and view product reviews.</p>
+            <p>Location: /store/reviews</p>
+            <p>How to use: Read the existing reviews on the page. Click "Add a Review" to add a review</p>
         </li>
-    </ol>
-    
-    <h2>What was hard to do?</h2>
-    <p>Some of the challenging aspects of this project included:</p>
+
+    <h2>3. What was hard to do?</h2>
     <ul>
-        <li>Implementing the custom tea blender functionality with real-time updates and visualization using Chart.js.</li>
-        <li>Setting up the admin panel with user activity tracking and product management, ensuring proper access control.</li>
-        <li>Developing the search functionality for the admin page, allowing filtering of user activities based on username prefixes.</li>
-        <li>Integrating custom tea blends with regular product functions, ensuring they can be added to the cart, checked out, and managed similarly to standard products.</li>
+        <li>Ensuring proper user authentication and session management across all routes, including handling "remember me" functionality.</li>
+        <li>Integrating the interactive map feature with our product data using Leaflet.js.</li>
+        <li>Managing the shopping cart state across different sessions and ensuring data persistence.</li>
+        <li>Developing the search functionality for all products in the store and admin page</li>
     </ul>
     
-    <h2>Partner Information</h2>
-    <ul>
-        <li>Orian Daniel&lt;[Partner's ID]&gt;</li>
-    </ul>
+    <h2>4. Who Is Your Partner?</h2>
+    <p>Tal Solovey &lt;209954445&gt;</p>
+
+    <h2>What Did You Do? What Did Your Partner Do?</h2>
 
     <p>While we often started work on features individually, we made it a point to review, refine, and complete each other's code. 
         This approach ensured that both partners had a deep understanding of all aspects of the project.</p>
 
-    <h3>Key Areas of Focus:</h3>
     <p>I initially took the lead on:</p>
     <ul>
         <li>Designed and implemented the Tea Blender feature</li>
@@ -96,22 +99,31 @@
     <p>However, as the project progressed, we both contributed significantly to all areas, often completing and enhancing each other's work. 
         This collaborative approach allowed us to leverage our individual strengths while ensuring a cohesive and well-rounded final product.</p>
     
-        <h2>All Routes Our App Supports</h2>
+        <h2>5. Specify All Routes Your App Supports:</h2>
 
         <h3>Main Routes:</h3>
         <ul>
-            <li><code>/</code> - (GET) - Home page</li>
-            <li><code>/readme.html</code> - (GET) - README file</li>
-            <li><code>/llm.html</code> - (GET) - LLM-generated code information</li>
+            <li><code>/</code> - Home page</li>
+            <li><code>/readme.html</code> - README file</li>
+            <li><code>/llm.html</code> - LLM-generated code information</li>
         </ul>
         
+        <h3>Admin Routes:</h3>
+        <ul>
+            <li><code>/admin</code> - (GET) - Admin panel (requires admin login)</li>
+            <li><code>/admin/filtered-activities</code> - (GET) - Filter user activities</li>
+            <li><code>/admin/activities</code> - (GET) - Get all user activities</li>
+            <li><code>/admin/products</code> - (GET/POST) - Get/Add products (admin view)</li>
+            <li><code>/admin/products/:id</code> (PUT/DELETE) - Update/delete a product</li>
+            <li><code>/admin/orders</code> - (GET) - Get all orders</li>
+        </ul>
+
         <h3>Store Routes:</h3>
         <ul>
             <li><code>/store</code> - (GET) - Main store page</li>
             <li><code>/store/product/:id</code> - (GET) - get product details</li>
             <li><code>/store/search</code> - (GET) - Search functionality for products</li>
-            <li><code>/store/tea-blender</code> - (GET) - Custom tea blending tool</li>
-            <li><code>/store/tea-blender</code> - (POST) - Save a custom blend</li>
+            <li><code>/store/tea-blender</code> - (GET/POST) - Custom tea blending tool</li>
             <li><code>/store/blendable-teas</code> - (GET) - Get blendable teas data</li>
             <li><code>/store/user-blends</code> - (GET) - Get user's custom blends</li>
             <li><code>/store/remove-blend/:blendId</code> - (DELETE) - Remove a custom blend</li>
@@ -121,8 +133,7 @@
             <li><code>/store/checkout</code> - (GET) - Checkout process</li>
             <li><code>/store/quiz</code> - (GET) - Tea preference quiz</li>
             <li><code>/store/api/products</code> - (GET) - Get all products data</li>
-            <li><code>/store/reviews</code> - (GET) - Customer reviews page</li>
-            <li><code>/store/reviews</code> - (POST) - Add a review</li>
+            <li><code>/store/reviews</code> - (GET/POST) - Customer reviews page</li>
             <li><code>/store/remove-item</code> - (POST) - Remove an item from cart</li>
             <li><code>/store/update-quantity</code> - (POST) - Update quantity of an item in cart</li>
             <li><code>/store/checkout/process</code> - (POST) - Process the checkout</li>
@@ -131,22 +142,9 @@
             <li><code>/store/api/tea-regions</code> - (GET) - Get tea regions data for map</li>
         </ul>
         
-        <h3>Admin Routes:</h3>
-        <ul>
-            <li><code>/admin</code> - (GET) - Admin panel (requires admin login)</li>
-            <li><code>/admin/filtered-activities</code> - (GET) - Filter user activities</li>
-            <li><code>/admin/activities</code> - (GET) - Get all user activities</li>
-            <li><code>/admin/products</code> - (GET) - Get all products (admin view)</li>
-            <li><code>/admin/products</code> (POST) - Add a new product</li>
-            <li><code>/admin/products/:id</code> (PUT) - Update a product</li>
-            <li><code>/admin/products/:id</code> (DELETE) - Remove a product</li>
-            <li><code>/admin/orders</code> - (GET) - Get all orders</li>
-        </ul>
-        
         <h3>Authentication Routes:</h3>
         <ul>
-            <li><code>/auth/register</code> - (GET) - User registration page</li>
-            <li><code>/auth/register</code> (POST) - Process user registration</li>
+            <li><code>/auth/register</code> - (GET/POST) - User registration page</li>
             <li><code>/auth/login</code> - (GET) - User login page</li>
             <li><code>/auth/login</code> (POST) - Process user login</li>
             <li><code>/auth/logout</code> - (GET) - User logout</li>

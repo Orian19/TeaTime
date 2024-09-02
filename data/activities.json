@@ -2403,5 +2403,30 @@
     "username": "admin",
     "type": "login",
     "datetime": "2024-09-02T13:43:53.573Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T14:20:30.627Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T14:31:56.321Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T15:49:13.231Z"
+  },
+  {
+    "username": "admin",
+    "type": "add-to-cart",
+    "datetime": "2024-09-02T15:49:32.062Z"
+  },
+  {
+    "username": "admin",
+    "type": "login",
+    "datetime": "2024-09-02T16:41:41.190Z"
   }
 ]
