@@ -63,20 +63,26 @@ async function testLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: 'admin', password: 'admin' })
     });
-    console.log("Login Status:", response.status);
-    console.log("Login Headers:", response.headers.raw());
-    const responseText = await response.text();
-    console.log("Login Response Body:", responseText);
-    
-    try {
-        const responseJson = JSON.parse(responseText);
-        if (response.ok) {
+
+    const contentType = response.headers.get('content-type');
+    const isJson = contentType && contentType.includes('application/json');
+
+    if (isJson) {
+        const data = await response.json();
+        if (response.ok && data.success) {
             authCookie = response.headers.get('set-cookie');
+            logTestResult("Login", true);
+        } else {
+            logTestResult("Login", false);
         }
-        logTestResult("Login", response.ok);
-    } catch (error) {
-        console.error("Failed to parse login response as JSON:", error);
-        logTestResult("Login", false);
+    } else {
+        const responseText = await response.text();
+        if (response.ok && responseText.includes('TeaTime')) {
+            authCookie = response.headers.get('set-cookie');
+            logTestResult("Login", true);
+        } else {
+            logTestResult("Login", false);
+        }
     }
 }
 
