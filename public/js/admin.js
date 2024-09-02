@@ -355,7 +355,9 @@ function cancelEdit() {
  */
 function removeProduct(productId) {
     axios.delete(`/admin/products/${productId}`)
-        .then(() => getProducts(currentPage, document.getElementById('productSearchInput').value.trim()))
+        .then(() => {
+            getProducts(currentPage, document.getElementById('productSearchInput').value.trim());
+        })
         .catch(error => {
             console.error('Error removing product:', error);
             alert('An error occurred while removing the product.');

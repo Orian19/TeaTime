@@ -212,7 +212,6 @@ router.post('/add-to-cart', async (req, res) => {
                 return res.status(500).json({ error: 'Session save failed' });
             }
 
-            console.log('After adding to cart:', req.session);
             res.redirect('/store');
         });
 

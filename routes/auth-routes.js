@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
 
         // Basic input validation
         if (!username || !password || username.length < 3 || password.length < 8) {
-            return res.status(400).render('register', { error: 'Invalid username or password' });
+            return res.status(400).render('register', { error: 'Invalid username (at lease 3 chars) or password (at least 8 chars)' });
         }
 
         const isRegistered = await registerUser(username, password);
